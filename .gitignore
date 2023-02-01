@@ -1,0 +1,8 @@
+out.*
+*.log
+*.dat
+chk*
+plt*
+blades*/
+out*/
+rst*/
