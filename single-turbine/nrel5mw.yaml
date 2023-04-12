@@ -1,0 +1,21 @@
+exawind:
+  nalu_wind_inp:
+    - nrel5mw_nalu.yaml
+  amr_wind_inp: nrel5mw_amr.inp
+  num_timesteps: 10
+  additional_picard_iterations: 0
+
+  # Variables for overset exchange
+  nalu_vars:
+    - velocity
+    - turbulent_ke
+    - specific_dissipation_rate
+    - pressure
+
+  amr_cell_vars:
+    - velocity
+    - tke
+    - sdr
+
+  amr_node_vars:
+    - p
