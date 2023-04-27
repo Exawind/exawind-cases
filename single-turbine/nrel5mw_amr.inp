@@ -87,7 +87,7 @@ incflo.verbose =   0
 #     EXCEPTION HANDLING                #
 #########################################
 amrex.abort_on_out_of_gpu_memory = 1
-amrex.the_arena_is_managed = 0
+amrex.the_arena_is_managed = 1
 #amrex.fpe_trap_invalid  =   1           # Trap NaNs
 #amrex.throw_exception = 1
 #amrex.signal_handling = 0
