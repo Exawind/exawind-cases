@@ -1,0 +1,39 @@
+#!/bin/bash -l
+
+#SBATCH -A CFD116
+#SBATCH -o nrel5mw-16t_2048_128.o%j
+#SBATCH -t 02:00:00
+#SBATCH -p batch
+#SBATCH -N 320
+#SBATCH --ntasks-per-node=8
+#SBATCH --exclusive
+
+nodes=$SLURM_JOB_NUM_NODES
+ranks=$SLURM_NTASKS
+
+export rocm_version=5.4.3
+
+module purge
+module load amd/${rocm_version}
+module load craype-accel-amd-gfx90a
+module load PrgEnv-amd
+module load cray-mpich
+
+export LD_LIBRARY_PATH=/opt/rocm-${rocm_version}/llvm/lib/:$LD_LIBRARY_PATH
+export HIP_LAUNCH_BLOCKING=1
+
+# release
+#exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-vqtsoq4t2jy4es4sgh5zwxpu3iwwjfzg/bin/exawind
+
+# release + umpire
+exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-t724fodm66sjoisqcbgxjajke5bloqlp/bin/exawind
+
+srun -N 320 -n 2560 --gpus-per-node=8 --gpu-bind=closest  $exawind --awind 2048 --nwind 512 nrel5mw.yaml
+
+mkdir run_${SLURM_JOBID}
+#
+mv nrel5mw_nalu*.log run_${SLURM_JOBID}
+mv nrel5mw-16t_2048_128.o${SLURM_JOBID} run_${SLURM_JOBID}
+mv amr-wind.log run_${SLURM_JOBID}/amr_wind_2048.log
+mv timings.dat run_${SLURM_JOBID}/
+mv forces*dat run_${SLURM_JOBID}/
