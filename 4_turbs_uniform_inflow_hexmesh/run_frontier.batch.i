@@ -22,7 +22,7 @@ module load cray-mpich
 export LD_LIBRARY_PATH=/opt/rocm-${rocm_version}/llvm/lib/:$LD_LIBRARY_PATH
 export HIP_LAUNCH_BLOCKING=1
 
-# release
+o# release
 #exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-vqtsoq4t2jy4es4sgh5zwxpu3iwwjfzg/bin/exawind
 
 # release + umpire
