@@ -1,8 +1,10 @@
 #!/bin/bash -l
 
+
 #SBATCH -A CFD116
 #SBATCH -o nrel5mw-1t-abl_%AMRW_RANKS%_%NALU_RANKS%.o%j
-#SBATCH -t 02:00:00
+#SBATCH -J nrel5mw-1t-abl_gpu
+#SBATCH -t 00:20:00
 #SBATCH -p batch
 #SBATCH -N %NODES%
 #SBATCH --ntasks-per-node=%RANKS_PER_NODE%

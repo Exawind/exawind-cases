@@ -1,8 +1,10 @@
 #!/bin/bash -l
 
+
 #SBATCH -A CFD116
 #SBATCH -o nrel5mw-1t-abl_2048_128.o%j
-#SBATCH -t 02:00:00
+#SBATCH -J nrel5mw-1t-abl_gpu
+#SBATCH -t 00:20:00
 #SBATCH -p batch
 #SBATCH -N 272
 #SBATCH --ntasks-per-node=8

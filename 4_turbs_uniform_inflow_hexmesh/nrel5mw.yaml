@@ -1,9 +1,9 @@
 exawind:
   nalu_wind_inp:
     - nrel5mw_nalu1.yaml
+    - nrel5mw_nalu2.yaml
+    - nrel5mw_nalu3.yaml
     - nrel5mw_nalu4.yaml
-    - nrel5mw_nalu5.yaml
-    - nrel5mw_nalu11.yaml
   amr_wind_inp: nrel5mw_amr.inp
   num_timesteps: 100
   additional_picard_iterations: 0

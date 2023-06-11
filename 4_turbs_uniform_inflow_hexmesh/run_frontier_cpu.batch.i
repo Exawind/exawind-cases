@@ -1,7 +1,8 @@
 #!/bin/bash -l
 
 #SBATCH -A CFD116
-#SBATCH -o nrel5mw-1t-abl_%AMRW_RANKS%_%NALU_RANKS%.o%j
+#SBATCH -o nrel5mw-1t-abl_cpu_%AMRW_RANKS%_%NALU_RANKS%.o%j
+#SBATCH -J nrel5mw-1t-abl_cpu
 #SBATCH -t 02:00:00
 #SBATCH -p batch
 #SBATCH -N %NODES%
@@ -22,7 +23,7 @@ srun -N %NODES% -n %RANKS% $exawind --awind %AMRW_RANKS% --nwind %NALU_RANKS% nr
 mkdir run_${SLURM_JOBID}
 #
 mv nrel5mw_nalu*.log run_${SLURM_JOBID}
-mv nrel5mw-1t-abl_%AMRW_RANKS%_%NALU_RANKS%.o${SLURM_JOBID} run_${SLURM_JOBID}
+mv nrel5mw-1t-abl_cpu_%AMRW_RANKS%_%NALU_RANKS%.o${SLURM_JOBID} run_${SLURM_JOBID}
 mv amr-wind.log run_${SLURM_JOBID}/amr_wind_%AMRW_RANKS%.log
 mv timings.dat run_${SLURM_JOBID}/
 mv forces*dat run_${SLURM_JOBID}/
