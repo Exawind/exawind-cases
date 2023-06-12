@@ -1,11 +1,15 @@
 for i in "$@"; do
     case "$1" in
-        -a=*|--amrw_ranks=*)
-            amrw_ranks="${i#*=}"
+        -a=*|--amrw_nodes=*)
+            amrw_nodes="${i#*=}"
             shift # past argument=value
             ;;
-        -n=*|--nalu_ranks=*)
-            nalu_ranks="${i#*=}"
+        -n=*|--nalu_nodes=*)
+            nalu_nodes="${i#*=}"
+            shift # past argument=value
+            ;;
+        -rpn=*|--ranks_per_node=*)
+            ranks_per_node="${i#*=}"
             shift # past argument=value
             ;;
         --)
@@ -15,14 +19,10 @@ for i in "$@"; do
     esac
 done
 
-nalu_nodes=$((nalu_ranks/8))
-total_nalu_nodes=$((nalu_nodes*4))
-total_nalu_ranks=$((total_nalu_nodes*8))
-amrw_nodes=$((amrw_ranks/8))
-nodes=$((total_nalu_nodes+amrw_nodes))
-ranks=$((nodes*8))
-echo $nodes, $ranks, $amrw_ranks, $nalu_nodes, $nalu_ranks, $total_nalu_ranks 
-
-sed "s/%NODES%/$nodes/g;s/%RANKS%/$ranks/g;s/%RANKS_PER_NODE%/8/g;s/%AMRW_RANKS%/$amrw_ranks/g;s/%NALU_RANKS%/$nalu_ranks/g;s/%TOTAL_NALU_RANKS%/$total_nalu_ranks/g;" run_frontier.batch.i > run_frontier.batch
-
+nalu_ranks=$((nalu_nodes*ranks_per_node*4))
+amrw_ranks=$((amrw_nodes*ranks_per_node))
+nodes=$((nalu_nodes*4+amrw_nodes))
+ranks=$((nalu_ranks+amrw_ranks))
+echo $nodes, $ranks, $amrw_ranks, $nalu_ranks 
+sed "s/%NODES%/$nodes/g;s/%RANKS%/$ranks/g;s/%RANKS_PER_NODE%/$ranks_per_node/g;s/%AMRW_RANKS%/$amrw_ranks/g;s/%NALU_RANKS%/$nalu_ranks/g;" run_frontier.batch.i > run_frontier.batch
 sbatch run_frontier.batch

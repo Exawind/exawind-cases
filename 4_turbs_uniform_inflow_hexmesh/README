@@ -6,9 +6,9 @@ To run this test, you will need to modify the path to the exawind driver in run_
 exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-t724fodm66sjoisqcbgxjajke5bloqlp/bin/exawind
 
 Then, do:
-sh script_frontier.sh -a=2048 -n=128
+sh script_frontier.sh -a=256 -n=16 -rpn=8
 
-This will devote 2048 GPUs (256 nodes) to amr-wind and 128 GPUs (4 nodes) to each nalu instance. You can vary this parameter to add more or less GPUs.
+This will devote 256 nodes (2048 GPUs) to amr-wind and 16 nodes (128 GPUs) to each nalu instance with 4 turbines. You can vary this parameter to add more or less GPUs.
 
 CPU
 ==============

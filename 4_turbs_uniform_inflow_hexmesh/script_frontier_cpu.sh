@@ -21,7 +21,7 @@ done
 
 nalu_ranks=$((nalu_nodes*ranks_per_node*4))
 amrw_ranks=$((amrw_nodes*ranks_per_node))
-nodes=$((nalu_nodes+amrw_nodes))
+nodes=$((nalu_nodes*4+amrw_nodes))
 ranks=$((nalu_ranks+amrw_ranks))
 echo $nodes, $ranks, $amrw_ranks, $nalu_ranks 
 sed "s/%NODES%/$nodes/g;s/%RANKS%/$ranks/g;s/%RANKS_PER_NODE%/$ranks_per_node/g;s/%AMRW_RANKS%/$amrw_ranks/g;s/%NALU_RANKS%/$nalu_ranks/g;" run_frontier_cpu.batch.i > run_frontier_cpu.batch
