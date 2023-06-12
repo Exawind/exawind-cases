@@ -2,7 +2,7 @@
 
 
 #SBATCH -A CFD116
-#SBATCH -o nrel5mw-1t-abl_%AMRW_RANKS%_%NALU_RANKS%.o%j
+#SBATCH -o nrel5mw-1t-abl_gpu_%AMRW_RANKS%_%NALU_RANKS%.o%j
 #SBATCH -J nrel5mw-1t-abl_gpu
 #SBATCH -t 00:20:00
 #SBATCH -p batch
@@ -24,6 +24,9 @@ module load cray-mpich
 export LD_LIBRARY_PATH=/opt/rocm-${rocm_version}/llvm/lib/:$LD_LIBRARY_PATH
 export HIP_LAUNCH_BLOCKING=1
 
+export FI_MR_CACHE_MONITOR=memhooks
+export FI_CXI_RX_MATCH_MODE=software
+
 # release
 #exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-vqtsoq4t2jy4es4sgh5zwxpu3iwwjfzg/bin/exawind
 
@@ -35,7 +38,7 @@ srun -N %NODES% -n %RANKS% --gpus-per-node=%RANKS_PER_NODE% --gpu-bind=closest  
 mkdir run_${SLURM_JOBID}
 #
 mv nrel5mw_nalu*.log run_${SLURM_JOBID}
-mv nrel5mw-1t-abl_%AMRW_RANKS%_%NALU_RANKS%.o${SLURM_JOBID} run_${SLURM_JOBID}
+mv nrel5mw-1t-abl_gpu_%AMRW_RANKS%_%NALU_RANKS%.o${SLURM_JOBID} run_${SLURM_JOBID}
 mv amr-wind.log run_${SLURM_JOBID}/amr_wind_%AMRW_RANKS%.log
 mv timings.dat run_${SLURM_JOBID}/
 mv forces*dat run_${SLURM_JOBID}/

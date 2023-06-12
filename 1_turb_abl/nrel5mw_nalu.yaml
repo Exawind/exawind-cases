@@ -3,13 +3,11 @@ Simulations:
   time_integrator: ti_1
   optimizer: opt1
 
-# Hypre memory and other configurations
 hypre_config:
-    memory_pool_mbs: 4096
-    #umpire_device_pool_mbs: 4096
-    use_vendor_spgemm: yes
-    use_vendor_spmv: no
-    use_vendor_sptrans: no
+  umpire_device_pool_mbs: 4096
+  use_vendor_spgemm: 1
+  use_vendor_spmv: 0
+  use_vendor_sptrans: 0
 
 linear_solvers:
   # solver for the momentum
@@ -18,25 +16,19 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 100
-    kspace: 100
-    segregated_solver: yes
+    max_iterations: 1000
+    kspace: 1000
+    sync_alg: 1
+    output_level: 0
+    write_matrix_files: no
+    #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
-    write_matrix_files: no
     dump_hypre_matrix_stats: no
-    output_level: 0
-
-    #segregated_single_solve: yes
-    #write_preassembly_matrix_files: yes
-    #sync_alg: 1
-    #fast_hypre_matrix_assemble: yes
-    #fast_hypre_rhs_assemble: yes
-
-    hypre_cfg_file: /lustre/orion/proj-shared/cfd116/mullowne/1_turb_abl/hypre_file.yaml
+    segregated_solver: yes
+    hypre_cfg_file: hypre_file.yaml
     hypre_cfg_node: hypre_simple_precon
-
 
   # solver for the scalars TKE, SDR
   - name: solve_scalar
@@ -44,21 +36,16 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 100
-    kspace: 100
+    max_iterations: 1000
+    kspace: 1000
+    sync_alg: 1
+    output_level: 0
+    write_matrix_files: no
+    #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
-    write_matrix_files: no
     dump_hypre_matrix_stats: no
-    output_level: 0
-
-    #segregated_single_solve: yes
-    #write_preassembly_matrix_files: yes
-    #sync_alg: 1
-    #fast_hypre_matrix_assemble: yes
-    #fast_hypre_rhs_assemble: yes
-
     hypre_cfg_file: hypre_file.yaml
     hypre_cfg_node: hypre_simple_precon
 
@@ -68,21 +55,16 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 100
-    kspace: 100
+    max_iterations: 1000
+    kspace: 1000
+    sync_alg: 1
+    output_level: 2
+    write_matrix_files: no
+    #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
-    write_matrix_files: no
     dump_hypre_matrix_stats: no
-    output_level: 0
-
-    #segregated_single_solve: yes
-    #write_preassembly_matrix_files: yes
-    #sync_alg: 1
-    #fast_hypre_matrix_assemble: yes
-    #fast_hypre_rhs_assemble: yes
-
     hypre_cfg_file: hypre_file.yaml
     hypre_cfg_node: hypre_elliptic
 
@@ -127,16 +109,16 @@ realms:
         convergence_tolerance: 1e-8
 
   initial_conditions:
-  - constant: ic_1
-    target_name:
-      - blade1-HEX
-      - blade2-HEX
-      - blade3-HEX
-    value:
-      pressure: 0
-      velocity: [9.8726896031426, 5.7, 0.0]
-      turbulent_ke: 1.0
-      specific_dissipation_rate: 250.0
+    - constant: ic_1
+      target_name:
+        - blade1-HEX
+        - blade2-HEX
+        - blade3-HEX
+      value:
+        pressure: 0.0
+        velocity: [9.8726896031426, 5.7, 0.0]
+        turbulent_ke: 1.0
+        specific_dissipation_rate: 250.0
 
   material_properties:
     target_name:
