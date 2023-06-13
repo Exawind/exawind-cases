@@ -1,6 +1,5 @@
 #!/bin/bash -l
 
-
 #SBATCH -A CFD116
 #SBATCH -o 1t-abl_gpu_%AMRW_RANKS%_%NALU_RANKS%.o%j
 #SBATCH -J 1t-abl_gpu

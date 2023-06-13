@@ -20,3 +20,18 @@ Then, do:
 sh script_frontier_cpu.sh -a=512 -n=32 -rpn=48
 
 This will devote 512 nodes to amr-wind and 32 nodes to each nalu instance (1 turbine), with 48 ranks per node. You can vary this parameter to add more or less CPUs cores
+
+
+
+
+==============
+PURE AMR_WIND Sim:
+==============
+
+GPU:
+==============
+sh script_amrw_frontier.sh -a=8 -rpn=8
+
+CPU:
+==============
+sh script_amrw_frontier_cpu.sh -a=8 -rpn=48
