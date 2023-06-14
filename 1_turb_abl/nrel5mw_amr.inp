@@ -2,7 +2,7 @@
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               = -1     # Max (simulated) time to evolve
-time.max_step                = -1          # Max number of time steps
+time.max_step                = 30010 #-1          # Max number of time steps
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #         TIME STEP COMPUTATION         #
 #.......................................#
@@ -76,7 +76,7 @@ ABL.enable_hybrid_rl_mode = true
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
 amr.n_cell              = 512 512 192    # Grid cells at coarsest AMRlevel
-amr.max_level           = 4            # Max AMR level in hierarchy
+amr.max_level           = 1            # Max AMR level in hierarchy
 amr.max_grid_size       = 128
 tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
@@ -133,10 +133,10 @@ nodal_proj.num_post_smooth = 10
 nodal_proj.bottom_rtol = 1.0e-9
 nodal_proj.bottom_atol = 1.0e-12
 #
-mac_proj.verbose=1
+mac_proj.verbose=3
 mac_proj.max_coarsening_level = 0
 mac_proj.do_nsolve = false
-mac_proj.bottom_verbose  = 0
+mac_proj.bottom_verbose  = 1
 mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-6
 mac_proj.mg_atol = 1.0e-10
@@ -173,7 +173,7 @@ amrex.hypre_sptrans_use_vendor = 0
 #amrex.hypre_umpire_device_pool_mbs = 4096
 
 hypre.bamg_verbose = 0
-hypre.verbose = 0
+hypre.verbose = 1
 hypre.recompute_preconditioner = 0
 hypre.hypre_solver = GMRES
 hypre.hypre_preconditioner = BoomerAMG

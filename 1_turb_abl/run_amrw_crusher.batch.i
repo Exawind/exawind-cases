@@ -27,7 +27,7 @@ export HIP_LAUNCH_BLOCKING=1
 export FI_MR_CACHE_MONITOR=memhooks
 export FI_CXI_RX_MATCH_MODE=software
 
-amrw=/autofs/nccs-svm1_home1/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/amr-wind-main-u3riz6tomvv2umbvc5zjrqzo6qmy7zpw/bin/amr_wind
+amrw=/lustre/orion/cfd116/proj-shared/mullowne/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/amr-wind-main-bvvmocyvq7w6dvqwcuzoza4qztsvihyf/bin/amr_wind
 
 srun -N %NODES% -n %RANKS% --gpus-per-node=%RANKS_PER_NODE% --gpu-bind=closest  $amrw nrel5mw_amr.inp
 
