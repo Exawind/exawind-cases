@@ -1,0 +1,21 @@
+This case describes a single nrel 5-mw turbine neutral ABL in a 5km by 5km by 2km domain, with rated wind speed at hub height. To run the ABL, followed by blade-resolved turbine simulation, follow the steps below. Change paths where needed, and develop job scripts specific to the architecture as required.
+
+Precursor
+==============
+To develop the ABL, follow the following steps:
+
+1. In the `initial_flow` folder, run the simulation using amr-wind executable. This step will generate the checkpoint files needed for a fully developed netural ABL.
+
+mpirun -np 2520 <amr-wind executable> abl.inp
+
+2. With the converged ABL generated, we now generate the boundary plane required as inflow boundary conditions for the turbine run. In the `boundary_plane` folder, run the the simulation using amr-wind executable. Change the path to the restart file `io.restart_file` in `abl.inp`, if required.
+
+mpirun -np 2520 <amr-wind executable> abl.inp
+
+3. We now need to generate the temperature file, and wall boundary conditions. To do so, go to `runtime_stats` folder. Change the location of `boundary_planes` under `calc_runtime_stats.py` and `get_mean_temperature_profile.py`, and run the scripts. Save the generated information from the output of `calc_runtime_stats.py` in a text file. 
+
+Turbine run
+==============
+This setup is for a single turbine. Change the location for the restart files, temperature file, and the boundary file, as defined using `io.restart_file`, `BoussinesqBuoyancy.tprofile_filename`, and `ABL.bndry_file`, in the `nrel5mw_amr.inp` file. Similarly, change the location of the near-body mesh as defined by `mesh:` in the `nrel5mw_nalu.yaml` input file. On summit, we can run this problem as below - 
+
+jsrun -n 1260 -r 6 -a 1 -c 1 -g 1 <exawind-driver> --awind 1200 --nwind 60 nrel5mw.yaml

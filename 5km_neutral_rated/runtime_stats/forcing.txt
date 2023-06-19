@@ -1,0 +1,9 @@
+Statistics file      = /Users/asharma/codes/C_Code/currTests/abl/5km_neutral/boundary_plane/post_processing/abl_statistics30000.nc
+Desired start time   = 15000
+Desired end time     = 16000
+abl_forcing_x        = -0.000349710865169856
+abl_forcing_y        = 0.0011134941091590048
+hvelmag              = 7.12794309269604
+u_mean               = 6.093275678667113
+v_mean               = 3.659473797517521
+theta_mean           = 300.2026467204779
