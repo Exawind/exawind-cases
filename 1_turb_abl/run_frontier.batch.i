@@ -3,7 +3,7 @@
 #SBATCH -A CFD116
 #SBATCH -o 1t-abl_gpu_%AMRW_RANKS%_%NALU_RANKS%.o%j
 #SBATCH -J 1t-abl_gpu
-#SBATCH -t 00:20:00
+#SBATCH -t 02:00:00
 #SBATCH -p batch
 #SBATCH -N %NODES%
 #SBATCH --ntasks-per-node=%RANKS_PER_NODE%
@@ -27,10 +27,7 @@ export FI_MR_CACHE_MONITOR=memhooks
 export FI_CXI_RX_MATCH_MODE=software
 
 # release
-#exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-vqtsoq4t2jy4es4sgh5zwxpu3iwwjfzg/bin/exawind
-
-# release + umpire
-exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-t724fodm66sjoisqcbgxjajke5bloqlp/bin/exawind
+exawind=/lustre/orion/cfd116/proj-shared/mullowne/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-ndi3c36sv4e6dpvcwggd7g46ozuicnxb/bin/exawind
 
 srun -N %NODES% -n %RANKS% --gpus-per-node=%RANKS_PER_NODE% --gpu-bind=closest  $exawind --awind %AMRW_RANKS% --nwind %NALU_RANKS% nrel5mw.yaml
 

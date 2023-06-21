@@ -20,6 +20,7 @@ module load craype-accel-amd-gfx90a
 module load PrgEnv-amd
 module load cray-mpich
 
+rm -fr plt* chk* post_processing*
 
 export LD_LIBRARY_PATH=/opt/rocm-${rocm_version}/llvm/lib/:$LD_LIBRARY_PATH
 export HIP_LAUNCH_BLOCKING=1
