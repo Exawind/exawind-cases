@@ -31,8 +31,8 @@ Turbine0:
   num_force_pts_tower: 12
   az_blend_mean: 18.84955592153876
   az_blend_delta: 1.5707963267948966
-  vel_mean: 15.0
-  wind_dir: 270.0
+  vel_mean: 11.7
+  wind_dir: 300.0 # double check yaw is correct, possible bug in openfast cpp
   z_ref: 90.0
   shear_exp: 0.0
   
