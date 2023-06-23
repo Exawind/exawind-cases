@@ -1,0 +1,37 @@
+GPU
+==============
+To run this test, you will need to modify the path to the exawind driver in run_frontier.batch.i
+
+exawind=/ccs/home/mullowne/SM/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-t724fodm66sjoisqcbgxjajke5bloqlp/bin/exawind
+
+Then, do:
+sh script_frontier.sh -a=256 -n=16 -rpn=8
+
+This will devote 256 nodes (2048 GPUs) to amr-wind and 16 nodes (128 GPUs) to each nalu instance with 1 turbine. You can vary this parameter to add more or less GPUs.
+
+CPU
+==============
+
+To run this test, you will need to modify the path to the exawind driver in run_frontier_cpu.batch.i
+
+exawind=/lustre/orion/cfd116/proj-shared/mullowne/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-wusoumhon22vkjawiiykqqciwrcfamqp/bin/exawind
+
+Then, do:
+sh script_frontier_cpu.sh -a=512 -n=32 -rpn=48
+
+This will devote 512 nodes to amr-wind and 32 nodes to each nalu instance (1 turbine), with 48 ranks per node. You can vary this parameter to add more or less CPUs cores
+
+
+
+
+==============
+PURE AMR_WIND Sim:
+==============
+
+GPU:
+==============
+sh script_amrw_frontier.sh -a=8 -rpn=8
+
+CPU:
+==============
+sh script_amrw_frontier_cpu.sh -a=8 -rpn=48
