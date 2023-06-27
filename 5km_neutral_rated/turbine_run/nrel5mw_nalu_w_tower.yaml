@@ -190,13 +190,6 @@ realms:
         angle: 30.0
         axis: [0.0, 0.0, 1.0]
         centroid: [0.0, 0.0, 0.0]
-        
-  - name: turbine_translate
-    mesh_parts:
-      - blade1-HEX
-      - blade2-HEX
-      - blade3-HEX
-    motion:
       - type: translation
         displacement: [1772.54, 2080.0, 90.0]
 
