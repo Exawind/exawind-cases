@@ -3,12 +3,6 @@ Simulations:
   time_integrator: ti_1
   optimizer: opt1
 
-hypre_config:
-  umpire_device_pool_mbs: 4096
-  use_vendor_spgemm: 1
-  use_vendor_spmv: 0
-  use_vendor_sptrans: 0
-
 linear_solvers:
   # solver for the momentum
   - name: solve_mom
@@ -16,19 +10,25 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 1000
-    kspace: 1000
-    sync_alg: 1
-    output_level: 0
+    max_iterations: 100
+    kspace: 20
+    segregated_solver: yes
     write_matrix_files: no
     #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
     dump_hypre_matrix_stats: no
-    segregated_solver: yes
-    hypre_cfg_file: hypre_file.yaml
-    hypre_cfg_node: hypre_simple_precon
+
+    bamg_max_levels: 1
+    bamg_relax_type: 12
+    bamg_num_sweeps: 2
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
+
+    bamg_output_level: 0
+    bamg_debug: 0
+    output_level: 0
 
   # solver for the scalars TKE, SDR
   - name: solve_scalar
@@ -36,18 +36,24 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 1000
-    kspace: 1000
-    sync_alg: 1
-    output_level: 0
+    max_iterations: 100
+    kspace: 20
     write_matrix_files: no
     #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
     dump_hypre_matrix_stats: no
-    hypre_cfg_file: hypre_file.yaml
-    hypre_cfg_node: hypre_simple_precon
+
+    bamg_max_levels: 1
+    bamg_relax_type: 12
+    bamg_num_sweeps: 2
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
+
+    bamg_output_level: 0
+    bamg_debug: 0
+    output_level: 0
 
   # solver for the pressure
   - name: solve_elliptic
@@ -55,23 +61,89 @@ linear_solvers:
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
-    max_iterations: 1000
-    kspace: 1000
-    sync_alg: 1
-    output_level: 2
-    write_matrix_files: no
+    max_iterations: 100
+    kspace: 40
+    write_matrix_files:  no
     #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
     reuse_linear_system: yes
     simple_hypre_matrix_assemble: yes
     dump_hypre_matrix_stats: no
-    hypre_cfg_file: hypre_file.yaml
-    hypre_cfg_node: hypre_elliptic
+
+    #bamg_max_levels: 7
+    bamg_coarsen_type: 8
+    bamg_interp_type: 6
+    bamg_relax_type: 11
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
+    bamg_keep_transpose: 1
+
+    bamg_num_sweeps: 2
+    #bamg_num_down_sweeps: 2
+    #bamg_num_up_sweeps: 2
+    #bamg_num_coarse_sweeps: 1
+
+    bamg_strong_threshold: 0.3243198904981685
+    bamg_trunc_factor: 0.4227143073461007
+    bamg_pmax_elmts: 3
+
+    bamg_agg_num_levels: 1
+    bamg_agg_interp_type: 7
+    bamg_agg_pmax_elmts: 3
+
+    bamg_output_level: 0
+    bamg_debug: 0
+    output_level: 0
+
+  # solver for the wall
+  - name: solve_wall
+    type: hypre
+    method: hypre_gmres
+    preconditioner: boomerAMG
+    tolerance: 1e-5
+    max_iterations: 100
+    kspace: 40
+    write_matrix_files:  no
+    #write_preassembly_matrix_files: yes
+    recompute_preconditioner_frequency: 1
+    reuse_linear_system: yes
+    simple_hypre_matrix_assemble: yes
+    dump_hypre_matrix_stats: no
+
+    bamg_max_levels: 7
+    bamg_coarsen_type: 8
+    bamg_interp_type: 6
+    bamg_relax_type: 11
+    bamg_num_sweeps: 2
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
+    bamg_trunc_factor: 0.1
+    bamg_agg_num_levels: 2
+    bamg_agg_interp_type: 5
+    bamg_agg_pmax_elmts: 3
+    bamg_pmax_elmts: 3
+    bamg_strong_threshold: 0.25
+
+    bamg_output_level: 0
+    bamg_debug: 0
+    output_level: 0
+
+  - name: solve_cont
+    type: hypre
+    method: hypre_gmres
+    preconditioner: boomerAMG
+    tolerance: 1e-5
+    max_iterations: 200
+    kspace: 75
+    output_level: 0
+    bamg_coarsen_type: 8
+    bamg_interp_type: 6
+    bamg_cycle_type: 1
 
 realms:
 
 - name: realm_1
-  mesh: mesh/120_cores/nrel5mw_volume.exo
+  mesh: mesh/240_cores/tower_and_blades.exo
   use_edges: yes
   check_jacobians: true
 
@@ -85,7 +157,7 @@ realms:
       turbulent_ke: solve_scalar
       specific_dissipation_rate: solve_scalar
       pressure: solve_elliptic
-      ndtw: solve_elliptic
+      ndtw: solve_wall
 
     systems:
     - WallDistance:
@@ -168,6 +240,9 @@ realms:
     overset_connectivity_type: tioga
     overset_user_data:
       tioga_populate_inactive_part: false
+      mesh_tag_offset: 0
+      tioga_options:
+        symmetry_direction: 3
       mesh_group:
       - overset_name: Turbine
         mesh_parts:
@@ -192,7 +267,7 @@ realms:
         centroid: [0.0, 0.0, 0.0]
       - type: translation
         displacement: [1772.54, 2080.0, 90.0]
-
+        
   - name: tower_translate
     mesh_parts:
       - tower-fluid-HEX
@@ -303,15 +378,13 @@ realms:
     - turbulent_viscosity
     - iblank
     - iblank_cell
+    - current_coordinates
     - mesh_displacement
     - mesh_velocity
     - q_criterion
     - vorticity
-    - disp_map
-    - disp_map_interp
     - div_mesh_velocity
     - element_courant
-    - dual_nodal_volume
 
 Time_Integrators:
 - StandardTimeIntegrator:

@@ -11,9 +11,9 @@ time.cfl              =   0.95       # CFL factor
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #            INPUT AND OUTPUT           #
 #.......................................#
-io.restart_file = /gpfs/alpine/cfd116/proj-shared/asharma/abl/5km_neutral_rated/initial_flow/chk30000
-time.plot_interval            =  500       # Steps between plot files
-time.checkpoint_interval      =  500       # Steps between checkpoint files
+io.restart_file = /lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/initial_flow/chk30000
+time.plot_interval            =  500      # Steps between plot files
+time.checkpoint_interval      =  500      # Steps between checkpoint files
 time.plot_start               =  30000
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #               PHYSICS                 #
@@ -36,7 +36,7 @@ ICNS.source_terms = BoussinesqBuoyancy CoriolisForcing BodyForce ABLMeanBoussine
 
 BoussinesqBuoyancy.reference_temperature = 300.0
 BoussinesqBuoyancy.read_temperature_profile = true
-BoussinesqBuoyancy.tprofile_filename = /gpfs/alpine/cfd116/proj-shared/asharma/abl/5km_neutral_rated/runtime_stats/avg_theta.dat
+BoussinesqBuoyancy.tprofile_filename = /lustre/orion/proj-shared/cfd116/files/5km_neutral_rated/runtime_stats/avg_theta.dat
 
 CoriolisForcing.east_vector = 1.0 0.0 0.0
 CoriolisForcing.north_vector = 0.0 1.0 0.0
@@ -111,7 +111,7 @@ zlo.tke_type = "zero_gradient"
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 # Boundary data sampling for IO         #
 #.......................................#
-ABL.bndry_file = /gpfs/alpine/cfd116/proj-shared/asharma/abl/5km_neutral_rated/boundary_plane/bndry_file
+ABL.bndry_file = /lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file
 ABL.bndry_io_mode = 1
 ABL.bndry_planes = xlo ylo
 ABL.bndry_output_start_time = 15000.0
@@ -172,7 +172,7 @@ amrex.hypre_spmv_use_vendor = 0
 amrex.hypre_sptrans_use_vendor = 0
 
 hypre.bamg_verbose = 0
-hypre.verbose = 1
+hypre.verbose = 0
 hypre.recompute_preconditioner = 0
 hypre.hypre_solver = GMRES
 hypre.hypre_preconditioner = BoomerAMG
