@@ -168,15 +168,15 @@ realms:
         ovset_parts: [outerBC]
 
   mesh_transformation:
-  - name: turbine_rotate_yaw
+  - name: turbine_shaft_tilt
     mesh_parts:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
     motion:
       - type: rotation
-        angle: 30.0
-        axis: [0.0, 0.0, 1.0]
+        angle: 5.0
+        axis: [0.0, 1.0, 0.0]
         centroid: [0.0, 0.0, 0.0]
         
   - name: turbine_translate
