@@ -259,7 +259,6 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
-      - tower-fluid-HEX
     motion:
       - type: rotation
         angle: 30.0
