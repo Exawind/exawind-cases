@@ -140,7 +140,7 @@ linear_solvers:
 
 realms:
 - name: realm_1
-  mesh: ../meshes/nrel5mw_nearbody.exo
+  mesh: ./mesh/nrel5mw_nearbody.exo
   use_edges: yes
 
   equation_systems:
