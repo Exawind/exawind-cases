@@ -1,0 +1,24 @@
+# Example input file
+exawind:
+  nalu_wind_inp:
+    - nrel5mw_nalu_w_tower_1.yaml
+    - nrel5mw_nalu_w_tower_2.yaml
+    - nrel5mw_nalu_w_tower_3.yaml
+    - nrel5mw_nalu_w_tower_4.yaml
+  amr_wind_inp: nrel5mw_amr.inp
+  num_timesteps: 1450
+  nonlinear_iterations: 1
+
+  # Variables for overset exchange
+  nalu_vars:
+    - velocity
+    - turbulent_ke
+    - specific_dissipation_rate
+    - pressure
+  amr_cell_vars:
+    - velocity
+    - tke
+    - sdr
+  amr_node_vars:
+    - p
+    
