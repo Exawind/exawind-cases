@@ -1,0 +1,12 @@
+GPU
+==============
+First make sure you've run the setup.sh script in the directory above this one to initialize the openfast datasets.
+This only needs to be done once unless we change compilers.
+
+To run this test, you will need to make sure the spack environment you used to build the exawind stack is active
+i.e. (spack env activate my-gpu-build)
+
+Then, do:
+sh script_frontier.sh -a=256 -n=16 -rpn=8
+
+This will devote 256 nodes (2048 GPUs) to amr-wind and 16 nodes (128 GPUs) to each nalu instance with 1 turbine. You can vary this parameter to add more or less GPUs.

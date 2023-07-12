@@ -6,3 +6,5 @@ plt*
 blades*/
 out*/
 rst*/
+*.chkp
+*.nc
