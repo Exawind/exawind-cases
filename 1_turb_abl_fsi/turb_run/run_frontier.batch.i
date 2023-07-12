@@ -14,22 +14,16 @@ ranks=$SLURM_NTASKS
 
 export rocm_version=5.4.3
 
-module purge
-module load amd/${rocm_version}
-module load craype-accel-amd-gfx90a
-module load PrgEnv-amd
-module load cray-mpich
-
-export LD_LIBRARY_PATH=/opt/rocm-${rocm_version}/llvm/lib/:$LD_LIBRARY_PATH
+# env variables for the spack environment will propogate to a new shell
+# commands (i.e. spack) most likely do not
+source ${SPACK_MANAGER}/start.sh
+spack load exawind
 export HIP_LAUNCH_BLOCKING=1
 
 export FI_MR_CACHE_MONITOR=memhooks
 export FI_CXI_RX_MATCH_MODE=software
 
-# release
-exawind=/lustre/orion/cfd116/proj-shared/mullowne/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/exawind-master-ndi3c36sv4e6dpvcwggd7g46ozuicnxb/bin/exawind
-
-srun -N %NODES% -n %RANKS% --gpus-per-node=%RANKS_PER_NODE% --gpu-bind=closest  $exawind --awind %AMRW_RANKS% --nwind %NALU_RANKS% nrel5mw.yaml
+srun -N %NODES% -n %RANKS% --gpus-per-node=%RANKS_PER_NODE% --gpu-bind=closest  exawind --awind %AMRW_RANKS% --nwind %NALU_RANKS% nrel5mw.yaml
 
 mkdir run_${SLURM_JOBID}
 #

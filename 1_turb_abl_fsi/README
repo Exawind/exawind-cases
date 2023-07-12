@@ -1,0 +1,15 @@
+This test case is for running a single blade resolved nrel5mw turbine in an ABL
+To set this case up make sure you have a valid build of the exawind driver with FSI enabled via spack-manager
+
+For example:
+
+quick-create -n exawind-gpu -s exawind+rcom+amr_wind_gpu+nalu_wind_gpu+fsi
+spack install
+
+Then run the setup.sh script.
+This will build the controller library for openfast, run openfast in a standalone fashion, and copy the files needed for the FSI turbine run into the turb_run directory.
+Once this is complete run
+
+sh script_frontier.sh -a=256 -n=16 -rpn=8
+
+in the turb_run directory to launch the job.
