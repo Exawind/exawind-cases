@@ -261,22 +261,18 @@ realms:
       - blade3-HEX
     motion:
       - type: rotation
-        angle: 30.0
-        axis: [0.0, 0.0, 1.0]
-        centroid: [0.0, 0.0, 0.0]
-      - type: rotation
         angle: 5.0
         axis: [0.0, 1.0, 0.0]
         centroid: [0.0, 0.0, 0.0]
       - type: translation
-        displacement: [1600, 1000, 90.0]
+        displacement: [1595, 1000, 90.0]
         
   - name: tower_translate
     mesh_parts:
       - tower-fluid-HEX
     motion:
       - type: translation
-        displacement: [1603.53, 1003.53, 0.0]
+        displacement: [1600, 1000, 0.0]
         
   mesh_motion:
   - name: blade_rotation
@@ -287,8 +283,8 @@ realms:
     motion:
     - type: rotation
       omega: 1.267109036947883
-      axis: [ 0.8660254037844387, 0.5, 0.0 ]
-      centroid: [1600, 1000, 90.0]
+      axis: [ 1.0, 0.0, 0.0 ]
+      centroid: [1595, 1000, 90.0]
       start_time: 0.03443526170799
 
   solution_options:
@@ -339,7 +335,7 @@ realms:
     physics: surface_force_and_moment
     output_file_name: forces01.dat
     frequency: 4
-    parameters: [1600, 1000, 90.0]
+    parameters: [1595, 1000, 90.0]
     target_name:
     - blade1
     - blade2
