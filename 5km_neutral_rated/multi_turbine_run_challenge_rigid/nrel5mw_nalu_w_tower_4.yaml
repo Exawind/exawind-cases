@@ -272,7 +272,7 @@ realms:
       - tower-fluid-HEX
     motion:
       - type: translation
-        displacement: [1800, 1800, 90.0]
+        displacement: [1800, 1800, 0.0]
         
   mesh_motion:
   - name: blade_rotation
