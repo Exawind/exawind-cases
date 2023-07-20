@@ -143,7 +143,7 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: new_mesh/nrel5mw_volume.exo
+  mesh: new_mesh/tower_and_blades.exo
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
@@ -186,6 +186,7 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
+      - tower-fluid-HEX
     value:
       pressure: 0.0
       velocity: [9.8726896031426, 5.7, 0.0]
@@ -197,11 +198,12 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
+      - tower-fluid-HEX
 
     specifications:
     - name: density
       type: constant
-      value: 1.225
+      value: 1.0
     - name: viscosity
       type: constant
       value: 1.8e-5
@@ -226,11 +228,22 @@ realms:
       use_wall_function: no
       turbulent_ke: 0.0
 
+  - wall_boundary_condition: bc_tower
+    target_name: tower-wall
+    wall_user_data:
+       use_wall_function: no
+       velocity: [0.0,0.0,0.0]
+       turbulent_ke: 0.0
+
+  - symmetry_boundary_condition: bc_ground
+    target_name: tower-ground
+    symmetry_user_data:
+
   - overset_boundary_condition: bc_overset
     overset_connectivity_type: tioga
     overset_user_data:
       tioga_populate_inactive_part: false
-      mesh_tag_offset: 0
+      mesh_tag_offset: 3
       tioga_options:
         symmetry_direction: 3
       mesh_group:
@@ -239,8 +252,9 @@ realms:
           - blade1-HEX
           - blade2-HEX
           - blade3-HEX
-        wall_parts: [blade1, blade2, blade3]
-        ovset_parts: [outerBC]
+          - tower-fluid-HEX
+        wall_parts: [blade1, blade2, blade3, tower-wall]
+        ovset_parts: [outerBC, tower-overset]
 
   mesh_transformation:
   - name: turbine_tilt_translate
@@ -255,6 +269,13 @@ realms:
         centroid: [0.0, 0.0, 0.0]
       - type: translation
         displacement: [1795, 1800, 90.0]
+        
+  - name: tower_translate
+    mesh_parts:
+      - tower-fluid-HEX
+    motion:
+      - type: translation
+        displacement: [1800, 1800, 0.0]
 
   openfast_fsi:
     n_turbines_glob: 1
@@ -298,9 +319,6 @@ realms:
     projected_timescale_type: momentum_diag_inv
 
     options:
-    - source_terms:
-        continuity: density_time_derivative
-
     - hybrid_factor:
         velocity: 1.0
         turbulent_ke: 1.0
@@ -359,6 +377,7 @@ realms:
         - blade1-HEX
         - blade2-HEX
         - blade3-HEX
+        - tower-fluid-HEX
 
       reynolds_averaged_variables:
       - velocity
@@ -391,15 +410,12 @@ realms:
     - vorticity
     - div_mesh_velocity
     - element_courant
-    - dual_nodal_volume
-    - disp_map
-    - disp_map_interp
 
 Time_Integrators:
 - StandardTimeIntegrator:
     name: ti_1
     start_time: 0
-    time_step: 0.003443526170798898
+    time_step: 0.003443526170799
     termination_step_count: 200000000
     time_stepping_type: fixed
     time_step_count: 0

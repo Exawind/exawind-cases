@@ -26,6 +26,6 @@ Turbine0:
   az_blend_delta: 1.5707963267948966
   vel_mean: 11.4
   wind_dir: 240.0
-  z_ref: 90.0
+  z_ref: 90
   shear_exp: 0.0
   
