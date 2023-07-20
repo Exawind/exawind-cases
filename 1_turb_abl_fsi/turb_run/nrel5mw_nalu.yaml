@@ -71,7 +71,9 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: /lustre/orion/proj-shared/cfd116/nrel5mw_meshes/mesh_12mDoF/nrel5mw_volume.exo
+  #mesh: /lustre/orion/proj-shared/cfd116/nrel5mw_meshes/tower_and_blades/tower_and_blades.exo
+  mesh: /lustre/orion/cfd116/proj-shared/ashesh/tower+rotor_correct_height/tower_and_blades.exo
+  # mesh: /lustre/orion/proj-shared/cfd116/nrel5mw_meshes/mesh_12mDoF/nrel5mw_volume.exo
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
@@ -114,6 +116,7 @@ realms:
         - blade1-HEX
         - blade2-HEX
         - blade3-HEX
+        - tower-fluid-HEX
       value:
         pressure: 0.0
         velocity: [9.8726896031426, 5.7, 0.0]
@@ -125,6 +128,7 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
+      - tower-fluid-HEX
 
     specifications:
     - name: density
@@ -154,6 +158,12 @@ realms:
       use_wall_function: no
       turbulent_ke: 0.0
 
+  - wall_boundary_condition: bc_wall
+    target_name: tower-wall
+    wall_user_data:
+      use_wall_function: no
+      turbulent_ke: 0.0
+
   - overset_boundary_condition: bc_overset
     overset_connectivity_type: tioga
     overset_user_data:
@@ -164,7 +174,8 @@ realms:
           - blade1-HEX
           - blade2-HEX
           - blade3-HEX
-        wall_parts: [blade1, blade2, blade3]
+          - tower-fluid-HEX
+        wall_parts: [blade1, blade2, blade3, tower-fluid-HEX]
         ovset_parts: [outerBC]
 
   mesh_transformation:
@@ -178,15 +189,14 @@ realms:
         angle: 5.0
         axis: [0.0, 1.0, 0.0]
         centroid: [0.0, 0.0, 0.0]
-        
-  - name: turbine_translate
-    mesh_parts:
-      - blade1-HEX
-      - blade2-HEX
-      - blade3-HEX
-    motion:
       - type: translation
         displacement: [1772.54, 2080.0, 90.0]
+        
+  - name: tower_translate
+      - tower-fluid-HEX
+    motion:
+      - type: translation
+        displacement: 1800.0, 1800.0, 90.0]
         
   openfast_fsi:
     n_turbines_glob: 1
@@ -203,6 +213,10 @@ realms:
       turbine_hub_pos: [1772.54, 2080.0, 90.0]
       restart_filename: "nrel5mw.5760"
       sim_type: "ext-loads"
+      tower_parts:
+        - tower-fluid-HEX
+      tower_boundary_parts:
+        - tower-wall
       blade_parts:
         - ["blade1-HEX"]
         - ["blade2-HEX"]
@@ -232,6 +246,9 @@ realms:
     projected_timescale_type: momentum_diag_inv
 
     options:
+    - source_terms:
+      continuity: density_time_derivative
+
     - hybrid_factor:
         velocity: 1.0
         turbulent_ke: 1.0
@@ -290,6 +307,7 @@ realms:
         - blade1-HEX
         - blade2-HEX
         - blade3-HEX
+        - tower-fluid-HEX
 
       reynolds_averaged_variables:
       - velocity
