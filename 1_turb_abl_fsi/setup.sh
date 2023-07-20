@@ -4,7 +4,7 @@ spack load openfast
 set -x
 rundir=$(pwd)
 cd ../5MW_Baseline/ServoData/
-spack build-env openfast fc -shared  -o libdiscon.so DISCON/DISCON.F90 
+spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90
 # run standalone openfast and copy files to run directory
 cd $rundir/openfast_run/
 openfastcpp inp.yaml
