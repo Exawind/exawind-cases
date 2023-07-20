@@ -162,6 +162,10 @@ realms:
       use_wall_function: no
       turbulent_ke: 0.0
 
+  - symmetry_boundary_condition: ground
+    target_name: tower-ground
+    symmetry_user_data:
+
   - overset_boundary_condition: bc_overset
     overset_connectivity_type: tioga
     overset_user_data:
@@ -194,7 +198,7 @@ realms:
       - tower-fluid-HEX
     motion:
       - type: translation
-        displacement: [1800.0, 1800.0, 90.0]
+        displacement: [1777.54, 2080.0, 90.0]
         
   openfast_fsi:
     n_turbines_glob: 1
@@ -206,8 +210,7 @@ realms:
     n_checkpoint: 1440
     dt_FAST: 0.0008608815426997245
     Turbine0:
-      # do these need to match the openfast file?
-      turbine_base_pos: [1772.54, 2080.0, 00.0]
+      turbine_base_pos: [1777.54, 2080.0, 00.0]
       turbine_hub_pos: [1772.54, 2080.0, 90.0]
       restart_filename: "nrel5mw.5760"
       sim_type: "ext-loads"
