@@ -196,7 +196,7 @@ realms:
       - tower-fluid-HEX
     motion:
       - type: translation
-        displacement: 1800.0, 1800.0, 90.0]
+        displacement: [1800.0, 1800.0, 90.0]
         
   openfast_fsi:
     n_turbines_glob: 1
