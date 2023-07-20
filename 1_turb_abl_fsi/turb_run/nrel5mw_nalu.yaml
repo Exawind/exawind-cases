@@ -71,9 +71,7 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  #mesh: /lustre/orion/proj-shared/cfd116/nrel5mw_meshes/tower_and_blades/tower_and_blades.exo
   mesh: /lustre/orion/cfd116/proj-shared/ashesh/tower+rotor_correct_height/tower_and_blades.exo
-  # mesh: /lustre/orion/proj-shared/cfd116/nrel5mw_meshes/mesh_12mDoF/nrel5mw_volume.exo
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
