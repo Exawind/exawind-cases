@@ -248,7 +248,7 @@ realms:
 
     options:
     - source_terms:
-      continuity: density_time_derivative
+        continuity: density_time_derivative
 
     - hybrid_factor:
         velocity: 1.0
