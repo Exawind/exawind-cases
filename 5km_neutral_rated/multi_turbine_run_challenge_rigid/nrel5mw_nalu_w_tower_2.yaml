@@ -143,7 +143,10 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: mesh/240_cores/tower_and_blades.exo
+  mesh: new_mesh/tower_and_blades.exo
+  automatic_decomposition_type: rcb
+  rebalance_mesh: yes
+  stk_rebalance_method: parmetis
   use_edges: yes
   check_jacobians: true
 
