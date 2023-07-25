@@ -177,8 +177,8 @@ realms:
           - blade2-HEX
           - blade3-HEX
           - tower-fluid-HEX
-        wall_parts: [blade1, blade2, blade3, tower-fluid-HEX]
-        ovset_parts: [outerBC]
+        wall_parts: [blade1, blade2, blade3, tower-wall]
+        ovset_parts: [outerBC, tower-overset]
 
   mesh_transformation:
   - name: turbine_shaft_tilt
