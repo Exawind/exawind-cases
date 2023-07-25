@@ -195,6 +195,7 @@ realms:
         displacement: [1772.54, 2080.0, 90.0]
         
   - name: tower_translate
+     mesh_parts:
       - tower-fluid-HEX
     motion:
       - type: translation
