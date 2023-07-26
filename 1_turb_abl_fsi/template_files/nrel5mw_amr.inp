@@ -1,21 +1,21 @@
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               = -1     # Max (simulated) time to evolve
 time.max_step                = 31440 #-1          # Max number of time steps
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #         TIME STEP COMPUTATION         #
 #.......................................#
 time.fixed_dt         =   0.003443526170799   # Use this constant dt if > 0
 time.cfl              =   0.95       # CFL factor
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            INPUT AND OUTPUT           #
 #.......................................#
-io.restart_file = _{AMR_RESTART_FILE}
+io.restart_file = {AMR_RESTART_FILE}
 time.plot_interval            =  500       # Steps between plot files
 time.checkpoint_interval      =  500       # Steps between checkpoint files
 time.plot_start               =  30000
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #               PHYSICS                 #
 #.......................................#
 incflo.gravity        =  0.0  0.0 -9.81  # Gravitational force (3D)
@@ -72,7 +72,7 @@ ABL.stats_output_frequency = 1
 ABL.stats_output_format = netcdf
 
 ABL.enable_hybrid_rl_mode = true
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
 amr.n_cell              = 512 512 192    # Grid cells at coarsest AMRlevel
@@ -81,7 +81,7 @@ amr.max_grid_size       = 128
 tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
 tagging.static.type = CartBoxRefinement
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #              GEOMETRY                 #
 #.......................................#
 geometry.prob_lo        =   0.       0.     0.  # Lo corner coordinates
@@ -108,7 +108,7 @@ zhi.temperature_type = "fixed_gradient"
 zhi.temperature = 0.003
 zlo.tke_type = "zero_gradient"
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 # Boundary data sampling for IO         #
 #.......................................#
 ABL.bndry_file = {AMR_BOUNDARY_FILE}
@@ -118,7 +118,7 @@ ABL.bndry_output_start_time = 15000.0
 ABL.bndry_var_names = velocity temperature tke
 ABL.bndry_output_format = native
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #                SOLVER                 #
 #.......................................#
 incflo.verbose = 0
