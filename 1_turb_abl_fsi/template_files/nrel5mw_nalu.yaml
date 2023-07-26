@@ -214,7 +214,7 @@ realms:
         
 {if(TOWER)}
   - name: turbine_tower_placement
-     mesh_parts:
+    mesh_parts:
       - tower-fluid-HEX
     motion:
       - type: translation
