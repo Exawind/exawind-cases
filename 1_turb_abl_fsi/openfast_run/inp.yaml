@@ -19,13 +19,13 @@ Turbine0:
   FAST_input_filename: "nrel5mw.fst"
   sim_type: ext-loads
   #restart_filename: "Turbine0"
-  turbine_base_pos: [1777.54, 2080.0, 00.0]
-  turbine_hub_pos: [1772.54, 2080.0, 90.0]
+  turbine_base_pos: [1800, 1800, 0]
+  turbine_hub_pos: [1795, 1800, 90]
   num_force_pts_blade: 50
   num_force_pts_tower: 12
   az_blend_mean: 18.84955592153876
   az_blend_delta: 1.5707963267948966
-  vel_mean: 11.7
+  vel_mean: 11.4
   wind_dir: 240.0
   z_ref: 90.0
   shear_exp: 0.0

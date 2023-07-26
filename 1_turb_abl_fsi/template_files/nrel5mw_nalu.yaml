@@ -199,7 +199,7 @@ realms:
 {endif}
 
   mesh_transformation:
-  - name: turbine_shaft_tilt
+  - name: turbine_rotor_placment
     mesh_parts:
       - blade1-HEX
       - blade2-HEX
@@ -210,15 +210,15 @@ realms:
         axis: [0.0, 1.0, 0.0]
         centroid: [0.0, 0.0, 0.0]
       - type: translation
-        displacement: [1772.54, 2080.0, 90.0]
+        displacement: [1795, 1800, 90]
         
 {if(TOWER)}
-  - name: tower_translate
+  - name: turbine_tower_placement
      mesh_parts:
       - tower-fluid-HEX
     motion:
       - type: translation
-        displacement: [1777.54, 2080.0, 90.0]
+        displacement: [1800, 1800, 0]
 {endif}
         
   openfast_fsi:
@@ -231,8 +231,8 @@ realms:
     n_checkpoint: 1440
     dt_FAST: 0.0008608815426997245
     Turbine0:
-      turbine_base_pos: [1777.54, 2080.0, 00.0]
-      turbine_hub_pos: [1772.54, 2080.0, 90.0]
+      turbine_base_pos: [1800, 1800, 0]
+      turbine_hub_pos: [1795, 1800, 90]
       restart_filename: "nrel5mw.5760"
       sim_type: "ext-loads"
 {if(TOWER)}
@@ -251,7 +251,7 @@ realms:
         - ["blade3"]
       az_blend_mean: 18.84955592153876
       az_blend_delta: 1.5707963267948966
-      vel_mean: 11.7
+      vel_mean: 11.4
       wind_dir: 240.0
       z_ref: 90.0
       shear_exp: 0.0
@@ -315,7 +315,7 @@ realms:
     physics: surface_force_and_moment
     output_file_name: forces01.dat
     frequency: 4
-    parameters: [1772.54, 2080.0, 90.0]
+    parameters: [1795, 1800, 90]
     target_name:
     - blade1
     - blade2
