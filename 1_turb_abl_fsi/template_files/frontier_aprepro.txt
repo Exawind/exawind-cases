@@ -10,8 +10,6 @@ export=FI_CXI_RX_MATCH_MODE=software'}
 
 # {SLURM_ARGS = '
 #SBATCH -A CFD116
-#SBATCH -o ' \\ NAME \\ '.o%j
-#SBATCH -J ' \\ NAME \\ '
 #SBATCH -t 02:00:00
 #SBATCH -p batch
 #SBATCH -N 272
