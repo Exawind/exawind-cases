@@ -195,6 +195,7 @@ realms:
         displacement: [1772.54, 2080.0, 90.0]
         
   - name: tower_translate
+    mesh_parts:
       - tower-fluid-HEX
     motion:
       - type: translation
@@ -214,10 +215,10 @@ realms:
       turbine_hub_pos: [1772.54, 2080.0, 90.0]
       restart_filename: "nrel5mw.5760"
       sim_type: "ext-loads"
-        #tower_parts:
-        #  - tower-fluid-HEX
-        #tower_boundary_parts:
-        #  - tower-wall
+      tower_parts:
+        - tower-fluid-HEX
+      tower_boundary_parts:
+        - tower-wall
       blade_parts:
         - ["blade1-HEX"]
         - ["blade2-HEX"]
