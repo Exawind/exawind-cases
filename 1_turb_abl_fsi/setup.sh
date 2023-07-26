@@ -41,7 +41,7 @@ mkdir -p ${rundir}
 echo "Setting up build dir"
 spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
 spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
-spack build-env trilinos aprepro -qW --include ${aprepro_include} NAME=${PROBNAME} template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
+spack build-env trilinos aprepro -qW --include ${aprepro_include} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 cp template_files/nrel5mw.yaml ${rundir}
 cp template_files/hypre_file.yaml ${rundir}
 cp openfast_run/* ${rundir}
