@@ -45,12 +45,13 @@ spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files
 spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 cp template_files/nrel5mw.yaml ${rundir}
 cp template_files/hypre_file.yaml ${rundir}
+cp template_files/static_box.txt ${rundir}
 cp openfast_run/* ${rundir}
 
 # step 5 run openfast
 echo "Compile openfast servo"
 cd $(pwd)/../5MW_Baseline/ServoData/
-spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90 
+spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90
 # run standalone openfast and copy files to run directory
 echo "Run openfast to start"
 set -x
