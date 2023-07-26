@@ -7,9 +7,13 @@ quick-create -n exawind-gpu -s exawind+rcom+amr_wind_gpu+nalu_wind_gpu+fsi
 spack install
 
 Then run the setup.sh script.
-This will build the controller library for openfast, run openfast in a standalone fashion, and copy the files needed for the FSI turbine run into the turb_run directory.
-Once this is complete run
 
-sh script_frontier.sh -a=256 -n=16 -rpn=8
+``` shell
+setup.sh -n=[name you want for the run, default is the date]
+```
 
-in the turb_run directory to launch the job.
+This will create a run directory `run_[name]`, populate the files, run the openfast precursor and move all the files you need into the run directory.
+If you include the `-s=True` flag then it will also submit a job for you on the platform, and the `-e=[your email]` command will have slurm email you about the job.
+
+The files are processed for each machine based on the values in the `template_files/[machine]_aprepro.txt` file.
+You can tweak things there, but it would be best to tweak them in the run directory and open a PR if a change needs to be made to these templates.
