@@ -30,30 +30,31 @@ for i in "$@"; do
             ;;
     esac
 done
+
 # step 3 create dirs
 if [[ -z ${PROBNAME} ]]; then
   PROBNAME=$(date "+%Y%m%d")
 fi
-rundir="run_${PROBNAME}"
+rundir="$(pwd)/run_${PROBNAME}"
 mkdir -p ${rundir}
 
 # step 4 setup run dir
 echo "Setting up run dir"
 spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
 spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
-spack build-env trilinos aprepro -qW --include ${aprepro_include} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
+spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 cp template_files/nrel5mw.yaml ${rundir}
 cp template_files/hypre_file.yaml ${rundir}
 cp openfast_run/* ${rundir}
 
 # step 5 run openfast
 echo "Compile openfast servo"
-cd ../5MW_Baseline/ServoData/
+cd $(pwd)/../5MW_Baseline/ServoData/
 spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90 
 # run standalone openfast and copy files to run directory
 echo "Run openfast to start"
 set -x
-cd $rundir/
+cd ${rundir}
 spack build-env openfast openfastcpp inp.yaml
 
 # step 6 submit job if desired
