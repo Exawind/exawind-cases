@@ -6,7 +6,7 @@ For example:
 quick-create -n exawind-gpu -s exawind+rcom+amr_wind_gpu+nalu_wind_gpu+fsi
 spack install
 
-Then run the setup.sh script.
+Then run the setup.sh script with the FSI environment activated.
 
 ``` shell
 setup.sh -n=[name you want for the run, default is the date]

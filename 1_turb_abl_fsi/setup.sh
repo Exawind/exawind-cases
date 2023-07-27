@@ -1,6 +1,7 @@
 # step 1 checks
 source ${SPACK_MANAGER}/start.sh
 spack-start # ensure spack-manager is going
+spack load exawind
 
 # machine specific params i.e. mesh/restart/etc
 aprepro_include=template_files/${SPACK_MANAGER_MACHINE}_aprepro.txt
