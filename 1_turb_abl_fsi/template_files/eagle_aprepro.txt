@@ -1,4 +1,5 @@
-# {NALU_MESH = "/projects/hfm/ashesh/nrel5mw/new_mesh/tower+rotor_correct_height/tower_and_blades.exo"}
+# {NALU_MESH_TOWER = "/projects/hfm/ashesh/nrel5mw/new_mesh/tower+rotor_correct_height/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/projects/hfm/ashesh/nrel5mw/new_mesh/rotor/nrel5mw_volume.exo"}
 # {AMR_RESTART_FILE = "/projects/hfm/ashesh/nrel5mw/5km_abl/initial_flow/chk30000"}
 # {AMR_TPROFILE_FILE = "/projects/hfm/ashesh/nrel5mw/5km_abl/runtime_stats/avg_theta.dat"}
 # {AMR_BOUNDARY_FILE = "/projects/hfm/ashesh/nrel5mw/5km_abl/boundary_plane/bndry_file"}
@@ -9,4 +10,4 @@
 #SBATCH -N 70
 #SBATCH --qos=high'}
 
-# {SRUN_COMMAND = 'srun -n 2520 exawind --nwind 1980 --awind 540 nrel5mw.yaml &> driver.log'}
+# {SRUN_COMMAND = 'srun -n 2520 exawind --nwind 540 --awind 1980 nrel5mw.yaml &> driver.log'}

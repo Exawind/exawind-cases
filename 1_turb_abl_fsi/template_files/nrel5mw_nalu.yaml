@@ -71,7 +71,11 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: {NALU_MESH}
+{if(TOWER)}
+  mesh: {NALU_MESH_TOWER}
+{else}
+  mesh: {NALU_MESH_BLADES}
+{endif}
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
