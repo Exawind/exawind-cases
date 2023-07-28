@@ -41,13 +41,14 @@ mkdir -p ${rundir}
 
 # step 4 setup run dir
 echo "Setting up run dir"
-spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
-spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
-spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 cp template_files/nrel5mw.yaml ${rundir}
 cp template_files/hypre_file.yaml ${rundir}
-cp template_files/static_box.txt ${rundir}
+cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
 cp openfast_run/* ${rundir}
+spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
+spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
+spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
+spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 
 # step 5 run openfast
 echo "Compile openfast servo"

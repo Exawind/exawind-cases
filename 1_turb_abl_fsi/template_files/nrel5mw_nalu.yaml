@@ -212,7 +212,7 @@ realms:
       - type: rotation
         angle: 5.0
         axis: [0.0, 1.0, 0.0]
-        centroid: [0.0, 0.0, 0.0]
+        centroid: [5.0, 0.0, 0.0]
       - type: translation
         displacement: [1795, 1800, 90]
         
