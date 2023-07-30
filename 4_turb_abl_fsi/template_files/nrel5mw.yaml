@@ -1,0 +1,42 @@
+turbines:
+ - &hub_0: [1795, 1800, 90]
+   &tower_0: [1800, 1800, 0]
+
+exawind:
+  nalu_wind_inp:
+  - base_input_file: nrel5mw.yaml
+    logfile: turb1.log
+    replace:
+      realms:
+      - mesh_transformation:
+        # turbine rotor position
+        - motion: [~#rotation, displacement: *hub_0]
+        # tower placement
+        - - motion: [~#rotation, displacement: *tower_0]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_0
+            turbine_hub_pos: *hub_0
+            restart_filename: "t1_rst.5760"
+        post_processing:
+        - output_file_name: forces_00.dat
+          parameters: *hub_0
+        restart: {restart_data_base_name: rst01/turb0.rst}
+        output: {output_data_base_name: out01/turb0.e}
+  amr_wind_inp: nrel5mw_amr.inp
+  num_timesteps: 1440
+  nonlinear_iterations: 1
+
+  # Variables for overset exchange
+  nalu_vars:
+    - velocity
+    - turbulent_ke
+    - specific_dissipation_rate
+    - pressure
+  amr_cell_vars:
+    - velocity
+    - tke
+    - sdr
+  amr_node_vars:
+    - p
+    
