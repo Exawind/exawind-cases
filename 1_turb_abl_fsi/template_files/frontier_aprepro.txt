@@ -11,7 +11,7 @@ export=FI_CXI_RX_MATCH_MODE=software'}
 
 # {SLURM_ARGS = '
 #SBATCH -A CFD116
-#SBATCH -t 02:00:00
+#SBATCH -t 06:00:00
 #SBATCH -p batch
 #SBATCH -N 272
 #SBATCH --ntasks-per-node=8

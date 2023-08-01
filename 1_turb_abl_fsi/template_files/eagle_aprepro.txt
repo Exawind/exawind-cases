@@ -6,7 +6,7 @@
 
 # {SLURM_ARGS = '
 #SBATCH -A hfm
-#SBATCH -t 02:00:0
+#SBATCH -t 04:00:0
 #SBATCH -N 70
 #SBATCH --qos=high'}
 
