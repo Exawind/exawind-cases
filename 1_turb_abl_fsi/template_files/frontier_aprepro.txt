@@ -1,5 +1,5 @@
-# {NALU_MESH_TOWER = "/lustre/orion/cfd116/proj-shared/ashesh/tower+rotor_correct_height/tower_and_blades.exo"}
-# {NALU_MESH_BLADES = "/lustre/orion/cfd116/proj-shared/ashesh/blades_only/nrel5mw_volume.exo"}
+# {NALU_MESH_TOWER = "/lustre/orion/cfd116/proj-shared/ashesh/rotor+tower/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/lustre/orion/cfd116/proj-shared/ashesh/rotor/nrel5mw_volume.exo"}
 # {AMR_RESTART_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/initial_flow/chk30000"}
 # {AMR_TPROFILE_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/runtime_stats/avg_theta.dat"}
 # {AMR_BOUNDARY_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file"}
