@@ -23,9 +23,8 @@ spack load exawind
 
 mkdir run_$SLURM_JOBID
 #
-mv nrel5mw_nalu*.log run_$SLURM_JOBID
-mv 1t-abl_gpu_2048_128.o$SLURM_JOBID run_$SLURM_JOBID
-mv amr-wind.log run_$SLURM_JOBID/amr_wind_2048.log
+mv *.log run_$SLURM_JOBID
+mv {NAME}.o$SLURM_JOBID run_$SLURM_JOBID
 mv timings.dat run_$SLURM_JOBID/
 mv forces*dat run_$SLURM_JOBID/
 
