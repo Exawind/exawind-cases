@@ -208,13 +208,11 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
-{if(TILT)}
     motion: #tilt done in original mesh location of [0, 0, 0]
       - type: rotation
         angle: 5.0
         axis: [0.0, 1.0, 0.0]
-        centroid: [5.0, 0.0, 0.0] # distance between hub and tower
-{endif}
+        centroid: [5.0191, 0.0, 0.0] # distance between hub and tower
       - type: translation
         displacement: [1795, 1800, 90]
         

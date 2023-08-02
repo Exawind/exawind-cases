@@ -25,10 +25,6 @@ for i in "$@"; do
             SUBMIT="${i#*=}"
             shift # past argument=value
             ;;
-        -m=*|--mesh-tilt=*)
-            TILT="${i#*=}"
-            shift # past argument=value
-            ;;
         --)
             shift
             break
@@ -47,7 +43,7 @@ mkdir -p ${rundir}
 echo "Setting up run dir"
 cp template_files/static_files/* ${rundir}
 cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
-spack build-env trilinos aprepro -qW --include ${aprepro_include} TILT=${TILT} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
+spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
 spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
 spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
 spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
