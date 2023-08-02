@@ -58,7 +58,7 @@ linear_solvers:
     max_iterations: 1000
     kspace: 1000
     sync_alg: 1
-    output_level: 2
+    output_level: 0
     write_matrix_files: no
     #write_preassembly_matrix_files: yes
     recompute_preconditioner_frequency: 1
@@ -208,13 +208,13 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
-{if(TILT)}
-    motion: #tilt done in original mesh location of [0, 0, 0]
+    motion:
+      #tilt done in original mesh location of [0, 0, 0]
       - type: rotation
         angle: 5.0
         axis: [0.0, 1.0, 0.0]
-        centroid: [5.0, 0.0, 0.0] # distance between hub and tower
-{endif}
+        centroid: [0.0, 0.0, 0.0]
+      # then translated to the hub_ref_position as computed by openfast
       - type: translation
         displacement: [1795, 1800, 90]
         
