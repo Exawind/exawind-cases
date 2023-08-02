@@ -1,0 +1,85 @@
+turbine_info:
+ - &hub_0: [795, 800, 90]
+   &tower_0: [800, 800, 0]
+   &openfast_rst0: "turb0_rst.5760"
+   &tower_1: [1600, 1000, 0]
+ - &hub_2: [995, 1600, 90]
+   &tower_2: [1000, 1600, 0]
+ - &hub_3: [1795, 1800, 90]
+   &tower_3: [1800, 1800, 0]
+n_turbines_glob: 4
+dry_run: False
+debug: False
+sim_start: init
+coupling_mode: strong
+n_iter: 1
+t_start:  0.0
+t_end:    4.958677685950414
+t_max:    600.553079947575359
+dt_driver: 0.003443526170798898
+restart_freq: 1440
+output_freq: 1
+set_exp_law_wind: False
+set_uniform_x_blade_forces: False
+x_blade_force: 0.0
+super_controller: False
+Turbine0:
+  turb_id: 0
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  #restart_filename: "Turbine0"
+  turbine_base_pos: *tower_0
+  turbine_hub_pos: *hub_0
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine1:
+  turb_id: 1
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  #restart_filename: "Turbine0"
+  turbine_base_pos: *tower_1
+  turbine_hub_pos: *hub_1
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine2:
+  turb_id: 2
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  #restart_filename: "Turbine0"
+  turbine_base_pos: *tower_2
+  turbine_hub_pos: *hub_2
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine3:
+  turb_id: 3
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_3
+  turbine_hub_pos: *hub_3
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+  
