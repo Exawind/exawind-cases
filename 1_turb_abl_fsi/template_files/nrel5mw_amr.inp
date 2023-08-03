@@ -12,8 +12,8 @@ time.cfl              =   0.95       # CFL factor
 #            INPUT AND OUTPUT           #
 #.......................................#
 io.restart_file = {AMR_RESTART_FILE}
-time.plot_interval            =  360       # Steps between plot files
-time.checkpoint_interval      =  500       # Steps between checkpoint files
+time.plot_interval            =  1440       # Steps between plot files
+time.checkpoint_interval      =  1440       # Steps between checkpoint files
 time.plot_start               =  30000
 #.......................................#
 #               PHYSICS                 #
