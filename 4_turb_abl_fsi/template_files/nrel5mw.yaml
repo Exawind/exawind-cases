@@ -1,34 +1,38 @@
 # this may be excessive use of anchors but if we change
 # names and such we can do it all here
-turbine_info:
- - &hub_0: [795, 800, 90]
-   &tower_0: [800, 800, 0]
-   &openfast_rst0: "turb0_rst.5760"
-   &forces0: "forces_00.dat"
-   &output0: "out01/turb0.e"
-   &restart0: "out01/turb0.rst"
-   &log0: "turb0_nalu.log"
- - &hub_1: [1595, 1000, 90]
-   &tower_1: [1600, 1000, 0]
-   &openfast_rst0: "turb1_rst.5760"
-   &forces0: "forces_01.dat"
-   &output0: "out01/turb1.e"
-   &restart0: "out01/turb1.rst"
-   &log0: "turb1_nalu.log"
- - &hub_2: [995, 1600, 90]
-   &tower_2: [1000, 1600, 0]
-   &openfast_rst0: "turb2_rst.5760"
-   &forces0: "forces_02.dat"
-   &output0: "out01/turb2.e"
-   &restart0: "out01/turb2.rst"
-   &log0: "turb2_nalu.log"
- - &hub_3: [1795, 1800, 90]
-   &tower_3: [1800, 1800, 0]
-   &openfast_rst0: "turb3_rst.5760"
-   &forces0: "forces_03.dat"
-   &output0: "out01/turb3.e"
-   &restart0: "out01/turb3.rst"
-   &log0: "turb3_nalu.log"
+turbine_info: 
+  turb0:
+    turbine_hub_pos: &hub_0 [795, 800, 90]
+    turbine_base_pos: &tower_0 [800, 800, 0]
+    openfast_restart: &openfast_rst0 "nrel5mw.5760"
+    force: &forces0 "forces_T0_01.dat"
+    output: &output0 "out01/turb0.e"
+    restart: &restart0 "rst01/turb0.rst"
+    logfile: &log0 "turb_0.log"
+  turb1:
+    turbine_hub_pos: &hub_1 [1595, 1000, 90]
+    turbine_base_pos: &tower_1 [1600, 1000, 0]
+    openfast_restart: &openfast_rst1 "nrel5mw.T1.5760"
+    force: &forces1 "forces_T1_01.dat"
+    output: &output1 "out01/turb1.e"
+    restart: &restart1 "rst01/turb1.rst"
+    logfile: &log1 "turb_1.log"
+  turb2:
+    turbine_hub_pos: &hub_2 [995, 1600, 90]
+    turbine_base_pos: &tower_2 [1000, 1600, 0]
+    openfast_restart: &openfast_rst2 "nrel5mw.T2.5760"
+    force: &forces2 "forces_T2_01.dat"
+    output: &output2 "out01/turb2.e"
+    restart: &restart2 "rst01/turb2.rst"
+    logfile: &log2 "turb_2.log"
+  turb3:
+    turbine_hub_pos: &hub_3 [1795, 1800, 90]
+    turbine_base_pos: &tower_3 [1800, 1800, 0]
+    openfast_restart: &openfast_rst3 "nrel5mw.T3.5760"
+    force: &forces3 "forces_T3_01.dat"
+    output: &output3 "out01/turb3.e"
+    restart: &restart3 "rst01/turb3.rst"
+    logfile: &log3 "turb_3.log"
 
 exawind:
   nalu_wind_inp:
