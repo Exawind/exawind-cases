@@ -179,7 +179,9 @@ realms:
   - overset_boundary_condition: bc_overset
     overset_connectivity_type: tioga
     overset_user_data:
-      tioga_populate_inactive_part: false
+      mesh_tag_offset: 0
+      tioga_options:
+        symmetry_direction: 3
       mesh_group:
       - overset_name: Turbine
         mesh_parts:
