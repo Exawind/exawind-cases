@@ -42,35 +42,20 @@ mkdir -p ${rundir}
 echo "Setting up run dir"
 single_turb_ref=$(pwd)/../1_turb_abl_fsi/template_files
 
-cp template_files/driver_static_files/* ${rundir}
+# files that do not change
+cp ${single_turb_ref}/static_files/* ${rundir}
+cp template_files/static_files/* ${rundir}
 cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
 
-spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} ${single_turb_ref}/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
-spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} ${single_turb_ref}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
-spack build-env trilinos aprepro -qW --include ${aprepro_include} ${single_turb_ref}/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
-spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
-
-echo "Compile openfast servo"
-cd $(pwd)/../5MW_Baseline/ServoData/
-spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90
-
-# setup openfast run dirs
-for ((i=0; i<4; i++)); do
-  echo "Setup Turb $i}"
-  fastdir=${rundir}/fast_turb_${i}
-  # copy openfast files needed
-  cp template_files/openfast_static_files/* ${fastdir}
-  # aprepro
-  spack build-env trilinos aprepro -qW  TURBID=${i} template_files/inp.yaml ${fastdir}/inp.yaml
-  # runcase
-  cd ${fastdir}
-  spack build-env openfast openfastcpp inp.yaml
-  # copy nc files and other required things to the 
-done
+# files that need to be edited with the preprocessor, mainly for reuse from the single turbine case
+aprepro -qW --include ${aprepro_include} TOWER=${TOWER} ${single_turb_ref}/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
+aprepro -qW --include ${aprepro_include} ${single_turb_ref}/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
+aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 
 cd ${rundir}
 
 # step 6 submit job if desired
+# openfast will be run in parallel to start this job
 if [ -n "${SUBMIT}" ]; then
   echo "Submit job"
   sbatch slurm_sub.sh
