@@ -19,7 +19,8 @@ spack load exawind
 {SUBMIT_EXPORTS}
 {endif}
 
-{SRUN_COMMAND}
+{SRUN_COMMAND_OPENFAST}
+{SRUN_COMMAND_EXAWIND}
 
 mkdir run_$SLURM_JOBID
 #

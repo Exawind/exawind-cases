@@ -43,9 +43,9 @@ exawind:
       realms:
       - mesh_transformation:
         # turbine rotor position
-        - motion: [~#rotation, displacement: *hub_0]
+        - motion: [~, displacement: *hub_0]
         # tower placement
-        - - motion: [~#rotation, displacement: *tower_0]
+        - motion: [~, displacement: *tower_0]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_0
@@ -63,9 +63,9 @@ exawind:
       realms:
       - mesh_transformation:
         # turbine rotor position
-        - motion: [~#rotation, displacement: *hub_1]
+        - motion: [~, displacement: *hub_1]
         # tower placement
-        - - motion: [~#rotation, displacement: *tower_1]
+        - motion: [~, displacement: *tower_1]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_1
@@ -83,9 +83,9 @@ exawind:
       realms:
       - mesh_transformation:
         # turbine rotor position
-        - motion: [~#rotation, displacement: *hub_2]
+        - motion: [~, displacement: *hub_2]
         # tower placement
-        - - motion: [~#rotation, displacement: *tower_2]
+        - motion: [~, displacement: *tower_2]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_2
@@ -103,9 +103,9 @@ exawind:
       realms:
       - mesh_transformation:
         # turbine rotor position
-        - motion: [~#rotation, displacement: *hub_3]
+        - motion: [~, displacement: *hub_3]
         # tower placement
-        - - motion: [~#rotation, displacement: *tower_3]
+        - motion: [~, displacement: *tower_3]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_3

@@ -56,7 +56,13 @@ cd ${rundir}
 
 # step 6 submit job if desired
 # openfast will be run in parallel to start this job
+#
 if [ -n "${SUBMIT}" ]; then
   echo "Submit job"
+if [ "darwin" = "${SPACK_MANAGER_MACHINE}" ]; then
+  # TEST INFRASTUCTURE as a bash script
+  bash slurm_sub.sh
+else
   sbatch slurm_sub.sh
+fi
 fi
