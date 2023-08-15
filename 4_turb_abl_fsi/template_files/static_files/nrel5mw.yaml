@@ -9,6 +9,7 @@ turbine_info:
     output: &output0 "out01/turb0.e"
     restart: &restart0 "rst01/turb0.rst"
     logfile: &log0 "turb_0.log"
+    tag: &tag0 0
   turb1:
     turbine_hub_pos: &hub_1 [1595, 1000, 90]
     turbine_base_pos: &tower_1 [1600, 1000, 0]
@@ -17,6 +18,7 @@ turbine_info:
     output: &output1 "out01/turb1.e"
     restart: &restart1 "rst01/turb1.rst"
     logfile: &log1 "turb_1.log"
+    tag: &tag1 1
   turb2:
     turbine_hub_pos: &hub_2 [995, 1600, 90]
     turbine_base_pos: &tower_2 [1000, 1600, 0]
@@ -25,6 +27,7 @@ turbine_info:
     output: &output2 "out01/turb2.e"
     restart: &restart2 "rst01/turb2.rst"
     logfile: &log2 "turb_2.log"
+    tag: &tag2 2
   turb3:
     turbine_hub_pos: &hub_3 [1795, 1800, 90]
     turbine_base_pos: &tower_3 [1800, 1800, 0]
@@ -33,19 +36,21 @@ turbine_info:
     output: &output3 "out01/turb3.e"
     restart: &restart3 "rst01/turb3.rst"
     logfile: &log3 "turb_3.log"
+    tag: &tag3 3
 
 exawind:
   nalu_wind_inp:
   ### Turb 0 ###
-  - base_input_file: nrel5mw.yaml
+  - base_input_file: nrel5mw_nalu.yaml
     logfile: *log0
     replace:
       realms:
-      - mesh_transformation:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag0}]
+        mesh_transformation:
         # turbine rotor position
         - motion: [~, displacement: *hub_0]
         # tower placement
-        - motion: [~, displacement: *tower_0]
+        - motion: [displacement: *tower_0]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_0
@@ -57,15 +62,16 @@ exawind:
         output: {output_data_base_name: *output0}
         restart: {restart_data_base_name: *restart0}
   ### Turb 1 ###
-  - base_input_file: nrel5mw.yaml
+  - base_input_file: nrel5mw_nalu.yaml
     logfile: *log1
     replace:
       realms:
-      - mesh_transformation:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag1}]
+        mesh_transformation:
         # turbine rotor position
         - motion: [~, displacement: *hub_1]
         # tower placement
-        - motion: [~, displacement: *tower_1]
+        - motion: [displacement: *tower_1]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_1
@@ -77,15 +83,16 @@ exawind:
         output: {output_data_base_name: *output1}
         restart: {restart_data_base_name: *restart1}
   ### Turb 2 ###
-  - base_input_file: nrel5mw.yaml
+  - base_input_file: nrel5mw_nalu.yaml
     logfile: *log2
     replace:
       realms:
-      - mesh_transformation:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag2}]
+        mesh_transformation:
         # turbine rotor position
         - motion: [~, displacement: *hub_2]
         # tower placement
-        - motion: [~, displacement: *tower_2]
+        - motion: [displacement: *tower_2]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_2
@@ -97,15 +104,16 @@ exawind:
         output: {output_data_base_name: *output2}
         restart: {restart_data_base_name: *restart2}
   ### Turb 3 ###
-  - base_input_file: nrel5mw.yaml
+  - base_input_file: nrel5mw_nalu.yaml
     logfile: *log3
     replace:
       realms:
-      - mesh_transformation:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag3}]
+        mesh_transformation:
         # turbine rotor position
         - motion: [~, displacement: *hub_3]
         # tower placement
-        - motion: [~, displacement: *tower_3]
+        - motion: [displacement: *tower_3]
         openfast_fsi:
           Turbine0:
             turbine_base_pos: *tower_3
