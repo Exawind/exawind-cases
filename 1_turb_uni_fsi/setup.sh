@@ -46,6 +46,8 @@ cp ${fsiTemplate}/static_files/* ${rundir}
 cp template_files/static_files/* ${rundir}
 spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} ${fsiTemplate}/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
 spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} ${fsiTemplate}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
+# getting a weird carriage on frontier in this file for some reason
+sed -i 's/\r//g' ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
 spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 
 # step 5 run openfast
