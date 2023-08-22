@@ -10,4 +10,4 @@
 #SBATCH -N 70
 #SBATCH --qos=high'}
 
-# {SRUN_COMMAND = 'srun -n 2520 exawind --nwind 540 --awind 1980 nrel5mw.yaml &> driver.log'}
+# {SRUN_COMMAND = 'spack build-env exawind srun -n 2520 exawind --nwind 540 --awind 1980 nrel5mw.yaml &> driver.log'}
