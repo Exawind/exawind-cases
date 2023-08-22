@@ -48,9 +48,9 @@ cp template_files/static_files/* ${rundir}
 cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
 
 # files that need to be edited with the preprocessor, mainly for reuse from the single turbine case
-aprepro -qW --include ${aprepro_include} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
-aprepro -qW --include ${aprepro_include} ${single_turb_ref}/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
-aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
+spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
+spack build-env trilinos aprepro -qW --include ${aprepro_include} ${single_turb_ref}/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
+spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 
 cd ${rundir}
 
