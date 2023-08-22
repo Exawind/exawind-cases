@@ -1,0 +1,14 @@
+# mesh files are meaningless for this infrastructure test
+# {NALU_MESH_TOWER = "/lustre/orion/cfd116/proj-shared/ashesh/rotor+tower/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/lustre/orion/cfd116/proj-shared/ashesh/rotor/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/initial_flow/chk30000"}
+# {AMR_TPROFILE_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/runtime_stats/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file"}
+
+# {SUBMIT_EXPORTS = ''}
+
+# {SLURM_ARGS = ''}
+
+# {SRUN_COMMAND_OPENFAST = 'mpiexec -n 4 -bind-to core openfastcpp inp.yaml'}
+# {SRUN_COMMAND_EXAWIND = 'mpiexec -n 4 -bind-to core exawind -nwind 4 -awind 4 nrel5mw.yaml'}
+
