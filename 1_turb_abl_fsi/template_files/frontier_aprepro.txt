@@ -7,7 +7,7 @@
 # {SUBMIT_EXPORTS = '
 export HIP_LAUNCH_BLOCKING=1
 export FI_MR_CACHE_MONITOR=memhooks
-export=FI_CXI_RX_MATCH_MODE=software'}
+export FI_CXI_RX_MATCH_MODE=software'}
 
 # {SLURM_ARGS = '
 #SBATCH -A CFD116
