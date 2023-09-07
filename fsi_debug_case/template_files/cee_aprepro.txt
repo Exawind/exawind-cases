@@ -1,0 +1,9 @@
+# mesh files are meaningless for this infrastructure test
+# {SUBMIT_EXPORTS = '
+export CUDA_LAUNCH_BLOCKING=1
+export CUDA_MANAGED_FORCE_DEVICE_ALLOC=1'}
+
+# {SLURM_ARGS = ''}
+
+# {SRUN_COMMAND_EXAWIND = 'mpirun -np 1 naluX -i fsiTurbineSurrogate.yaml'}
+
