@@ -92,7 +92,7 @@ spack build-env openfast openfastcpp inp.yaml
 # step 6 submit job if desired
 if [ -n "${SUBMIT}" ]; then
   echo "Submit job"
-if [ "darwin" = "${SPACK_MANAGER_MACHINE}" ]; then
+if [ "darwin" = "${SPACK_MANAGER_MACHINE}" ] || [ "cee" = "${SPACK_MANAGER_MACHINE}" ]; then
   # TEST INFRASTUCTURE as a bash script
   bash slurm_sub.sh
 else
