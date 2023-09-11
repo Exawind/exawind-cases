@@ -5,9 +5,12 @@
 # {AMR_BOUNDARY_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file"}
 
 # {SUBMIT_EXPORTS = '
+module load PrgEnv-amd/8.3.3
+module load amd/5.4.3
 export HIP_LAUNCH_BLOCKING=1
 export FI_MR_CACHE_MONITOR=memhooks
-export FI_CXI_RX_MATCH_MODE=software'}
+export FI_CXI_RX_MATCH_MODE=software
+export MPICH_SMP_SINGLE_COPY_MODE=NONE'}
 
 # {SLURM_ARGS = '
 #SBATCH -A CFD116
