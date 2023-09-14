@@ -1,21 +1,21 @@
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               = -1          # Max (simulated) time to evolve
 time.max_step                = -1          # Max number of time steps
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #         TIME STEP COMPUTATION         #
 #.......................................#
 time.fixed_dt         =   0.003443526170799   # Use this constant dt if > 0
 time.cfl              =   0.95       # CFL factor
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            INPUT AND OUTPUT           #
 #.......................................#
-io.restart_file = /lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/initial_flow/chk30000
+io.restart_file = {AMR_RESTART_FILE}
 time.plot_interval            =  1440      # Steps between plot files
 time.checkpoint_interval      =  1440      # Steps between checkpoint files
 time.plot_start               =  30000
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #               PHYSICS                 #
 #.......................................#
 incflo.gravity        =  0.0  0.0 -9.81  # Gravitational force (3D)
@@ -36,7 +36,7 @@ ICNS.source_terms = BoussinesqBuoyancy CoriolisForcing BodyForce ABLMeanBoussine
 
 BoussinesqBuoyancy.reference_temperature = 300.0
 BoussinesqBuoyancy.read_temperature_profile = true
-BoussinesqBuoyancy.tprofile_filename = /lustre/orion/proj-shared/cfd116/files/5km_neutral_rated/runtime_stats/avg_theta.dat
+BoussinesqBuoyancy.tprofile_filename = {AMR_TPROFILE_FILE}
 
 CoriolisForcing.east_vector = 1.0 0.0 0.0
 CoriolisForcing.north_vector = 0.0 1.0 0.0
@@ -72,7 +72,7 @@ ABL.stats_output_frequency = 1
 ABL.stats_output_format = netcdf
 
 ABL.enable_hybrid_rl_mode = true
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
 amr.n_cell              = 512 512 192    # Grid cells at coarsest AMRlevel
@@ -82,7 +82,7 @@ amr.blocking_factor     = 32
 tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
 tagging.static.type = CartBoxRefinement
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #              GEOMETRY                 #
 #.......................................#
 geometry.prob_lo        =   0.       0.     0.  # Lo corner coordinates
@@ -109,17 +109,17 @@ zhi.temperature_type = "fixed_gradient"
 zhi.temperature = 0.003
 zlo.tke_type = "zero_gradient"
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 # Boundary data sampling for IO         #
 #.......................................#
-ABL.bndry_file = /lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file
+ABL.bndry_file = {AMR_BOUNDARY_FILE}
 ABL.bndry_io_mode = 1
 ABL.bndry_planes = xlo ylo
 ABL.bndry_output_start_time = 15000.0
 ABL.bndry_var_names = velocity temperature tke
 ABL.bndry_output_format = native
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #                SOLVER                 #
 #.......................................#
 incflo.verbose = 0
@@ -172,7 +172,7 @@ amrex.hypre_spgemm_use_vendor = 1
 amrex.hypre_spmv_use_vendor = 0
 amrex.hypre_sptrans_use_vendor = 0
 amrex.hypre_umpire_device_pool_mbs = 4096
-	
+
 hypre.bamg_verbose = 0
 hypre.verbose = 0
 hypre.recompute_preconditioner = 0
@@ -198,3 +198,14 @@ hypre.bamg_agg_pmax_elmts = 3
 hypre.bamg_pmax_elmts = 3
 hypre.bamg_keep_transpose = 1
 hypre.write_matrix_files = 0
+
+hypre.bamg_smooth_type = 5
+hypre.bamg_smooth_num_sweeps = 1
+hypre.bamg_smooth_num_levels = 0
+hypre.bamg_ilu_type = 0
+hypre.bamg_ilu_level = 0
+hypre.bamg_ilu_max_iter = 1
+hypre.bamg_ilu_reordering_type = 0
+hypre.bamg_ilu_tri_solve = 0
+hypre.bamg_ilu_lower_jacobi_iters = 3
+hypre.bamg_ilu_upper_jacobi_iters = 3
