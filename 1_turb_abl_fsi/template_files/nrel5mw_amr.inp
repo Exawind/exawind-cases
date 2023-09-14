@@ -1,8 +1,8 @@
 #.......................................#
 #            SIMULATION STOP            #
 #.......................................#
-time.stop_time               = -1     # Max (simulated) time to evolve
-time.max_step                = 31440 #-1          # Max number of time steps
+time.stop_time               = -1          # Max (simulated) time to evolve
+time.max_step                = -1          # Max number of time steps
 #.......................................#
 #         TIME STEP COMPUTATION         #
 #.......................................#
@@ -12,8 +12,8 @@ time.cfl              =   0.95       # CFL factor
 #            INPUT AND OUTPUT           #
 #.......................................#
 io.restart_file = {AMR_RESTART_FILE}
-time.plot_interval            =  1440       # Steps between plot files
-time.checkpoint_interval      =  1440       # Steps between checkpoint files
+time.plot_interval            =  1440      # Steps between plot files
+time.checkpoint_interval      =  1440      # Steps between checkpoint files
 time.plot_start               =  30000
 #.......................................#
 #               PHYSICS                 #
@@ -78,6 +78,7 @@ ABL.enable_hybrid_rl_mode = true
 amr.n_cell              = 512 512 192    # Grid cells at coarsest AMRlevel
 amr.max_level           = 4            # Max AMR level in hierarchy
 amr.max_grid_size       = 128
+amr.blocking_factor     = 32
 tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
 tagging.static.type = CartBoxRefinement
@@ -136,7 +137,7 @@ nodal_proj.bottom_atol = 1.0e-12
 mac_proj.verbose=0
 mac_proj.max_coarsening_level = 0
 mac_proj.do_nsolve = false
-mac_proj.bottom_verbose  = 1
+mac_proj.bottom_verbose  = 0
 mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-6
 mac_proj.mg_atol = 1.0e-10
@@ -170,10 +171,10 @@ amrex.init_hypre = 1
 amrex.hypre_spgemm_use_vendor = 1
 amrex.hypre_spmv_use_vendor = 0
 amrex.hypre_sptrans_use_vendor = 0
-#amrex.hypre_umpire_device_pool_mbs = 4096
+amrex.hypre_umpire_device_pool_mbs = 4096
 
 hypre.bamg_verbose = 0
-hypre.verbose = 1
+hypre.verbose = 0
 hypre.recompute_preconditioner = 0
 hypre.hypre_solver = GMRES
 hypre.hypre_preconditioner = BoomerAMG
@@ -197,3 +198,14 @@ hypre.bamg_agg_pmax_elmts = 3
 hypre.bamg_pmax_elmts = 3
 hypre.bamg_keep_transpose = 1
 hypre.write_matrix_files = 0
+
+hypre.bamg_smooth_type = 5
+hypre.bamg_smooth_num_sweeps = 1
+hypre.bamg_smooth_num_levels = 0
+hypre.bamg_ilu_type = 0
+hypre.bamg_ilu_level = 0
+hypre.bamg_ilu_max_iter = 1
+hypre.bamg_ilu_reordering_type = 0
+hypre.bamg_ilu_tri_solve = 0
+hypre.bamg_ilu_lower_jacobi_iters = 3
+hypre.bamg_ilu_upper_jacobi_iters = 3
