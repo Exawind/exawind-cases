@@ -126,7 +126,7 @@ exawind:
         restart: {restart_data_base_name: *restart3}
   ### AMR-WIND ###
   amr_wind_inp: nrel5mw_amr.inp
-  num_timesteps: 1440
+  num_timesteps: 5760
   nonlinear_iterations: 1
 
   # Variables for overset exchange
