@@ -8,3 +8,4 @@ out*/
 rst*/
 *.chkp
 *.nc
+.DS_Store
