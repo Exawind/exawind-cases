@@ -2,8 +2,8 @@
 # names and such we can do it all here
 turbine_info: 
   turb0:
-    turbine_hub_pos: &hub_0 [795, 800, 90]
-    turbine_base_pos: &tower_0 [800, 800, 0]
+    turbine_hub_pos: &hub_0 [620, 625, 90]
+    turbine_base_pos: &tower_0 [625, 625, 0]
     openfast_restart: &openfast_rst0 "nrel5mw.5760"
     force: &forces0 "forces_T0_01.dat"
     output: &output0 "out01/turb0.e"
@@ -11,8 +11,8 @@ turbine_info:
     logfile: &log0 "turb_0.log"
     tag: &tag0 0
   turb1:
-    turbine_hub_pos: &hub_1 [1595, 1000, 90]
-    turbine_base_pos: &tower_1 [1600, 1000, 0]
+    turbine_hub_pos: &hub_1 [720, 1125, 90]
+    turbine_base_pos: &tower_1 [725, 1125, 0]
     openfast_restart: &openfast_rst1 "nrel5mw.T1.5760"
     force: &forces1 "forces_T1_01.dat"
     output: &output1 "out01/turb1.e"
@@ -20,8 +20,8 @@ turbine_info:
     logfile: &log1 "turb_1.log"
     tag: &tag1 1
   turb2:
-    turbine_hub_pos: &hub_2 [995, 1600, 90]
-    turbine_base_pos: &tower_2 [1000, 1600, 0]
+    turbine_hub_pos: &hub_2 [1120, 725, 90]
+    turbine_base_pos: &tower_2 [1125, 725, 0]
     openfast_restart: &openfast_rst2 "nrel5mw.T2.5760"
     force: &forces2 "forces_T2_01.dat"
     output: &output2 "out01/turb2.e"
@@ -29,15 +29,122 @@ turbine_info:
     logfile: &log2 "turb_2.log"
     tag: &tag2 2
   turb3:
-    turbine_hub_pos: &hub_3 [1795, 1800, 90]
-    turbine_base_pos: &tower_3 [1800, 1800, 0]
+    turbine_hub_pos: &hub_3 [820, 1625, 90]
+    turbine_base_pos: &tower_3 [825, 1625, 0]
     openfast_restart: &openfast_rst3 "nrel5mw.T3.5760"
     force: &forces3 "forces_T3_01.dat"
     output: &output3 "out01/turb3.e"
     restart: &restart3 "rst01/turb3.rst"
     logfile: &log3 "turb_3.log"
     tag: &tag3 3
-
+  turb4:
+    turbine_hub_pos: &hub_4 [1220, 1225, 90]
+    turbine_base_pos: &tower_4 [1225, 1225, 0]
+    openfast_restart: &openfast_rst4 "nrel5mw.T4.5760"
+    force: &forces4 "forces_T4_01.dat"
+    output: &output4 "out01/turb4.e"
+    restart: &restart4 "rst01/turb4.rst"
+    logfile: &log4 "turb_4.log"
+    tag: &tag4 4
+  turb5:
+    turbine_hub_pos: &hub_5 [1620, 825, 90]
+    turbine_base_pos: &tower_5 [1625, 825, 0]
+    openfast_restart: &openfast_rst5 "nrel5mw.T5.5760"
+    force: &forces5 "forces_T5_01.dat"
+    output: &output5 "out01/turb5.e"
+    restart: &restart5 "rst01/turb5.rst"
+    logfile: &log5 "turb_5.log"
+    tag: &tag5 5
+  turb6:
+    turbine_hub_pos: &hub_6 [920, 2125, 90]
+    turbine_base_pos: &tower_6 [925, 2125, 0]
+    openfast_restart: &openfast_rst6 "nrel5mw.T6.5760"
+    force: &forces6 "forces_T6_01.dat"
+    output: &output6 "out01/turb6.e"
+    restart: &restart6 "rst01/turb6.rst"
+    logfile: &log6 "turb_6.log"
+    tag: &tag6 6
+  turb7:
+    turbine_hub_pos: &hub_7 [1320, 1725, 90]
+    turbine_base_pos: &tower_7 [1325, 1725, 0]
+    openfast_restart: &openfast_rst7 "nrel5mw.T7.5760"
+    force: &forces7 "forces_T7_01.dat"
+    output: &output7 "out01/turb7.e"
+    restart: &restart7 "rst01/turb7.rst"
+    logfile: &log7 "turb_7.log"
+    tag: &tag7 7
+  turb8:
+    turbine_hub_pos: &hub_8 [1720, 1325, 90]
+    turbine_base_pos: &tower_8 [1725, 1325, 0]
+    openfast_restart: &openfast_rst8 "nrel5mw.T8.5760"
+    force: &forces8 "forces_T8_01.dat"
+    output: &output8 "out01/turb8.e"
+    restart: &restart8 "rst01/turb8.rst"
+    logfile: &log8 "turb_8.log"
+    tag: &tag8 8
+  turb9:
+    turbine_hub_pos: &hub_9 [2120, 925, 90]
+    turbine_base_pos: &tower_9 [2125, 925, 0]
+    openfast_restart: &openfast_rst9 "nrel5mw.T9.5760"
+    force: &forces9 "forces_T9_01.dat"
+    output: &output9 "out01/turb9.e"
+    restart: &restart9 "rst01/turb9.rst"
+    logfile: &log9 "turb_9.log"
+    tag: &tag9 9
+  turb10:
+    turbine_hub_pos: &hub_10 [1420, 2225, 90]
+    turbine_base_pos: &tower_10 [1425, 2225, 0]
+    openfast_restart: &openfast_rst10 "nrel5mw.T10.5760"
+    force: &forces10 "forces_T10_01.dat"
+    output: &output10 "out01/turb10.e"
+    restart: &restart10 "rst01/turb10.rst"
+    logfile: &log10 "turb_10.log"
+    tag: &tag10 10
+  turb11:
+    turbine_hub_pos: &hub_11 [1820, 1825, 90]
+    turbine_base_pos: &tower_11 [1825, 1825, 0]
+    openfast_restart: &openfast_rst11 "nrel5mw.T11.5760"
+    force: &forces11 "forces_T11_01.dat"
+    output: &output11 "out01/turb11.e"
+    restart: &restart11 "rst01/turb11.rst"
+    logfile: &log11 "turb_11.log"
+    tag: &tag11 11
+  turb12:
+    turbine_hub_pos: &hub_12 [2220, 1425, 90]
+    turbine_base_pos: &tower_12 [2225, 1425, 0]
+    openfast_restart: &openfast_rst12 "nrel5mw.T12.5760"
+    force: &forces12 "forces_T12_01.dat"
+    output: &output12 "out01/turb12.e"
+    restart: &restart12 "rst01/turb12.rst"
+    logfile: &log12 "turb_12.log"
+    tag: &tag12 12
+  turb13:
+    turbine_hub_pos: &hub_13 [1920, 2325, 90]
+    turbine_base_pos: &tower_13 [1925, 2325, 0]
+    openfast_restart: &openfast_rst13 "nrel5mw.T13.5760"
+    force: &forces13 "forces_T13_01.dat"
+    output: &output13 "out01/turb13.e"
+    restart: &restart13 "rst01/turb13.rst"
+    logfile: &log13 "turb_13.log"
+    tag: &tag13 13
+  turb14:
+    turbine_hub_pos: &hub_14 [2320, 1925, 90]
+    turbine_base_pos: &tower_14 [2325, 1925, 0]
+    openfast_restart: &openfast_rst14 "nrel5mw.T14.5760"
+    force: &forces14 "forces_T14_01.dat"
+    output: &output14 "out01/turb14.e"
+    restart: &restart14 "rst01/turb14.rst"
+    logfile: &log14 "turb_14.log"
+    tag: &tag14 14
+  turb15:
+    turbine_hub_pos: &hub_15 [2420, 2425, 90]
+    turbine_base_pos: &tower_15 [2425, 2425, 0]
+    openfast_restart: &openfast_rst15 "nrel5mw.T15.5760"
+    force: &forces15 "forces_T15_01.dat"
+    output: &output15 "out01/turb15.e"
+    restart: &restart15 "rst01/turb15.rst"
+    logfile: &log15 "turb_15.log"
+    tag: &tag15 15
 exawind:
   nalu_wind_inp:
   ### Turb 0 ###
@@ -124,9 +231,261 @@ exawind:
           parameters: *hub_3
         output: {output_data_base_name: *output3}
         restart: {restart_data_base_name: *restart3}
+  ### Turb 4 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log4
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag4}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_4]
+        # tower placement
+        - motion: [displacement: *tower_4]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_4
+            turbine_hub_pos: *hub_4
+            restart_filename: *openfast_rst4
+        post_processing:
+        - output_file_name: *forces4
+          parameters: *hub_4
+        output: {output_data_base_name: *output4}
+        restart: {restart_data_base_name: *restart4}
+  ### Turb 5 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log5
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag5}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_5]
+        # tower placement
+        - motion: [displacement: *tower_5]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_5
+            turbine_hub_pos: *hub_5
+            restart_filename: *openfast_rst5
+        post_processing:
+        - output_file_name: *forces5
+          parameters: *hub_5
+        output: {output_data_base_name: *output5}
+        restart: {restart_data_base_name: *restart5}
+  ### Turb 6 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log6
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag6}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_6]
+        # tower placement
+        - motion: [displacement: *tower_6]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_6
+            turbine_hub_pos: *hub_6
+            restart_filename: *openfast_rst6
+        post_processing:
+        - output_file_name: *forces6
+          parameters: *hub_6
+        output: {output_data_base_name: *output6}
+        restart: {restart_data_base_name: *restart6}
+  ### Turb 7 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log7
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag7}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_7]
+        # tower placement
+        - motion: [displacement: *tower_7]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_7
+            turbine_hub_pos: *hub_7
+            restart_filename: *openfast_rst7
+        post_processing:
+        - output_file_name: *forces7
+          parameters: *hub_7
+        output: {output_data_base_name: *output7}
+        restart: {restart_data_base_name: *restart7}
+  ### Turb 8 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log8
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag8}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_8]
+        # tower placement
+        - motion: [displacement: *tower_8]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_8
+            turbine_hub_pos: *hub_8
+            restart_filename: *openfast_rst8
+        post_processing:
+        - output_file_name: *forces8
+          parameters: *hub_8
+        output: {output_data_base_name: *output8}
+        restart: {restart_data_base_name: *restart8}
+  ### Turb 9 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log9
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag9}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_9]
+        # tower placement
+        - motion: [displacement: *tower_9]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_9
+            turbine_hub_pos: *hub_9
+            restart_filename: *openfast_rst9
+        post_processing:
+        - output_file_name: *forces9
+          parameters: *hub_9
+        output: {output_data_base_name: *output9}
+        restart: {restart_data_base_name: *restart9}
+  ### Turb 10 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log10
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag10}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_10]
+        # tower placement
+        - motion: [displacement: *tower_10]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_10
+            turbine_hub_pos: *hub_10
+            restart_filename: *openfast_rst10
+        post_processing:
+        - output_file_name: *forces10
+          parameters: *hub_10
+        output: {output_data_base_name: *output10}
+        restart: {restart_data_base_name: *restart10}
+  ### Turb 11 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log11
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag11}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_11]
+        # tower placement
+        - motion: [displacement: *tower_11]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_11
+            turbine_hub_pos: *hub_11
+            restart_filename: *openfast_rst11
+        post_processing:
+        - output_file_name: *forces11
+          parameters: *hub_11
+        output: {output_data_base_name: *output11}
+        restart: {restart_data_base_name: *restart11}
+  ### Turb 12 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log12
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag12}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_12]
+        # tower placement
+        - motion: [displacement: *tower_12]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_12
+            turbine_hub_pos: *hub_12
+            restart_filename: *openfast_rst12
+        post_processing:
+        - output_file_name: *forces12
+          parameters: *hub_12
+        output: {output_data_base_name: *output12}
+        restart: {restart_data_base_name: *restart12}
+  ### Turb 13 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log13
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag13}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_13]
+        # tower placement
+        - motion: [displacement: *tower_13]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_13
+            turbine_hub_pos: *hub_13
+            restart_filename: *openfast_rst13
+        post_processing:
+        - output_file_name: *forces13
+          parameters: *hub_13
+        output: {output_data_base_name: *output13}
+        restart: {restart_data_base_name: *restart13}
+  ### Turb 14 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log14
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag14}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_14]
+        # tower placement
+        - motion: [displacement: *tower_14]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_14
+            turbine_hub_pos: *hub_14
+            restart_filename: *openfast_rst14
+        post_processing:
+        - output_file_name: *forces14
+          parameters: *hub_14
+        output: {output_data_base_name: *output14}
+        restart: {restart_data_base_name: *restart14}
+  ### Turb 15 ###
+  - base_input_file: nrel5mw_nalu.yaml
+    logfile: *log15
+    replace:
+      realms:
+      - boundary_conditions: [~, ~, ~, ~, ~, overset_user_data: { mesh_tag_offset: *tag15}]
+        mesh_transformation:
+        # turbine rotor position
+        - motion: [~, displacement: *hub_15]
+        # tower placement
+        - motion: [displacement: *tower_15]
+        openfast_fsi:
+          Turbine0:
+            turbine_base_pos: *tower_15
+            turbine_hub_pos: *hub_15
+            restart_filename: *openfast_rst15
+        post_processing:
+        - output_file_name: *forces15
+          parameters: *hub_15
+        output: {output_data_base_name: *output15}
+        restart: {restart_data_base_name: *restart15}
   ### AMR-WIND ###
   amr_wind_inp: nrel5mw_amr.inp
-  num_timesteps: 5760
+  num_timesteps: 200
   nonlinear_iterations: 1
 
   # Variables for overset exchange
