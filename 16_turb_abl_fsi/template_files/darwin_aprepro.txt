@@ -9,6 +9,6 @@
 
 # {SLURM_ARGS = ''}
 
-# {SRUN_COMMAND_OPENFAST = 'mpiexec -n 4 -bind-to core openfastcpp inp.yaml'}
-# {SRUN_COMMAND_EXAWIND = 'mpiexec -n 4 -bind-to core exawind -nwind 4 -awind 4 nrel5mw.yaml'}
+# {SRUN_COMMAND_OPENFAST = 'mpiexec -n 16 -bind-to core openfastcpp inp.yaml'}
+# {SRUN_COMMAND_EXAWIND = 'mpiexec -n 16 -bind-to core exawind -nwind 16 -awind 16 nrel5mw.yaml'}
 
