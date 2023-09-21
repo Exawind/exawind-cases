@@ -14,12 +14,12 @@ export MPICH_SMP_SINGLE_COPY_MODE=NONE'}
 
 # {SLURM_ARGS = '
 #SBATCH -A CFD116
-#SBATCH -t 06:00:00
+#SBATCH -t 02:00:00
 #SBATCH -p batch
-#SBATCH -N 1024
+#SBATCH -N 3072
 #SBATCH --ntasks-per-node=8
 #SBATCH --exclusive'}
 
-# {SRUN_COMMAND_OPENFAST = 'spack build-env openfast srun -N 1 -n 4 openfastcpp inp.yaml'}
-# {SRUN_COMMAND_EXAWIND = 'spack build-env exawind srun -N 1024 -n 8192 --gpus-per-node=8 --gpu-bind=closest  exawind --awind 4096 --nwind 4096 nrel5mw.yaml'}
+# {SRUN_COMMAND_OPENFAST = 'spack build-env openfast srun -N 1 -n 16 openfastcpp inp.yaml'}
+# {SRUN_COMMAND_EXAWIND = 'spack build-env exawind srun -N 3072 -n 24576 --gpus-per-node=8 --gpu-bind=closest  exawind --awind 20480 --nwind 4096 nrel5mw.yaml'}
 
