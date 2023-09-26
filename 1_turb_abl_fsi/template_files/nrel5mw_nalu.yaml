@@ -257,8 +257,8 @@ realms:
         - ["blade1"]
         - ["blade2"]
         - ["blade3"]
-      az_blend_mean: 18.84955592153876
-      az_blend_delta: 1.5707963267948966
+      az_blend_mean: {2*PI*CUT_IN_MEAN}
+      az_blend_delta: {2*PI*CUT_IN_WIDTH}
       vel_mean: 11.4
       wind_dir: 240.0
       z_ref: 90.0

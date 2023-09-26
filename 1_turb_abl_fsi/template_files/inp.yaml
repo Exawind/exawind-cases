@@ -23,8 +23,8 @@ Turbine0:
   turbine_hub_pos: [1795, 1800, 90]
   num_force_pts_blade: 50
   num_force_pts_tower: 12
-  az_blend_mean: 18.84955592153876
-  az_blend_delta: 1.5707963267948966
+  az_blend_mean: {2*PI*CUT_IN_MEAN}
+  az_blend_delta: {2*PI*CUT_IN_WIDTH}
   vel_mean: 11.4
   wind_dir: 240.0
   z_ref: 90.0
