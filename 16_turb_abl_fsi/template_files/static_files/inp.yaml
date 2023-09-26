@@ -1,0 +1,289 @@
+n_turbines_glob: 16
+turbine_info: 
+  turb0:
+    turbine_hub_pos: &hub_0 [620, 625, 90]
+    turbine_base_pos: &tower_0 [625, 625, 0]
+  turb1:
+    turbine_hub_pos: &hub_1 [720, 1125, 90]
+    turbine_base_pos: &tower_1 [725, 1125, 0]
+  turb2:
+    turbine_hub_pos: &hub_2 [1120, 725, 90]
+    turbine_base_pos: &tower_2 [1125, 725, 0]
+  turb3:
+    turbine_hub_pos: &hub_3 [820, 1625, 90]
+    turbine_base_pos: &tower_3 [825, 1625, 0]
+  turb4:
+    turbine_hub_pos: &hub_4 [1220, 1225, 90]
+    turbine_base_pos: &tower_4 [1225, 1225, 0]
+  turb5:
+    turbine_hub_pos: &hub_5 [1620, 825, 90]
+    turbine_base_pos: &tower_5 [1625, 825, 0]
+  turb6:
+    turbine_hub_pos: &hub_6 [920, 2125, 90]
+    turbine_base_pos: &tower_6 [925, 2125, 0]
+  turb7:
+    turbine_hub_pos: &hub_7 [1320, 1725, 90]
+    turbine_base_pos: &tower_7 [1325, 1725, 0]
+  turb8:
+    turbine_hub_pos: &hub_8 [1720, 1325, 90]
+    turbine_base_pos: &tower_8 [1725, 1325, 0]
+  turb9:
+    turbine_hub_pos: &hub_9 [2120, 925, 90]
+    turbine_base_pos: &tower_9 [2125, 925, 0]
+  turb10:
+    turbine_hub_pos: &hub_10 [1420, 2225, 90]
+    turbine_base_pos: &tower_10 [1425, 2225, 0]
+  turb11:
+    turbine_hub_pos: &hub_11 [1820, 1825, 90]
+    turbine_base_pos: &tower_11 [1825, 1825, 0]
+  turb12:
+    turbine_hub_pos: &hub_12 [2220, 1425, 90]
+    turbine_base_pos: &tower_12 [2225, 1425, 0]
+  turb13:
+    turbine_hub_pos: &hub_13 [1920, 2325, 90]
+    turbine_base_pos: &tower_13 [1925, 2325, 0]
+  turb14:
+    turbine_hub_pos: &hub_14 [2320, 1925, 90]
+    turbine_base_pos: &tower_14 [2325, 1925, 0]
+  turb15:
+    turbine_hub_pos: &hub_15 [2420, 2425, 90]
+    turbine_base_pos: &tower_15 [2425, 2425, 0]
+dry_run: False
+debug: False
+sim_start: init
+coupling_mode: strong
+n_iter: 1
+t_start:  0.0
+t_end:    4.958677685950414
+t_max:    600.553079947575359
+dt_driver: 0.003443526170798898
+restart_freq: 1440
+output_freq: 1
+set_exp_law_wind: False
+set_uniform_x_blade_forces: False
+x_blade_force: 0.0
+super_controller: False
+Turbine0:
+  turb_id: 0
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_0
+  turbine_hub_pos: *hub_0
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine1:
+  turb_id: 1
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_1
+  turbine_hub_pos: *hub_1
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine2:
+  turb_id: 2
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_2
+  turbine_hub_pos: *hub_2
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine3:
+  turb_id: 3
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_3
+  turbine_hub_pos: *hub_3
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine4:
+  turb_id: 4
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_4
+  turbine_hub_pos: *hub_4
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine5:
+  turb_id: 5
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_5
+  turbine_hub_pos: *hub_5
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine6:
+  turb_id: 6
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_6
+  turbine_hub_pos: *hub_6
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine7:
+  turb_id: 7
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_7
+  turbine_hub_pos: *hub_7
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine8:
+  turb_id: 8
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_8
+  turbine_hub_pos: *hub_8
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine9:
+  turb_id: 9
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_9
+  turbine_hub_pos: *hub_9
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine10:
+  turb_id: 10
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_10
+  turbine_hub_pos: *hub_10
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine11:
+  turb_id: 11
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_11
+  turbine_hub_pos: *hub_11
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine12:
+  turb_id: 12
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_12
+  turbine_hub_pos: *hub_12
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine13:
+  turb_id: 13
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_13
+  turbine_hub_pos: *hub_13
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine14:
+  turb_id: 14
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_14
+  turbine_hub_pos: *hub_14
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0
+Turbine15:
+  turb_id: 15
+  FAST_input_filename: "nrel5mw.fst"
+  sim_type: ext-loads
+  turbine_base_pos: *tower_15
+  turbine_hub_pos: *hub_15
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: 18.84955592153876
+  az_blend_delta: 1.5707963267948966
+  vel_mean: 11.4
+  wind_dir: 240.0
+  z_ref: 90.0
+  shear_exp: 0.0

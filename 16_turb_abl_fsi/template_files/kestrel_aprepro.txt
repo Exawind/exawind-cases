@@ -1,0 +1,21 @@
+# {NALU_MESH_TOWER = "/scratch/jrood/exawind-cases/4_turb_abl_fsi/large_files/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/scratch/jrood/exawind-cases/4_turb_abl_fsi/large_files/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/scratch/jrood/exawind-cases/4_turb_abl_fsi/large_files/chk30000"}
+# {AMR_TPROFILE_FILE = "/scratch/jrood/exawind-cases/4_turb_abl_fsi/large_files/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/scratch/jrood/exawind-cases/4_turb_abl_fsi/large_files/bndry_file"}
+
+# {SUBMIT_EXPORTS = '
+export FI_MR_CACHE_MONITOR=memhooks
+export MPICH_SMP_SINGLE_COPY_MODE=NONE
+export FI_CXI_RX_MATCH_MODE=software'}
+
+# {SLURM_ARGS = '
+#SBATCH -A hpcapps
+#SBATCH -t 30
+#SBATCH -N 980
+#SBATCH -n 101920
+#SBATCH --ntasks-per-node=104'}
+
+# {SRUN_COMMAND_OPENFAST = 'srun --mpi=pmi2 -N 1 -n 16 openfastcpp inp.yaml'}
+# {SRUN_COMMAND_EXAWIND = 'srun --mpi=pmi2 -N 980 -n 101920 -c 1 --cpu_bind=cores exawind --awind 93600 --nwind 8320 nrel5mw.yaml'}
+
