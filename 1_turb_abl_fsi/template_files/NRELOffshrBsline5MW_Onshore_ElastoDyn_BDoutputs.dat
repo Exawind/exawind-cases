@@ -12,7 +12,11 @@ True          FlapDOF2    - Second flapwise blade mode DOF (flag)
 True          EdgeDOF     - First edgewise blade mode DOF (flag)
 False         TeetDOF     - Rotor-teeter DOF (flag) [unused for 3 blades]
 False         DrTrDOF     - Drivetrain rotational-flexibility DOF (flag)
+{if(USE_CONTROLLER)}
+True          GenDOF      - Generator DOF (flag)
+{else}
 False         GenDOF      - Generator DOF (flag)
+{endif}
 False         YawDOF      - Yaw DOF (flag)
 {if(TOWER)}
 True          TwFADOF1    - First fore-aft tower bending-mode DOF (flag)

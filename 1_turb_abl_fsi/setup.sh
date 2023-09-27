@@ -33,6 +33,10 @@ for i in "$@"; do
             MEAN_CUT_IN="${i#*=}"
             shift # past argument=value
             ;;
+        -c=*|--controller=*)
+            USE_CONTROLLER="${i#*=}"
+            shift # past argument=value
+            ;;
         -s=*|--submit=*)
             SUBMIT="${i#*=}"
             shift # past argument=value
@@ -56,17 +60,24 @@ echo "Setting up run dir"
 cp template_files/static_files/* ${rundir}
 cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
 spack build-env trilinos aprepro -qW --include ${aprepro_include} CUT_IN_MEAN=${MEAN_CUT_IN} CUT_IN_WIDTH=${DELTA_CUT_IN} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
-spack build-env trilinos aprepro -qW --include ${aprepro_include} TOWER=${TOWER} template_files/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
+spack build-env trilinos aprepro -qW --include ${aprepro_include} USE_CONTROLLER=${USE_CONTROLLER} TOWER=${TOWER} template_files/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
 spack build-env trilinos aprepro -qW  CUT_IN_MEAN=${MEAN_CUT_IN} CUT_IN_WIDTH=${DELTA_CUT_IN} template_files/inp.yaml ${rundir}/inp.yaml
+spack build-env trilinos aprepro -qW  USE_CONTROLLER=${USE_CONTROLLER} template_files/nrel5mw.fst ${rundir}/nrel5mw.fst
+
 # getting a weird carriage on frontier in this file for some reason
 sed -i 's/\r//g' ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
+sed -i 's/\r//g' ${rundir}/nrel5mw.fst
+
 spack build-env trilinos aprepro -qW --include ${aprepro_include} template_files/nrel5mw_amr.inp ${rundir}/nrel5mw_amr.inp
 spack build-env trilinos aprepro -qW --include ${aprepro_include} EMAIL=${EMAIL} NAME="fsi-${PROBNAME}" template_files/slurm_sub.sh ${rundir}/slurm_sub.sh
 
 # step 5 run openfast
+if [ -n "${USE_CONTROLLER}" ]; then
 echo "Compile openfast servo"
 cd $(pwd)/../5MW_Baseline/ServoData/
 spack build-env openfast fc -shared -fPIC -o libdiscon.so DISCON/DISCON.F90
+fi
+
 # run standalone openfast and copy files to run directory
 echo "Run openfast to start"
 set -x
