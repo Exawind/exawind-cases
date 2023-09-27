@@ -1,8 +1,6 @@
 # step 1 checks
-SPACK_MANAGER=/lustre/orion/proj-shared/cfd116/mullowne/spack-manager/
 source ${SPACK_MANAGER}/start.sh
 spack-start # ensure spack-manager is going
-spack env activate -d $SPACK_MANAGER/environments/exawind_rocm-5.4.3
 spack load exawind
 
 # machine specific params i.e. mesh/restart/etc
