@@ -74,6 +74,10 @@ spack build-env trilinos aprepro -qW --include ${aprepro_include} \
 
 spack build-env trilinos aprepro -qW --include ${aprepro_include} \
   WIND_SPEED=${SPEED} WIND_DIR=${DIR} YAW=${YAW} \
+  template_files/fsiTurbineSurrogate_rst.yaml ${rundir}/fsiTurbineSurrogate_rst.yaml
+
+spack build-env trilinos aprepro -qW --include ${aprepro_include} \
+  WIND_SPEED=${SPEED} WIND_DIR=${DIR} YAW=${YAW} \
   template_files/inp.yaml ${rundir}/inp.yaml
 
 spack build-env trilinos aprepro -qW --include ${aprepro_include} \

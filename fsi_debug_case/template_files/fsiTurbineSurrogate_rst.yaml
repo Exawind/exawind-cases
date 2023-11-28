@@ -127,7 +127,7 @@ realms:
 # infrastructure, but this should run and produce the same results as the 
 # mesh motion path to about single precision accuracy
 - name: fsi_path
-  mesh: cylinder_turbine.g
+  mesh: rst/fsi.rst
   automatic_decomposition_type: rcb
   use_edges: yes
 
@@ -299,12 +299,13 @@ realms:
           pressure: 0.3
 
   restart:
-    restart_data_base_name: rst/fsi.rst
+    restart_data_base_name: rst/fsi_1.rst
     restart_frequency: 10
     restart_start: 0
+    restart_time: 0.045507499635939995
 
   output:
-    output_data_base_name: out/fsi.e
+    output_data_base_name: out/fsi_1.e
     output_frequency: 1
     output_node_set: no
     output_variables:
@@ -326,13 +327,13 @@ realms:
 
   - type: surface
     physics: surface_force_and_moment
-    output_file_name: forces/hub.dat
+    output_file_name: forces/hub_1.dat
     frequency: 1
     parameters: [0,0,0]
     target_name: [blade1, blade2, blade3, hub]
 
 - name: mesh_motion_path
-  mesh: cylinder_turbine.g
+  mesh: rst/rigid.rst
   automatic_decomposition_type: rcb
   use_edges: yes
 
@@ -483,12 +484,13 @@ realms:
           pressure: 0.3
 
   restart:
-    restart_data_base_name: rst/rigid.rst
+    restart_data_base_name: rst/rigid_1.rst
     restart_frequency: 10
     restart_start: 0
+    restart_time: 0.045507499635939995
 
   output:
-    output_data_base_name: out/rigid.e
+    output_data_base_name: out/rigid_1.e
     output_frequency: 1
     output_node_set: no
     output_variables:
@@ -510,7 +512,7 @@ realms:
 
   - type: surface
     physics: surface_force_and_moment
-    output_file_name: forces/rigid.dat
+    output_file_name: forces/rigid_1.dat
     frequency: 1
     parameters: [0,0,0]
     target_name: [blade1, blade2, blade3, hub]
@@ -520,7 +522,7 @@ Time_Integrators:
       name: ti_1
       start_time: 0
       time_step: 0.0045507499635939995
-      termination_step_count: 10
+      termination_step_count: 20
       time_stepping_type: fixed
       time_step_count: 0
       second_order_accuracy: yes
