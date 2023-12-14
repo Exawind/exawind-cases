@@ -1,0 +1,721 @@
+Running with 8 ranks per node and 1 ranks per GPU on 256 nodes for a total of 2048 ranks and 2048 total GPUs with 2048 AMR-Wind ranks...
++ module unload PrgEnv-cray
++ module load PrgEnv-amd
+
+Lmod is automatically replacing "cce/15.0.0" with "amd/5.3.0".
+
++ module load amd/5.4.3
+
+The following have been reloaded with a version change:
+  1) amd/5.3.0 => amd/5.4.3
+
++ export FI_MR_CACHE_MONITOR=memhooks
++ export FI_CXI_RX_MATCH_MODE=software
++ export MPICH_SMP_SINGLE_COPY_MODE=NONE
++ export SPACK_MANAGER=/ccs/home/marchdf/exawind/spack-manager
++ source /ccs/home/marchdf/exawind/spack-manager/start.sh && spack-start
++ spack env activate -d /ccs/home/marchdf/exawind/spack-manager/environments/amr-wind-mpi
++ spack load amr-wind+rocm+tiny_profile+gpu-aware-mpi
++ which amr_wind
+/autofs/nccs-svm1_home1/marchdf/exawind/spack-manager/spack/opt/spack/linux-sles15-zen3/clang-15.0.0/amr-wind-main-5ll7ca3c45hfpwkiqw32axyy3ek4zykk/bin/amr_wind
++ srun -N256 -n2048 -c1 --gpus-per-node=8 --gpu-bind=closest amr_wind abl_godunov_wenoz.inp amr.n_cell=16384 16384 256 geometry.prob_hi=64000. 64000. 1000. time.fixed_dt=0.02 time.max_step=5 time.plot_interval=-1 time.checkpoint_interval=-1 amrex.abort_on_out_of_gpu_memory=1 amrex.the_arena_is_managed=0 amr.blocking_factor=16 amr.max_grid_size=128 amrex.use_profiler_syncs=0 amrex.async_out=0
+==============================================================================
+                AMR-Wind (https://github.com/exawind/amr-wind)
+
+  AMR-Wind version :: 3cb334c-DIRTY
+  AMR-Wind Git SHA :: 3cb334c76bf462b32e95b97802b18d7b5c097987-DIRTY
+  AMReX version    :: 23.11-5-gd36463103dae
+
+  Exec. time       :: Tue Nov 28 22:08:11 2023
+  Build time       :: Nov 28 2023 15:34:07
+  C++ compiler     :: Clang 15.0.0
+
+  MPI              :: ON    (Num. ranks = 2048)
+  GPU              :: ON    (Backend: HIP)
+  OpenMP           :: OFF
+
+  Enabled third-party libraries: 
+    NetCDF    4.7.4
+    HYPRE     2.30.0
+
+           This software is released under the BSD 3-clause license.           
+ See https://github.com/Exawind/amr-wind/blob/development/LICENSE for details. 
+------------------------------------------------------------------------------
+
+Initializing AMReX (23.11-5-gd36463103dae)...
+MPI initialized with 2048 MPI processes
+MPI initialized with thread support level 0
+Initializing HIP...
+HIP initialized with 2048 devices.
+AMReX (23.11-5-gd36463103dae) initialized
+Initializing AMR-Wind ...
+Initializing boundary conditions for velocity_mueff
+Initializing boundary conditions for velocity
+Initializing boundary conditions for density
+Initializing boundary conditions for p
+Initializing boundary conditions for velocity_src_term
+Initializing boundary conditions for gp
+Creating PDESystem instance: ICNS-Godunov
+ABLWallFunction: log_law_height not specified for ABL physics. Assuming log_law_height = first cell height
+ABLWallFunction: Neither surface_temp_flux nor surface_temp_rate specified for ABL physics. Assuming Neutral Stratification
+Initializing boundary conditions for temperature_mueff
+Initializing boundary conditions for temperature
+Initializing boundary conditions for temperature_src_term
+Creating PDESystem instance: Temperature-Godunov
+Creating ABLStatsBase instance: precursor
+Creating Physics instance: ABL
+Initializing boundary conditions for mu_turb
+Creating TurbulenceModel instance: Smagorinsky-ConstTransport
+Initializing I/O manager
+Creating mesh... done
+Grid summary: 
+  Level 0   32768 grids  68719476736 cells  100 % of domain
+            smallest grid: 128 x 128 x 128  biggest grid: 128 x 128 x 128
+
+Shear Stress model: moeng
+Heat Flux model: moeng
+Creating MomentumSource instance: BoussinesqBuoyancy
+Creating MomentumSource instance: CoriolisForcing
+Creating MomentumSource instance: ABLForcing
+Begin initial projection
+  Nodal_projection               0       1.136965684e-16       1.136965684e-16
+Completed initial projection
+
+Begin initial pressure iterations. Num. iters = 3
+dt: 0.02
+CFL: 0.0364943 (conv: 0.0364943 diff: 0 src: 0 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                11       0.0007327274377       7.726824916e-15
+  temperature_solve              0       2.633157692e-09       2.633157692e-09
+  velocity_solve                 3        0.003271721949       2.140509991e-13
+  Nodal_projection               8        0.002934833699       2.583589403e-15
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       6.456939739e-09       1.170892923e-15
+  temperature_solve              0       2.633157692e-09       2.633157692e-09
+  velocity_solve                 3        0.003271721949       2.140509991e-13
+  Nodal_projection               2       1.571298689e-10       8.142284339e-15
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       6.457576257e-09       1.174832424e-15
+  temperature_solve              0       2.633157692e-09       2.633157692e-09
+  velocity_solve                 3        0.003271721949       2.140509991e-13
+  Nodal_projection               1       1.024544178e-12       3.167837944e-16
+Completed initial pressure iterations
+
+Initialization successful. Time elapsed = 9.149036338
+
+Begin simulation: 
+  Run until 22000 sec. or 5 timesteps
+  Fixed timestepping with dt = 0.02; max. CFL from inputs = 0.95
+
+==============================================================================
+Step: 1 dt: 0.02 Time: 0 to 0.02
+CFL: 0.0364963 (conv: 0.0364943 diff: 0 src: 0.000267098 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       6.457574944e-09       1.174670589e-15
+  temperature_solve              0       2.633157692e-09       2.633157692e-09
+  velocity_solve                 3        0.003271721949       2.140509991e-13
+  Nodal_projection               8        0.002934833751       2.600931555e-15
+
+WallClockTime: 1 Pre: 0.0221 Solve: 3.376 Post: 0.0622 Total: 3.46
+Solve time per cell: 1.006e-07
+
+==============================================================================
+Step: 2 dt: 0.02 Time: 0.02 to 0.04
+CFL: 0.0364964 (conv: 0.0364944 diff: 0 src: 0.000267098 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       1.474935521e-08       1.624278358e-15
+  temperature_solve              0       2.633271379e-09       2.633271379e-09
+  velocity_solve                 3        0.003264705861       2.131628207e-13
+  Nodal_projection               8        0.002934833762       2.593847395e-15
+
+WallClockTime: 2 Pre: 0.0125 Solve: 3.333 Post: 0.0651 Total: 3.411
+Solve time per cell: 9.933e-08
+
+==============================================================================
+Step: 3 dt: 0.02 Time: 0.04 to 0.06
+CFL: 0.0364948 (conv: 0.0364944 diff: 0 src: 0.000110994 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       2.118527271e-08       1.964333003e-15
+  temperature_solve              0       2.633385066e-09       2.633385066e-09
+  velocity_solve                 3        0.003257701691       2.131628207e-13
+  Nodal_projection               8        0.002934833763       2.593121488e-15
+
+WallClockTime: 3 Pre: 0.00309 Solve: 3.272 Post: 0.0806 Total: 3.355
+Solve time per cell: 9.75e-08
+
+==============================================================================
+Step: 4 dt: 0.02 Time: 0.06 to 0.08
+CFL: 0.0364948 (conv: 0.0364944 diff: 0 src: 0.000110981 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       2.758421007e-08       2.298553169e-15
+  temperature_solve              0       2.633555596e-09       2.633555596e-09
+  velocity_solve                 3         0.00325071462       2.122746423e-13
+  Nodal_projection               8        0.002934833763       2.614627231e-15
+
+WallClockTime: 4 Pre: 0.0414 Solve: 3.392 Post: 0.0606 Total: 3.494
+Solve time per cell: 1.011e-07
+
+==============================================================================
+Step: 5 dt: 0.02 Time: 0.08 to 0.1
+CFL: 0.0364948 (conv: 0.0364944 diff: 0 src: 0.000110968 )
+
+Godunov:
+  System                     Iters      Initial residual        Final residual
+  ----------------------------------------------------------------------------
+  MAC_projection                 6       3.392540812e-08       2.629883311e-15
+  temperature_solve              0       2.633669283e-09       2.633669283e-09
+  velocity_solve                 3        0.003243744601       2.122746423e-13
+  Nodal_projection               8        0.002934833764       2.587937646e-15
+
+WallClockTime: 5 Pre: 0.0159 Solve: 3.556 Post: 0.0615 Total: 3.634
+Solve time per cell: 1.06e-07
+
+==============================================================================
+
+Time spent in InitData():    9.168524628
+Time spent in Evolve():      17.33494237
+
+
+TinyProfiler total time across processes [min...avg...max]: 26.51 ... 26.51 ... 26.51
+
+-----------------------------------------------------------------------------------------------------------------
+Name                                                              NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+-----------------------------------------------------------------------------------------------------------------
+FillBoundary_finish()                                               7936       2.99      3.576      4.946  18.66%
+FabArray::ParallelCopy_finish()                                     1600       0.57      4.198      4.657  17.57%
+FillBoundary_nowait()                                               7936      1.894      2.141      2.799  10.56%
+MLNodeLaplacian::Fsmooth()                                          1428      2.212      2.238      2.286   8.62%
+MLABecLaplacian::Fsmooth()                                          1344      2.091      2.135      2.224   8.39%
+MLTensorOp::apply()                                                  216      1.466      1.534      1.593   6.01%
+MLMG::ResNormInf()                                                   161     0.8614       1.02      1.138   4.29%
+FabArray::norminf()                                                  265      0.686     0.7879     0.9979   3.76%
+amr-wind::ICNS-Godunov::compute_advection_term                         8     0.9179     0.9505     0.9913   3.74%
+MLNodeLinOp::applyBC()                                              1873     0.8692     0.8802     0.9887   3.73%
+amrex::Copy()                                                        574     0.3524     0.3566     0.5856   2.21%
+amrex::Dot()                                                         109          0   0.004142     0.5505   2.08%
+MLABecLaplacian::Fapply()                                            232     0.5124     0.5226     0.5503   2.08%
+amr-wind::ICNS-Godunov::pre_advection_actions                          8     0.4552     0.4714     0.5101   1.92%
+FabArray::Xpay()                                                    1120     0.4389      0.444     0.5033   1.90%
+MLMG::prepareForSolve()                                               33     0.2164     0.3196     0.4339   1.64%
+FabArray::sum()                                                       77    0.03829     0.2923     0.4125   1.56%
+amr-wind::Temperature-Godunov::compute_advection_term                  8     0.3052     0.3071     0.3817   1.44%
+MLCGSolver::ParallelAllReduce                                        137          0    0.00217     0.3457   1.30%
+amrex::Add()                                                         157     0.3187     0.3213     0.3454   1.30%
+MLNodeLaplacian::Fapply()                                            445     0.2592     0.2631     0.3389   1.28%
+MLCellLinOp::applyBC()                                              5010     0.1602     0.1805     0.3376   1.27%
+FabArray::setVal()                                                  2230     0.2748      0.284     0.3268   1.23%
+MLLinOp::makeSubCommunicator()                                        12     0.1742      0.257      0.325   1.23%
+amr-wind::incflo::MakeNewLevelFromScratch()                            1     0.2188     0.2457     0.3038   1.15%
+PhysBCFunct::()                                                      119    0.06602     0.1569     0.2872   1.08%
+MLMG::solve()                                                         33     0.2208     0.2573     0.2813   1.06%
+MLMG::oneIter()                                                      128     0.2261     0.2475     0.2651   1.00%
+amr-wind::PlaneAveraging::compute_averages                            18     0.1545     0.2006     0.2452   0.92%
+FabArray::Saxpy()                                                    121    0.03325     0.0348     0.2022   0.76%
+amr-wind::ICNS-Godunov::compute_source_term                           16     0.1893     0.1916     0.2004   0.76%
+MLMG::addInterpCorrection()                                          896     0.1336     0.1359     0.1665   0.63%
+MultiFab::Multiply()                                                 104    0.03924     0.0406     0.1604   0.60%
+MLPoisson::Fapply()                                                  458    0.08184    0.08401     0.1459   0.55%
+amr-wind::PlaneAveragingFine::compute_averages                        12     0.1247     0.1412     0.1457   0.55%
+amr-wind::incflo::ComputeDt                                            6    0.08752     0.1205      0.129   0.49%
+FabArray::LinComb()                                                   62   0.006991   0.007957     0.1243   0.47%
+amr-wind::ICNS-Godunov::compute_predictor_rhs                          8    0.05545    0.05596    0.09254   0.35%
+amrex::average_down                                                  651    0.07237    0.07429    0.08656   0.33%
+MLNodeLaplacian::interpolation()                                     357    0.07553    0.07737    0.08475   0.32%
+NodalProjector::project                                                9    0.06634     0.0678    0.08193   0.31%
+amr-wind::diffusion::average_velocity_eta_to_faces                    40    0.07004    0.07038    0.07965   0.30%
+FabArray::plus()                                                     121     0.0662    0.06685    0.07819   0.29%
+FabArray::mult()                                                      56    0.04604    0.04633     0.0778   0.29%
+FabArray::ParallelCopy_nowait()                                     1600      0.021    0.03104    0.07668   0.29%
+amr-wind::incflo::ApplyProjection                                      9    0.06139    0.06301    0.07593   0.29%
+MLMG::computeResidual()                                              128    0.06004    0.06064    0.07512   0.28%
+amr-wind::VelPlaneAveragingFine::compute_hvelmag_averages              6     0.0534    0.06307     0.0639   0.24%
+MLCellLinOp::compFlux()                                                8    0.02765    0.03142    0.06228   0.23%
+MLNodeLaplacian::restriction()                                       357    0.03335    0.03494    0.04543   0.17%
+amr-wind::fvm::strainrate                                              8    0.03559     0.0374    0.04527   0.17%
+amr-wind::ICNS-Godunov::linsys_solve                                   8     0.0193    0.01991    0.04253   0.16%
+MLPoisson::Fsmooth()                                                2968    0.01031    0.01774    0.04129   0.16%
+average_down_faces                                                   576    0.03717    0.03836     0.0411   0.16%
+MLCGSolver::bicgstab                                                   1          0  0.0002762    0.03755   0.14%
+amr-wind::ICNS-Godunov::compute_diffusion_term                        16    0.01834    0.01852    0.03337   0.13%
+amr-wind::Temperature-Godunov::compute_predictor_rhs                   8    0.02269    0.02278    0.03205   0.12%
+MLCellLinOp::prepareForSolve()                                        41    0.01767    0.01838    0.03098   0.12%
+amr-wind::VelPlaneAveraging::compute_hvelmag_averages                  6    0.01733    0.01851    0.03047   0.11%
+MLLinOp::defineGrids()                                                14    0.01736    0.01758    0.02756   0.10%
+amr-wind::ICNS::advection_mac_project                                  8    0.01262    0.01291    0.02222   0.08%
+MLNodeLaplacian::compRHS()                                             9    0.02001    0.02012    0.02128   0.08%
+MLMG::computeMLResidual()                                             33    0.01064    0.01075     0.0212   0.08%
+MLCellLinOp::defineAuxData()                                           5    0.00982    0.01126    0.02107   0.08%
+amr-wind::diffusion::fixup_eta_on_domain_faces                        40   0.002571   0.002844    0.02036   0.08%
+FabArray::setVal(val, thecmd, scomp, ncomp)                          258   0.008704   0.009453    0.02035   0.08%
+amr-wind::Smagorinsky-ConstTransport::update_turbulent_viscosity       8     0.0083   0.008415    0.01892   0.07%
+FabArrayBase::getFB()                                               8008   0.003248   0.004556    0.01883   0.07%
+FabArray::BuildMask()                                                 72    0.00561   0.005817    0.01783   0.07%
+MLNodeLinOp::buildMasks()                                              9    0.01593    0.01623    0.01776   0.07%
+FabArray::FillBoundary()                                            6457   0.003698   0.004797     0.0152   0.06%
+amr-wind::Temperature-Godunov::linsys_solve                            8   0.008476   0.008799    0.01392   0.05%
+amr-wind::ABLStats::initialize                                         1  0.0001133  0.0003361     0.0119   0.04%
+MLMG::mgVcycle()                                                     128   0.002098   0.002734    0.01169   0.04%
+MultiFab::Subtract()                                                   3    0.01023    0.01034    0.01047   0.04%
+MLMG::actualBottomSolve()                                            128  2.834e-05   0.000103   0.009769   0.04%
+FabArrayBase::FB::FB()                                               133   0.004565   0.005269    0.00732   0.03%
+FabArrayBase::CPC::define()                                          267    0.00541   0.005587   0.006915   0.03%
+MLCellLinOp::setLevelBC()                                             41   0.004907   0.005258   0.006039   0.02%
+amr-wind::godunov::compute_fluxes                                    256   0.003367   0.004093   0.005832   0.02%
+OwnerMask()                                                           18   0.004744   0.004955   0.005517   0.02%
+BndryData::define()                                                    5   0.004511   0.004919   0.005158   0.02%
+amr-wind::main()                                                       1    0.00366   0.003993   0.004974   0.02%
+MLCellLinOp::smooth()                                               2156    0.00166   0.002344   0.004752   0.02%
+FabArrayBase::getCPC()                                              1786   0.001916    0.00236    0.00396   0.01%
+makeSFC                                                               60   0.003491   0.003575   0.003836   0.01%
+MLMG::apply()                                                         24   0.002592   0.002787   0.003159   0.01%
+MLCellLinOp::apply()                                                 690  0.0003751  0.0005506   0.002915   0.01%
+OverrideSync_nowait()                                               1479  0.0005372  0.0009407   0.002835   0.01%
+MLPoisson::FFlux()                                                   128  0.0007756   0.001126   0.002644   0.01%
+DistributionMapping::Distribute()                                     61   0.001963   0.002052   0.002613   0.01%
+DistributionMapping::SFCProcessorMapDoIt()                             1   0.002259    0.00229   0.002333   0.01%
+amr-wind::godunov::predict_godunov                                   128   0.001405   0.001704   0.002159   0.01%
+amr-wind::ABLVelWallFunc                                              24   0.001412   0.001538   0.002077   0.01%
+MLNodeLaplacian::define()                                              9  0.0006136   0.000687   0.001787   0.01%
+FabArray::ParallelCopy()                                            1600  0.0007989   0.001018   0.001579   0.01%
+OverrideSync_finish()                                               1479  0.0005893  0.0008629   0.001488   0.01%
+MLLinOp::makeAgglomeratedDMap                                         12   0.001184   0.001271    0.00148   0.01%
+FAbArray::OverrideSync()                                            1479  0.0007481  0.0009387   0.001338   0.01%
+MLNodeLaplacian::normalize()                                          28          0  8.673e-06   0.001183   0.00%
+MLABecLaplacian::normalize()                                           0          0  8.818e-06   0.001161   0.00%
+amr-wind::ABLTempWallFunc                                             16   0.000875   0.000939   0.001108   0.00%
+amr-wind::PlaneAveraging::line_derivative_of_average_cell           4608  0.0005354  0.0006685   0.001068   0.00%
+amr-wind::FieldRepo::create_scratch_field                            112  0.0007716   0.000873   0.001048   0.00%
+MLMG:computeResOfCorrection()                                        896  0.0005452  0.0006878   0.001012   0.00%
+MLMG::mgVcycle_down::0                                               128  0.0002309  0.0002802  0.0009949   0.00%
+amr-wind::PlaneAveraging::compute_line_derivatives                     6  0.0003574  0.0004461  0.0008071   0.00%
+amr-wind::setup_operator                                              40  0.0006074  0.0006851  0.0007603   0.00%
+amr-wind::godunov::predict_weno                                      128  0.0004053  0.0005942  0.0007316   0.00%
+amr-wind::Temperature-Godunov::compute_diffusion_term                  8  0.0004593  0.0005244  0.0006294   0.00%
+MLMG::mgVcycle_up::3                                                 128  0.0001371  0.0002856  0.0005975   0.00%
+amr-wind::incflo::init_mesh                                            1  0.0002693  0.0002787   0.000596   0.00%
+amr-wind::Field::fillpatch                                            55  0.0001033  0.0001379  0.0005783   0.00%
+amr-wind::VelPlaneAveraging::compute_line_hvelmag_derivatives          6  0.0001273  0.0001585   0.000544   0.00%
+amr-wind::incflo::ApplyPredictor                                       8  0.0002133  0.0002873  0.0005318   0.00%
+MLCellLinOp::correctionResidual()                                    539   0.000283  0.0003598  0.0005124   0.00%
+MLMG::mgVcycle_up::4                                                 128  5.738e-05  0.0001368  0.0005061   0.00%
+amr-wind::incflo::Evolve()                                             1  0.0001122  0.0001493  0.0005053   0.00%
+DistributionMapping::LeastUsedCPUs()                                   1    0.00016  0.0004204  0.0004973   0.00%
+amr-wind::godunov::make_trans_velocities                             128  0.0003102   0.000375  0.0004784   0.00%
+MLMG::mgVcycle_down::2                                               128  0.0001867  0.0003091  0.0004768   0.00%
+MLMG::mgVcycle_up::5                                                 128  6.351e-05  8.755e-05  0.0004637   0.00%
+amr-wind::VelPlaneAveraging::line_derivative_of_average_cell        1536  0.0001951   0.000225  0.0004482   0.00%
+MLMG::mgVcycle_down::1                                               128  0.0002084  0.0002897   0.000423   0.00%
+MLMG::mgVcycle_up::0                                                 128  0.0001657  0.0002216  0.0004095   0.00%
+amr-wind::incflo::init_amr_wind_modules                                1  0.0001597  0.0001758   0.000378   0.00%
+MLMG::mgVcycle_up::2                                                 128  0.0001503  0.0002353  0.0003725   0.00%
+amr-wind::FieldRepo::get_field                                       259  0.0001226  0.0001568  0.0003699   0.00%
+FillPatchSingleLevel                                                  79  9.412e-05  0.0001264  0.0003628   0.00%
+MLMG::mgVcycle_down::3                                               128  0.0001709  0.0002322  0.0003511   0.00%
+MLMG::mgVcycle_up::1                                                 128  0.0001543  0.0002512  0.0003452   0.00%
+MLMG::mgVcycle_up::6                                                 128  8.104e-05  9.056e-05  0.0003331   0.00%
+MLCellLinOp::solutionResidual()                                      125  0.0001363  0.0002111  0.0003269   0.00%
+amr-wind::FieldRepo::make_new_level_from_scratch                       1   0.000284  0.0002924  0.0003191   0.00%
+MLMG::mgVcycle_down::6                                               128  7.491e-05  8.655e-05  0.0003085   0.00%
+MLMG::mgVcycle_down::4                                               128  0.0001149  0.0001679  0.0003081   0.00%
+MLMG::mgVcycle_down::5                                               128  7.528e-05  0.0001083   0.000297   0.00%
+MLABecLaplacian::define()                                              4  0.0002084  0.0002335  0.0002898   0.00%
+MLCellLinOp::defineBC()                                                5  0.0001001  0.0001289   0.000288   0.00%
+amr-wind::incflo::post_advance_work                                    5  1.407e-05  2.342e-05  0.0002648   0.00%
+amr-wind::ICNS-Godunov::initialize                                     1  4.173e-05  5.319e-05  0.0002614   0.00%
+amr-wind::ICNS-Godunov::compute_mueff                                  8  1.152e-05  1.938e-05  0.0002438   0.00%
+amr-wind::Field::setVal 1                                             34   2.19e-05   3.69e-05  0.0002436   0.00%
+MultiFab::Copy()                                                      51    2.3e-05  3.426e-05   0.000242   0.00%
+MLABecLaplacian::averageDownCoeffs()                                  40   9.81e-05  0.0001141   0.000238   0.00%
+amr-wind::Field::fillphysbc                                           40  5.373e-05  7.509e-05  0.0002268   0.00%
+amr-wind::incflo::InitialProjection()                                  1  1.101e-05  2.411e-05  0.0002265   0.00%
+amr-wind::incflo::prepare_for_time_integration                         1  2.234e-06  4.014e-06  0.0002117   0.00%
+AmrMesh::MakeDistributionMap()                                         1   0.000147  0.0001521  0.0001744   0.00%
+MLABecLaplacian::prepareForSolve()                                    40  6.671e-05  0.0001057  0.0001576   0.00%
+MLMG::mgVcycle_bottom                                                128  5.891e-05  6.818e-05  0.0001248   0.00%
+amr-wind::incflo::regrid_and_update                                    5  4.763e-05  5.276e-05   8.81e-05   0.00%
+MLLinOp::define()                                                     14  1.678e-05  2.069e-05  8.194e-05   0.00%
+MLMG::MLRhsNormInf()                                                  33  1.266e-05  3.419e-05  7.873e-05   0.00%
+MLMG::MLResNormInf()                                                  33  1.634e-05  4.298e-05  7.018e-05   0.00%
+amr-wind::FieldRepo::declare_int_field                                 2  3.663e-05  4.501e-05  6.955e-05   0.00%
+MLTensorOp::define()                                                   2  3.225e-05   3.46e-05  6.739e-05   0.00%
+MLMG::getFluxes()                                                     16  2.726e-05  3.941e-05  6.651e-05   0.00%
+amr-wind::setup_solver                                                16  1.965e-05   4.17e-05  6.401e-05   0.00%
+amr-wind::incflo::InitialIterations()                                  1  1.512e-05  2.615e-05  6.311e-05   0.00%
+amr-wind::set_acoeffs                                                 40  2.048e-05  2.745e-05  6.279e-05   0.00%
+amr-wind::VelPlaneAveraging::operator                                 12  2.588e-05  3.247e-05  5.989e-05   0.00%
+amr-wind::Field::copy_state                                           12  9.268e-06  1.785e-05  5.843e-05   0.00%
+amr-wind::Temperature-Godunov::initialize                              1   2.26e-05  2.575e-05  5.821e-05   0.00%
+amr-wind::FieldRepo::declare_field                                    17  2.748e-05  3.113e-05  5.367e-05   0.00%
+amr-wind::incflo::pre_advance_stage2                                   5  2.087e-05  3.367e-05  5.057e-05   0.00%
+amr-wind::Field::fillpatch array                                       8    1.9e-05  2.591e-05  4.569e-05   0.00%
+MLNodeLaplacian::prepareForSolve()                                     9  2.864e-05  3.297e-05  4.212e-05   0.00%
+amr-wind::FPlaneAveraging::operator                                   18  2.052e-05   2.43e-05  4.203e-05   0.00%
+amr-wind::Temperature-Godunov::compute_mueff                           8  7.943e-06  2.164e-05  4.114e-05   0.00%
+MultiFab::Add()                                                       16  1.069e-05  1.892e-05  4.019e-05   0.00%
+amr-wind::FPlaneAveragingFine::operator                               12  1.474e-05  1.992e-05  4.017e-05   0.00%
+amr-wind::Field::advance_states                                       15  6.662e-06  1.379e-05  3.645e-05   0.00%
+NodalProjector::computeRHS                                             9  1.134e-05  1.717e-05  3.621e-05   0.00%
+amr-wind::Temperature-Godunov::compute_source_term                    16  9.927e-06  1.683e-05  3.502e-05   0.00%
+amr-wind::FieldRepo::get_int_field                                    16  1.062e-05   2.45e-05  3.476e-05   0.00%
+amr-wind::incflo::Advance                                              5  7.062e-06   1.03e-05  3.326e-05   0.00%
+NodalProjector::computeSyncResidual                                    9  4.559e-06  8.477e-06  3.037e-05   0.00%
+amr-wind::ABLStats::post_advance_work                                  5  1.052e-05  1.491e-05   2.87e-05   0.00%
+amr-wind::Field::set_inflow                                            6  6.882e-06  1.417e-05  2.666e-05   0.00%
+amr-wind::incflo::pre_advance_stage1                                   5  2.566e-06  3.243e-06  2.558e-05   0.00%
+amr-wind::FieldRepo::create_state                                      2  1.312e-06  3.511e-06  2.418e-05   0.00%
+amr-wind::PlaneAveragingFine::line_average_interpolated               28  7.729e-06  9.255e-06   1.94e-05   0.00%
+MLNodeLaplacian::averageDownCoeffs()                                   9  3.868e-06  5.097e-06  1.322e-05   0.00%
+amr-wind::IntField::setVal 1                                           2  1.605e-06  2.272e-06  1.302e-05   0.00%
+amr-wind::ABLBoundaryPlane::populate_data                              6  3.226e-06  4.632e-06  1.082e-05   0.00%
+amr-wind::incflo::InitData()                                           1  1.532e-06  3.359e-06  7.956e-06   0.00%
+amr-wind::RefineCriteriaManager::initialize                            1   9.52e-07  1.108e-06  6.482e-06   0.00%
+MLPoisson::define()                                                    1  1.723e-06    2.4e-06  3.716e-06   0.00%
+MLPoisson::prepareForSolve()                                           1  1.021e-06  1.319e-06  3.687e-06   0.00%
+-----------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------
+Name                                                              NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+-----------------------------------------------------------------------------------------------------------------
+amr-wind::main()                                                       1      26.51      26.51      26.51 100.00%
+amr-wind::incflo::ApplyPredictor                                       8      25.38      25.43      25.48  96.12%
+MLMG::solve()                                                         33      20.63      20.77      21.01  79.25%
+amr-wind::incflo::Evolve()                                             1      17.33      17.35      17.36  65.47%
+amr-wind::incflo::Advance                                              5      16.92      16.94      16.97  64.04%
+MLMG::oneIter()                                                      128      15.67      15.79      15.96  60.22%
+MLMG::mgVcycle()                                                     128      15.04      15.17      15.33  57.83%
+amr-wind::incflo::InitData()                                           1      9.147       9.15      9.168  34.59%
+amr-wind::incflo::ApplyProjection                                      9      8.734      8.802      8.845  33.37%
+amr-wind::incflo::prepare_for_time_integration                         1      8.641      8.686      8.714  32.87%
+amr-wind::incflo::InitialIterations()                                  1      8.564      8.579      8.597  32.43%
+NodalProjector::project                                                9      8.359      8.366       8.38  31.62%
+amr-wind::ICNS-Godunov::linsys_solve                                   8      7.113      7.174      7.238  27.31%
+FabArray::FillBoundary()                                            6457        4.8      5.263      6.972  26.30%
+amr-wind::ICNS-Godunov::pre_advection_actions                          8      5.829       5.92      6.013  22.69%
+MLCellLinOp::smooth()                                               2156      4.711      5.041      5.769  21.76%
+amr-wind::ICNS::advection_mac_project                                  8      5.075      5.164      5.296  19.98%
+FillBoundary_finish()                                               7936       2.99      3.576      4.946  18.66%
+MLCellLinOp::applyBC()                                              5010      3.403      3.746      4.848  18.29%
+MLMG::mgVcycle_down::0                                               128      4.467        4.6      4.768  17.99%
+FabArray::ParallelCopy()                                            1600     0.6517      4.233      4.684  17.67%
+FabArray::ParallelCopy_finish()                                     1600       0.57      4.198      4.657  17.57%
+MLMG::addInterpCorrection()                                          896     0.2693      3.656      4.348  16.40%
+MLMG::mgVcycle_up::3                                                 128     0.1487      2.071      4.283  16.16%
+MLMG::mgVcycle_up::0                                                 128       3.33      3.479       3.64  13.73%
+MLMG::mgVcycle_up::4                                                 128   0.001781      1.239      3.454  13.03%
+MLNodeLaplacian::Fsmooth()                                          1428      2.483      2.663       3.07  11.58%
+MLMG::mgVcycle_up::5                                                 128    0.00145     0.2754      2.919  11.01%
+FillBoundary_nowait()                                               7936        1.9      2.148       2.82  10.64%
+MLNodeLinOp::applyBC()                                              1873      1.611      1.867      2.779  10.48%
+MLMG::mgVcycle_up::6                                                 128   0.001517    0.06559      2.706  10.21%
+MLTensorOp::apply()                                                  216      2.322      2.452      2.632   9.93%
+MLMG::mgVcycle_bottom                                                128  8.972e-05    0.02055      2.618   9.88%
+MLMG::actualBottomSolve()                                            128  2.834e-05    0.02048      2.618   9.87%
+MLCGSolver::bicgstab                                                   1          0    0.02031        2.6   9.81%
+MLABecLaplacian::Fsmooth()                                          1344      2.091      2.135      2.224   8.39%
+MLCellLinOp::solutionResidual()                                      125      1.882      2.008      2.169   8.18%
+MLMG:computeResOfCorrection()                                        896      1.692      1.849      2.161   8.15%
+MLCellLinOp::apply()                                                 690      1.278      1.457      2.096   7.91%
+MLMG::ResNormInf()                                                   161      1.576      1.734      1.897   7.16%
+MLCellLinOp::correctionResidual()                                    539      1.199      1.313      1.607   6.06%
+MLMG::computeResidual()                                              128      1.301       1.36      1.461   5.51%
+MLMG::prepareForSolve()                                               33      1.051      1.191      1.424   5.37%
+MLMG::mgVcycle_down::3                                               128     0.3528     0.7865      1.101   4.15%
+MLMG::mgVcycle_down::1                                               128     0.7648     0.8884      1.081   4.08%
+amr-wind::ICNS-Godunov::compute_advection_term                         8      0.989      1.022      1.063   4.01%
+amr-wind::ICNS-Godunov::compute_diffusion_term                        16     0.8346     0.9012      1.006   3.80%
+FabArray::norminf()                                                  265      0.686     0.7879     0.9979   3.76%
+MLMG::apply()                                                         24     0.7446     0.8537     0.9695   3.66%
+FAbArray::OverrideSync()                                            1479     0.3028     0.4692     0.8676   3.27%
+MLMG::mgVcycle_down::4                                               128   0.002679      0.192     0.8368   3.16%
+MLMG::mgVcycle_up::1                                                 128     0.6081     0.7017     0.8326   3.14%
+MLABecLaplacian::prepareForSolve()                                    40     0.5868     0.7002     0.8238   3.11%
+FillPatchSingleLevel                                                  79     0.4534     0.6799     0.8214   3.10%
+amrex::average_down                                                  651     0.1387     0.3994      0.773   2.92%
+MLNodeLaplacian::restriction()                                       357     0.3529     0.5985     0.7624   2.88%
+OverrideSync_finish()                                               1479     0.1103     0.3094     0.7157   2.70%
+MLCGSolver::ParallelAllReduce                                        137          0    0.00516     0.7149   2.70%
+MLMG::mgVcycle_down::2                                               128     0.3537     0.5064     0.6669   2.52%
+amr-wind::Field::fillpatch                                            55     0.3504     0.5078      0.656   2.48%
+amr-wind::Temperature-Godunov::linsys_solve                            8     0.4656     0.5516     0.6486   2.45%
+MLABecLaplacian::averageDownCoeffs()                                  40     0.2108      0.367     0.6288   2.37%
+amrex::Copy()                                                        574     0.3524     0.3566     0.5856   2.21%
+amrex::Dot()                                                         109          0   0.004142     0.5505   2.08%
+MLABecLaplacian::Fapply()                                            232     0.5124     0.5226     0.5503   2.08%
+average_down_faces                                                   576     0.1542     0.2856     0.5264   1.99%
+FabArray::Xpay()                                                    1120     0.4389      0.444     0.5033   1.90%
+MLMG::mgVcycle_up::2                                                 128     0.2181      0.304     0.4426   1.67%
+MLMG::computeMLResidual()                                             33     0.3712     0.3919     0.4254   1.60%
+FabArray::sum()                                                       77    0.03829     0.2923     0.4125   1.56%
+amr-wind::Temperature-Godunov::compute_advection_term                  8     0.3073     0.3094     0.3844   1.45%
+amr-wind::incflo::post_advance_work                                    5     0.2838     0.3211      0.376   1.42%
+amr-wind::ABLStats::post_advance_work                                  5     0.2837     0.3211      0.376   1.42%
+amr-wind::VelPlaneAveraging::operator                                 12     0.2723     0.3207     0.3502   1.32%
+MLLinOp::define()                                                     14     0.1983     0.2813     0.3495   1.32%
+MLLinOp::defineGrids()                                                14     0.1983     0.2812     0.3495   1.32%
+amrex::Add()                                                         157     0.3187     0.3213     0.3454   1.30%
+MLNodeLaplacian::Fapply()                                            445     0.2592     0.2631     0.3389   1.28%
+FabArray::setVal()                                                  2230     0.2748      0.284     0.3268   1.23%
+MLMG::mgVcycle_down::5                                               128   0.001803    0.03095     0.3264   1.23%
+MLLinOp::makeSubCommunicator()                                        12     0.1742      0.257      0.325   1.23%
+amr-wind::incflo::init_mesh                                            1     0.2366     0.2623     0.3203   1.21%
+amr-wind::incflo::MakeNewLevelFromScratch()                            1     0.2332     0.2589      0.317   1.20%
+PhysBCFunct::()                                                      119    0.06602     0.1569     0.2872   1.08%
+amr-wind::incflo::init_amr_wind_modules                                1     0.1396     0.2017     0.2644   1.00%
+MLNodeLaplacian::define()                                              9     0.1557     0.2171     0.2634   0.99%
+amr-wind::setup_operator                                              40     0.2333     0.2352     0.2531   0.95%
+amr-wind::FPlaneAveraging::operator                                   18     0.1556     0.2018     0.2464   0.93%
+amr-wind::PlaneAveraging::compute_averages                            18     0.1545     0.2006     0.2452   0.92%
+amr-wind::Field::fillpatch array                                       8    0.09379     0.1723     0.2316   0.87%
+OverrideSync_nowait()                                               1479    0.07584     0.1589      0.221   0.83%
+amr-wind::Temperature-Godunov::compute_diffusion_term                  8    0.09376     0.1437     0.2074   0.78%
+FabArray::Saxpy()                                                    121    0.03325     0.0348     0.2022   0.76%
+amr-wind::ICNS-Godunov::compute_source_term                           16     0.1893     0.1916     0.2004   0.76%
+MultiFab::Multiply()                                                 104    0.03924     0.0406     0.1604   0.60%
+amr-wind::FPlaneAveragingFine::operator                               12     0.1321     0.1467     0.1503   0.57%
+amr-wind::PlaneAveragingFine::compute_averages                        12     0.1321     0.1467     0.1503   0.57%
+MLPoisson::Fapply()                                                  458    0.08184    0.08401     0.1459   0.55%
+amr-wind::incflo::InitialProjection()                                  1    0.06216     0.1076     0.1352   0.51%
+amr-wind::incflo::ComputeDt                                            6    0.08753     0.1205      0.129   0.49%
+amr-wind::Smagorinsky-ConstTransport::update_turbulent_viscosity       8    0.06118    0.07977     0.1261   0.48%
+FabArray::LinComb()                                                   62   0.006991   0.007957     0.1243   0.47%
+amr-wind::Field::fillphysbc                                           40    0.01835    0.04536     0.1121   0.42%
+MLMG::mgVcycle_down::6                                               128   0.001693   0.004751     0.1062   0.40%
+amr-wind::incflo::pre_advance_stage1                                   5    0.05699     0.0915    0.09654   0.36%
+NodalProjector::computeRHS                                             9    0.07346     0.0817    0.09555   0.36%
+MLNodeLaplacian::compRHS()                                             9    0.07345    0.08168    0.09554   0.36%
+MLPoisson::define()                                                    1   0.007421    0.06552    0.09302   0.35%
+amr-wind::ICNS-Godunov::compute_predictor_rhs                          8    0.05546    0.05596    0.09255   0.35%
+amr-wind::diffusion::average_velocity_eta_to_faces                    40    0.07275    0.07322    0.09077   0.34%
+MLMG::getFluxes()                                                     16    0.04825    0.05391    0.08544   0.32%
+MLNodeLaplacian::interpolation()                                     357    0.07553    0.07737    0.08475   0.32%
+FabArray::ParallelCopy_nowait()                                     1600    0.02399    0.03421    0.08108   0.31%
+FabArray::plus()                                                     121     0.0662    0.06685    0.07819   0.29%
+FabArray::mult()                                                      56    0.04604    0.04633     0.0778   0.29%
+MLCellLinOp::compFlux()                                                8    0.03667     0.0424    0.07396   0.28%
+MultiFab::Copy()                                                      51    0.05317    0.05349    0.06972   0.26%
+amr-wind::VelPlaneAveragingFine::compute_hvelmag_averages              6    0.05568    0.06539     0.0665   0.25%
+amr-wind::FieldRepo::make_new_level_from_scratch                       1    0.01253    0.01282    0.06079   0.23%
+amr-wind::fvm::strainrate                                              8    0.03559     0.0374    0.04527   0.17%
+MLNodeLinOp::buildMasks()                                              9    0.02761    0.02884     0.0429   0.16%
+MultiFab::Add()                                                       16    0.03241    0.03265    0.04257   0.16%
+MLABecLaplacian::define()                                              4    0.03513    0.03634    0.04162   0.16%
+MLPoisson::Fsmooth()                                                2968    0.01031    0.01774    0.04129   0.16%
+amr-wind::Temperature-Godunov::compute_predictor_rhs                   8    0.02271     0.0228    0.03207   0.12%
+MLCellLinOp::prepareForSolve()                                        41    0.01767    0.01838    0.03098   0.12%
+amr-wind::VelPlaneAveraging::compute_hvelmag_averages                  6    0.01733    0.01851    0.03047   0.11%
+MLCellLinOp::defineAuxData()                                           5    0.01737    0.01942    0.03027   0.11%
+amr-wind::set_acoeffs                                                 40    0.01931    0.01951    0.03018   0.11%
+MLMG::MLResNormInf()                                                  33    0.01904    0.01961    0.02977   0.11%
+amr-wind::Field::copy_state                                           12    0.01173    0.01188    0.02804   0.11%
+amr-wind::Temperature-Godunov::initialize                              1    0.01062    0.02092    0.02649   0.10%
+FabArray::BuildMask()                                                 72    0.01166    0.01261    0.02601   0.10%
+amr-wind::ICNS-Godunov::initialize                                     1    0.01378    0.01554    0.02554   0.10%
+MLTensorOp::define()                                                   2    0.01373    0.01548    0.02549   0.10%
+FabArrayBase::getFB()                                               8008   0.007921   0.009825    0.02544   0.10%
+amr-wind::diffusion::fixup_eta_on_domain_faces                        40   0.002571   0.002844    0.02036   0.08%
+FabArray::setVal(val, thecmd, scomp, ncomp)                          258   0.008704   0.009453    0.02035   0.08%
+MLMG::MLRhsNormInf()                                                  33    0.01884    0.01936    0.01961   0.07%
+amr-wind::Field::advance_states                                       15    0.01518     0.0153    0.01547   0.06%
+amr-wind::Field::setVal 1                                             34    0.01347    0.01362    0.01389   0.05%
+amr-wind::ABLStats::initialize                                         1  0.0001133  0.0003361     0.0119   0.04%
+MultiFab::Subtract()                                                   3    0.01023    0.01034    0.01047   0.04%
+FabArrayBase::getCPC()                                              1786   0.007397   0.007947    0.01019   0.04%
+amr-wind::Temperature-Godunov::compute_mueff                           8   0.009311   0.009366    0.01015   0.04%
+amr-wind::ICNS-Godunov::compute_mueff                                  8   0.009346   0.009396   0.009628   0.04%
+MLCellLinOp::defineBC()                                                5   0.006882   0.007441    0.00777   0.03%
+BndryData::define()                                                    5   0.006777   0.007313   0.007626   0.03%
+FabArrayBase::FB::FB()                                               133   0.004565   0.005269    0.00732   0.03%
+MLLinOp::makeAgglomeratedDMap                                         12   0.006521   0.006648   0.007283   0.03%
+FabArrayBase::CPC::define()                                          267    0.00541   0.005587   0.006915   0.03%
+MLCellLinOp::setLevelBC()                                             41   0.005297    0.00565    0.00643   0.02%
+amr-wind::Temperature-Godunov::compute_source_term                    16   0.006085   0.006151   0.006208   0.02%
+makeSFC                                                               60   0.005233   0.005376   0.006017   0.02%
+amr-wind::godunov::compute_fluxes                                    256   0.003367   0.004093   0.005832   0.02%
+OwnerMask()                                                           18   0.004744   0.004955   0.005517   0.02%
+AmrMesh::MakeDistributionMap()                                         1   0.002856   0.003114   0.003171   0.01%
+DistributionMapping::SFCProcessorMapDoIt()                             1   0.002702   0.002962    0.00302   0.01%
+MLPoisson::FFlux()                                                   128  0.0007756   0.001126   0.002644   0.01%
+DistributionMapping::Distribute()                                     61   0.001963   0.002052   0.002613   0.01%
+amr-wind::godunov::predict_godunov                                   128   0.001405   0.001704   0.002159   0.01%
+amr-wind::ABLVelWallFunc                                              24   0.001438   0.001568   0.002102   0.01%
+amr-wind::PlaneAveraging::compute_line_derivatives                     6  0.0009338   0.001115   0.001467   0.01%
+MLNodeLaplacian::normalize()                                          28          0  8.673e-06   0.001183   0.00%
+MLABecLaplacian::normalize()                                           0          0  8.818e-06   0.001161   0.00%
+amr-wind::ABLTempWallFunc                                             16   0.000901  0.0009669   0.001135   0.00%
+amr-wind::PlaneAveraging::line_derivative_of_average_cell           4608  0.0005354  0.0006685   0.001068   0.00%
+amr-wind::FieldRepo::create_scratch_field                            112  0.0007716   0.000873   0.001048   0.00%
+amr-wind::IntField::setVal 1                                           2  0.0007999  0.0008135   0.001034   0.00%
+amr-wind::VelPlaneAveraging::compute_line_hvelmag_derivatives          6  0.0003371  0.0003835  0.0007504   0.00%
+amr-wind::godunov::predict_weno                                      128  0.0004053  0.0005942  0.0007316   0.00%
+MLPoisson::prepareForSolve()                                           1  0.0003565  0.0004051  0.0005273   0.00%
+DistributionMapping::LeastUsedCPUs()                                   1    0.00016  0.0004204  0.0004973   0.00%
+amr-wind::godunov::make_trans_velocities                             128  0.0003102   0.000375  0.0004784   0.00%
+amr-wind::VelPlaneAveraging::line_derivative_of_average_cell        1536  0.0001951   0.000225  0.0004482   0.00%
+amr-wind::FieldRepo::get_field                                       259  0.0001226  0.0001568  0.0003699   0.00%
+amr-wind::incflo::regrid_and_update                                    5  4.763e-05  5.276e-05   8.81e-05   0.00%
+amr-wind::FieldRepo::declare_int_field                                 2  3.663e-05  4.501e-05  6.955e-05   0.00%
+amr-wind::setup_solver                                                16  1.965e-05   4.17e-05  6.401e-05   0.00%
+amr-wind::incflo::pre_advance_stage2                                   5  2.782e-05  4.144e-05  5.839e-05   0.00%
+amr-wind::FieldRepo::declare_field                                    17  2.748e-05  3.113e-05  5.367e-05   0.00%
+MLNodeLaplacian::prepareForSolve()                                     9   3.34e-05  3.807e-05  5.111e-05   0.00%
+amr-wind::FieldRepo::get_int_field                                    16  1.062e-05   2.45e-05  3.476e-05   0.00%
+NodalProjector::computeSyncResidual                                    9  4.559e-06  8.477e-06  3.037e-05   0.00%
+amr-wind::Field::set_inflow                                            6  6.882e-06  1.417e-05  2.666e-05   0.00%
+amr-wind::FieldRepo::create_state                                      2  1.312e-06  3.511e-06  2.418e-05   0.00%
+amr-wind::PlaneAveragingFine::line_average_interpolated               28  7.729e-06  9.255e-06   1.94e-05   0.00%
+MLNodeLaplacian::averageDownCoeffs()                                   9  3.868e-06  5.097e-06  1.322e-05   0.00%
+amr-wind::ABLBoundaryPlane::populate_data                              6  3.226e-06  4.632e-06  1.082e-05   0.00%
+amr-wind::RefineCriteriaManager::initialize                            1   9.52e-07  1.108e-06  6.482e-06   0.00%
+-----------------------------------------------------------------------------------------------------------------
+
+Device Memory Usage:
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Name                                                         Nalloc     Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+The_Arena::Initialize()                                        2048      2048    1185 KiB    1796 KiB      21 MiB      47 GiB      47 GiB      47 GiB
+amr-wind::FieldRepo::make_new_level_from_scratch             720896    720896    9319 MiB    9324 MiB    9324 MiB    9328 MiB    9328 MiB    9328 MiB
+MLABecLaplacian::define()                                   1092224   1092224    7615 MiB    7618 MiB    7621 MiB    7734 MiB    7735 MiB    7738 MiB
+MLMG::prepareForSolve()                                    12304096  12304096    3208 MiB    3212 MiB    3216 MiB    6638 MiB    6639 MiB    6642 MiB
+amr-wind::FieldRepo::create_scratch_field                   3670016   3670016     401 MiB     407 MiB     414 MiB    4644 MiB    4644 MiB    4644 MiB
+amr-wind::ICNS-Godunov::compute_advection_term               786432    786432      59 MiB      62 MiB      64 MiB    2389 MiB    2389 MiB    2389 MiB
+MLTensorOp::apply()                                         7077888   7077888      76 MiB      80 MiB      83 MiB    2322 MiB    2322 MiB    2322 MiB
+MLMG::apply()                                               1622016   1622016      40 MiB      45 MiB      52 MiB    1572 MiB    1572 MiB    1572 MiB
+MLTensorOp::define()                                         196608    196608    1524 MiB    1524 MiB    1525 MiB    1548 MiB    1548 MiB    1548 MiB
+amr-wind::incflo::ApplyProjection                            903168    903168     427 MiB     431 MiB     433 MiB    1304 MiB    1304 MiB    1304 MiB
+amr-wind::ICNS::advection_mac_project                        163840    163840    1254 MiB    1257 MiB    1258 MiB    1298 MiB    1298 MiB    1298 MiB
+amr-wind::diffusion::average_velocity_eta_to_faces          4177920   4177920    5951 KiB    6002 KiB    6527 KiB     774 MiB     774 MiB     774 MiB
+MLCellLinOp::compFlux()                                      786432    786432     430 KiB     522 KiB    1464 KiB     774 MiB     774 MiB     774 MiB
+amr-wind::ICNS-Godunov::pre_advection_actions                 81920     81920      11 MiB      11 MiB      12 MiB     653 MiB     653 MiB     653 MiB
+amr-wind::FieldRepo::declare_int_field                        65536     65536     267 MiB     268 MiB     268 MiB     271 MiB     271 MiB     271 MiB
+MLCellLinOp::setLevelBC()                                     32768     32768    5543   B    5681   B    6287   B     268 MiB     268 MiB     268 MiB
+MLNodeLinOp::buildMasks()                                   1228896   1228896      83 MiB      84 MiB      84 MiB     262 MiB     262 MiB     262 MiB
+amr-wind::Temperature-Godunov::compute_advection_term        524288    524288     227 KiB     231 KiB     287 KiB     253 MiB     253 MiB     253 MiB
+BndryData::define()                                         1966080   1966080     177 MiB     177 MiB     177 MiB     181 MiB     181 MiB     181 MiB
+MLCellLinOp::defineAuxData()                                4521792   4521792     160 MiB     160 MiB     161 MiB     163 MiB     163 MiB     164 MiB
+MLNodeLaplacian::define()                                    933840    933840      48 MiB      48 MiB      48 MiB     150 MiB     150 MiB     150 MiB
+OwnerMask()                                                  313623    313623      41 MiB      42 MiB      42 MiB     131 MiB     131 MiB     131 MiB
+amr-wind::PlaneAveragingFine::compute_averages               417792    417792     161 KiB     167 KiB     244 KiB     128 MiB     128 MiB     128 MiB
+amr-wind::VelPlaneAveragingFine::compute_hvelmag_averages    233472    233472      98 KiB     100 KiB     139 KiB     128 MiB     128 MiB     128 MiB
+ResizeRandomSeed                                               2048      2048      49 MiB      49 MiB      49 MiB      41 MiB      41 MiB      41 MiB
+average_down_faces                                          2098176   2098176      30 KiB      33 KiB      37 KiB    1664 KiB    1664 KiB    1664 KiB
+amrex::average_down                                         3954752   3954752    9176   B      10 KiB      11 KiB    1547 KiB    1547 KiB    1547 KiB
+MLMG::addInterpCorrection()                                 5206016   5206016     596   B    7757   B      13 KiB    1538 KiB    1538 KiB    1538 KiB
+MLNodeLaplacian::restriction()                              2244480   2244480     851   B    1915   B    4371   B     616 KiB     616 KiB     616 KiB
+MLCGSolver::bicgstab                                          75776     75776       0   B     190   B      23 KiB       0   B    4422   B     552 KiB
+MLMG::actualBottomSolve()                                      3424      3424       0   B      27   B    3570   B       0   B    3904   B     488 KiB
+MLMG::oneIter()                                              104448    104448     712   B     718   B     841   B     440 KiB     440 KiB     440 KiB
+amrex::Dot()                                                 342144    342144       0   B      28   B    3873   B       0   B    1763   B     220 KiB
+FabArray::sum()                                              159424    159424     246   B     250   B     511   B     220 KiB     220 KiB     220 KiB
+FabArray::norminf()                                          546720    546720     940   B     964   B    2899   B     220 KiB     220 KiB     220 KiB
+amr-wind::incflo::ComputeDt                                   24576     24576     122   B     124   B     214   B     220 KiB     220 KiB     220 KiB
+FabArray::setVal()                                          1218560   1218560     117 KiB     117 KiB     117 KiB     138 KiB     138 KiB     138 KiB
+MLABecLaplacian::Fsmooth()                                   141312    141312      68 KiB      69 KiB      74 KiB      75 KiB      76 KiB      81 KiB
+MLPoisson::Fsmooth()                                          98304     98304      72 KiB      72 KiB      72 KiB      75 KiB      75 KiB      75 KiB
+MLCellLinOp::applyBC()                                     17198080  17198080     162   B     168   B     226   B      54 KiB      54 KiB      54 KiB
+FillBoundary_nowait()                                      20628041  20628041     959   B     993   B    1053   B      45 KiB      45 KiB      45 KiB
+FillBoundary_finish()                                      11092553  11092553     329   B     346   B     379   B      45 KiB      45 KiB      45 KiB
+MLCellLinOp::prepareForSolve()                               211536    211536      22   B      22   B      42   B      45 KiB      45 KiB      45 KiB
+amrex::Copy()                                                235520    235520      32 KiB      32 KiB      32 KiB      37 KiB      37 KiB      37 KiB
+MLCellLinOp::defineBC()                                       32752     32752      28 KiB      29 KiB      30 KiB      29 KiB      29 KiB      31 KiB
+MLCGSolver::ParallelAllReduce                                 58496     58496       0   B       2   B     342   B       0   B     204   B      25 KiB
+FabArray::setVal(val, thecmd, scomp, ncomp)                  577424    577424       1   B       1   B       2   B      14 KiB      14 KiB      14 KiB
+FabArray::ParallelCopy_nowait()                             1757185   1757185       1   B       1   B       5   B    4144   B    6726   B    6896   B
+FabArray::ParallelCopy_finish()                              969267    969267       0   B       0   B       1   B    3104   B    6724   B    6896   B
+amr-wind::PlaneAveraging::compute_averages                    36864     36864      28   B      38   B      45   B    6144   B    6144   B    6144   B
+FabArray::mult()                                               6144      6144    5753   B    5755   B    5756   B    6144   B    6144   B    6144   B
+MLNodeLaplacian::Fapply()                                     33520     33520     641   B     669   B     870   B    2048   B    2139   B    3328   B
+FabArray::BuildMask()                                         96256     96256    1061   B    1061   B    1063   B    3104   B    3104   B    3104   B
+amr-wind::FieldRepo::declare_field                            69632     69632    2078   B    2078   B    2079   B    2080   B    2080   B    2080   B
+amr-wind::VelPlaneAveraging::compute_hvelmag_averages         12288     12288       1   B       1   B       2   B    2048   B    2048   B    2048   B
+MLPoisson::Fapply()                                           16384     16384    1946   B    1954   B    1963   B    2048   B    2048   B    2048   B
+MLNodeLaplacian::interpolation()                             277440    277440       0   B       0   B       0   B    2048   B    2048   B    2048   B
+MLABecLaplacian::Fapply()                                     12080     12080       0   B      19   B     454   B       0   B      91   B    1280   B
+PhysBCFunct::()                                             3899392   3899392       0   B       1   B       3   B     512   B    1202   B    1280   B
+MLNodeLaplacian::Fsmooth()                                    32256     32256       0   B      73   B     339   B       0   B     252   B    1152   B
+amr-wind::main()                                               8192      8192     127   B     127   B     127   B     128   B     128   B     128   B
+amr-wind::incflo::init_amr_wind_modules                        4096      4096      31   B      31   B      31   B      32   B      32   B      32   B
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Managed Memory Usage:
+----------------------------------------------------------------------------------------------------------------------
+Name                             Nalloc  Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+----------------------------------------------------------------------------------------------------------------------
+The_Managed_Arena::Initialize()    2048   2048     324   B     399   B     463   B    8192 KiB    8192 KiB    8192 KiB
+----------------------------------------------------------------------------------------------------------------------
+
+Pinned Memory Usage:
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Name                                                         Nalloc     Nfree  AvgMem min  AvgMem avg  AvgMem max  MaxMem min  MaxMem avg  MaxMem max
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+FillBoundary_nowait()                                      42813147  42813147    1586 KiB    1892 KiB    2102 KiB      57 MiB      57 MiB      57 MiB
+The_Pinned_Arena::Initialize()                                 2048      2048     282   B     342   B     395   B    8192 KiB    8192 KiB    8192 KiB
+FabArray::ParallelCopy_nowait()                             3825527   3825527    2095   B      12 KiB      16 KiB     210 KiB     432 KiB     648 KiB
+FabArray::setVal()                                          1218560   1218560     117 KiB     117 KiB     117 KiB     138 KiB     138 KiB     138 KiB
+MLABecLaplacian::Fsmooth()                                   141312    141312      68 KiB      69 KiB      74 KiB      75 KiB      76 KiB      81 KiB
+MLPoisson::Fsmooth()                                          98304     98304      72 KiB      72 KiB      72 KiB      75 KiB      75 KiB      75 KiB
+MLCellLinOp::applyBC()                                      6935840   6935840     162   B     168   B     226   B      54 KiB      54 KiB      54 KiB
+FillBoundary_finish()                                      11092553  11092553     329   B     347   B     379   B      45 KiB      45 KiB      45 KiB
+MLCellLinOp::prepareForSolve()                               211536    211536      22   B      22   B      42   B      45 KiB      45 KiB      45 KiB
+amrex::Copy()                                                235520    235520      32 KiB      32 KiB      32 KiB      37 KiB      37 KiB      37 KiB
+average_down_faces                                           264192    264192      28 KiB      28 KiB      28 KiB      32 KiB      32 KiB      32 KiB
+OwnerMask()                                                   18567     18567       0   B       0   B       0   B      10 KiB      13 KiB      16 KiB
+FabArray::setVal(val, thecmd, scomp, ncomp)                  577424    577424       1   B       1   B       2   B      14 KiB      14 KiB      14 KiB
+amrex::average_down                                          401408    401408    8809   B    8817   B    8822   B      11 KiB      11 KiB      11 KiB
+amr-wind::ICNS-Godunov::pre_advection_actions                 49152     49152       1   B       1   B       1   B    9616   B    9616   B    9616   B
+amr-wind::incflo::ApplyProjection                             18432     18432       2   B       2   B       2   B    9616   B    9616   B    9616   B
+MLMG::prepareForSolve()                                      104448    104448     651   B     653   B     657   B    9616   B    9616   B    9616   B
+FabArray::ParallelCopy_finish()                              969267    969267       0   B       0   B       1   B    3104   B    6724   B    6896   B
+FabArray::mult()                                               6144      6144    5753   B    5755   B    5756   B    6144   B    6144   B    6144   B
+amr-wind::diffusion::average_velocity_eta_to_faces           245760    245760      45   B      46   B      50   B    6144   B    6144   B    6144   B
+amr-wind::VelPlaneAveragingFine::compute_hvelmag_averages     36864     36864      12   B      15   B      17   B    6144   B    6144   B    6144   B
+amr-wind::PlaneAveragingFine::compute_averages                24576     24576      20   B      23   B      24   B    6144   B    6144   B    6144   B
+amr-wind::PlaneAveraging::compute_averages                    36864     36864      28   B      38   B      45   B    6144   B    6144   B    6144   B
+MLCellLinOp::setLevelBC()                                    211536    211536       0   B       0   B       0   B    4608   B    4608   B    4608   B
+MLNodeLaplacian::Fapply()                                     33520     33520     641   B     669   B     870   B    2048   B    2139   B    3328   B
+FabArray::BuildMask()                                         96256     96256    1061   B    1061   B    1063   B    3104   B    3104   B    3104   B
+MLNodeLaplacian::restriction()                               295872    295872     492   B     495   B     504   B    2656   B    2656   B    2656   B
+MLMG::addInterpCorrection()                                  315392    315392       0   B       0   B       0   B    2048   B    2048   B    2048   B
+MLPoisson::Fapply()                                           16384     16384    1946   B    1954   B    1963   B    2048   B    2048   B    2048   B
+amr-wind::VelPlaneAveraging::compute_hvelmag_averages         12288     12288       1   B       1   B       2   B    2048   B    2048   B    2048   B
+MLNodeLaplacian::interpolation()                             277440    277440       0   B       0   B       0   B    2048   B    2048   B    2048   B
+PhysBCFunct::()                                             3899392   3899392       0   B       1   B       3   B     512   B    1204   B    1280   B
+MLABecLaplacian::Fapply()                                     12080     12080       0   B      19   B     454   B       0   B      91   B    1280   B
+MLNodeLaplacian::Fsmooth()                                    32256     32256       0   B      73   B     339   B       0   B     252   B    1152   B
+FabArray::sum()                                              159424    159424       0   B       1   B     242   B      16   B      19   B     400   B
+amrex::Dot()                                                 342144    342144       0   B       0   B      17   B       0   B       3   B     400   B
+MLMG::actualBottomSolve()                                      1760      1760       0   B       0   B      44   B       0   B       2   B     272   B
+FabArray::norminf()                                          546720    546720       0   B       0   B      17   B      16   B      18   B     272   B
+amr-wind::incflo::ComputeDt                                   24576     24576       0   B       0   B       0   B      16   B      16   B      16   B
+MLMG::oneIter()                                              104448    104448       0   B       0   B       0   B      16   B      16   B      16   B
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Total GPU global memory (MB) spread across MPI: [65520 ... 65520]
+Free  GPU global memory (MB) spread across MPI: [16380 ... 16380]
+[The         Arena] space (MB) allocated spread across MPI: [49140 ... 49140]
+[The         Arena] space (MB) used      spread across MPI: [0 ... 0]
+[The Managed Arena] space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] space (MB) allocated spread across MPI: [228 ... 228]
+[The  Pinned Arena] space (MB) used      spread across MPI: [0 ... 0]
+AMReX (23.11-5-gd36463103dae) finalized
