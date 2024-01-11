@@ -1,17 +1,17 @@
 #----------------------------------
 # OPENFAST FILES
 #----------------------------------
-TURBINE_BASE_DIR=
-SERVO_FILE=
-ELASTO_FILE=
-FAST_FILE=
-FASTCPP_FILE=
+TURBINE_BASE_DIR="$(pwd)/../5MW_Baseline"
+SERVO_FILE="NRELOffshrBsline5MW_Onshore_ServoDyn.dat"
+ELASTO_FILE="NRELOffshrBsline5MW_Onshore_ElastoDyn.dat"
+FAST_FILE="5MW_Land_DLLL_WTurb_cpp.fst"
+FASTCPP_FILE="cDriver.yaml"
 #----------------------------------
 # EXAWIND FILES
 #----------------------------------
-NALU_FILE=
-AMR_FILE=
-DRIVER_FILE=
+NALU_FILE="nrel5mw-01-nalu.yaml"
+AMR_FILE="nrel5mw-01-amr.inp"
+DRIVER_FILE="nrel5mw.yaml"
 #----------------------------------
 # DEFAULT VARIABLES
 #----------------------------------
