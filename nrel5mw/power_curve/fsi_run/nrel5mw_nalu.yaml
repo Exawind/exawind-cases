@@ -71,11 +71,7 @@ linear_solvers:
 realms:
 
 - name: realm_1
-{if(TOWER)}
-  mesh: {NALU_MESH_TOWER}
-{else}
   mesh: {NALU_MESH_BLADES}
-{endif}
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
@@ -118,9 +114,6 @@ realms:
         - blade1-HEX
         - blade2-HEX
         - blade3-HEX
-{if(TOWER)}
-        - tower-fluid-HEX
-{endif}
       value:
         pressure: 0.0
         velocity: [{WIND_SPEED}, 0.0, 0.0]
@@ -132,9 +125,6 @@ realms:
       - blade1-HEX
       - blade2-HEX
       - blade3-HEX
-{if(TOWER)}
-      - tower-fluid-HEX
-{endif}
 
     specifications:
     - name: density
@@ -164,18 +154,6 @@ realms:
       use_wall_function: no
       turbulent_ke: 0.0
 
-{if(TOWER)}
-  - wall_boundary_condition: bc_wall
-    target_name: tower-wall
-    wall_user_data:
-      use_wall_function: no
-      turbulent_ke: 0.0
-
-  - symmetry_boundary_condition: ground
-    target_name: tower-ground
-    symmetry_user_data:
-{endif}
-
   - overset_boundary_condition: bc_overset
     overset_connectivity_type: tioga
     overset_user_data:
@@ -183,26 +161,19 @@ realms:
       tioga_options:
         symmetry_direction: 3
       mesh_group:
-      - overset_name: Turbine
-        mesh_parts:
-          - blade1-HEX
-          - blade2-HEX
-          - blade3-HEX
-{if(TOWER)}
-          - tower-fluid-HEX
-{endif}
-        wall_parts: 
-          - blade1 
-          - blade2
-          - blade3
-{if(TOWER)}
-          - tower-wall
-{endif}
-        ovset_parts:
-          - outerBC
-{if(TOWER)}
-          - tower-overset
-{endif}
+      mesh_group:
+      - overset_name: b1ovr
+        mesh_parts: [blade1-HEX]
+        wall_parts: [blade1]
+        ovset_parts: [outerbcblade1]
+      - overset_name: b2ovr
+        mesh_parts: [blade2-HEX]
+        wall_parts: [blade2]
+        ovset_parts: [outerbcblade2]
+      - overset_name: b3ovr
+        mesh_parts: [blade3-HEX]
+        wall_parts: [blade3]
+        ovset_parts: [outerbcblade3]
 
   mesh_transformation:
   - name: turbine_rotor_placment
@@ -220,15 +191,6 @@ realms:
       - type: translation
         displacement: [1795, 1800, 90]
         
-{if(TOWER)}
-  - name: turbine_tower_placement
-    mesh_parts:
-      - tower-fluid-HEX
-    motion:
-      - type: translation
-        displacement: [1800, 1800, 0]
-{endif}
-        
   openfast_fsi:
     n_turbines_glob: 1
     dry_run:  False
@@ -243,12 +205,6 @@ realms:
       turbine_hub_pos: [1795, 1800, 90]
       restart_filename: "nrel5mw.{CHKP_NUM}"
       sim_type: "ext-loads"
-{if(TOWER)}
-      tower_parts:
-        - tower-fluid-HEX
-      tower_boundary_parts:
-        - tower-wall
-{endif}
       blade_parts:
         - ["blade1-HEX"]
         - ["blade2-HEX"]
@@ -342,9 +298,6 @@ realms:
         - blade1-HEX
         - blade2-HEX
         - blade3-HEX
-{if(TOWER)}
-        - tower-fluid-HEX
-{endif}
 
       reynolds_averaged_variables:
       - velocity
