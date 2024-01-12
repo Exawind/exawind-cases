@@ -7,7 +7,7 @@ time.max_step                =   10     # Max number of time steps
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #         TIME STEP COMPUTATION         #
 #.......................................#
-time.fixed_dt         =   0.004550749963594      # Use this constant dt if > 0
+time.fixed_dt         =   {CFD_DT}
 time.cfl              =   1.0       # CFL factor
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #            INPUT AND OUTPUT           #
@@ -26,7 +26,7 @@ incflo.initial_iterations = 3
 #.......................................#
 incflo.gravity        =  0.0  0.0 -9.81  # Gravitational force (3D)
 incflo.density        =  1.225           # Reference density
-incflo.velocity = 9.8726896031426 5.7 0.0
+incflo.velocity = {WIND_SPEED} 0.0 0.0
 incflo.use_godunov = 1
 incflo.godunov_type = "weno_z"
 
@@ -41,7 +41,7 @@ incflo.physics = FreeStream
 #SyntheticTurbulence
 
 FreeStream.velocity_type = ConstValue
-ConstValue.velocity.value = 8.0 0.0 0.0
+ConstValue.velocity.value = {WIND_SPEED} 0.0 0.0
 
 FreeStream.tke_type = ConstValue
 ConstValue.tke.value = 1.0
@@ -74,14 +74,12 @@ geometry.is_periodic    =   0   0   0   # Periodicity x y z (0/1)
 # Boundary conditions
 xlo.type = "mass_inflow"
 xlo.density = 1.225
-xlo.velocity = 9.8726896031426 5.7 0.0
+xlo.velocity = {WIND_SPEED} 0.0 0.0
 xlo.tke = 1.0
 xlo.sdr = 250.0
 xhi.type = "pressure_outflow"
-ylo.type = "mass_inflow"
-ylo.density = 1.225
-ylo.velocity = 9.8726896031426 5.7 0.0
-yhi.type = "pressure_outflow"
+ylo.type = "slip_wall"
+yhi.type = "slip_wall"
 zlo.type =   "slip_wall"
 zhi.type =   "slip_wall"
 incflo.verbose =   0

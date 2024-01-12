@@ -9,8 +9,8 @@ FASTCPP_FILE="cDriver.yaml"
 #----------------------------------
 # EXAWIND FILES
 #----------------------------------
-NALU_FILE="nrel5mw-01-nalu.yaml"
-AMR_FILE="nrel5mw-01-amr.inp"
+NALU_FILE="nrel5mw_nalu.yaml"
+AMR_FILE="nrel5mw_amr.inp"
 DRIVER_FILE="nrel5mw.yaml"
 #----------------------------------
 # DEFAULT VARIABLES
@@ -95,9 +95,10 @@ mkdir -p $target_dir
 cp -R openfast_run/* $target_dir
 cp -R fsi_run/* $target_dir
 
-if [ "$RUNDIRECTORY" != "$scriptdir" ] ; then
-    cp -R ${TURBINE_BASE_DIR} ${RUNDIRECTORY}/.
-fi
+# shouldn't need to do this, pointing to the absolute path of the files now
+# if [ "$RUNDIRECTORY" != "$scriptdir" ] ; then
+#     cp -R ${TURBINE_BASE_DIR} ${RUNDIRECTORY}/.
+# fi
 
 cd $target_dir
 
@@ -119,7 +120,7 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt $
 # openfast model replacements
 aprepro -qW --include ${aprepro_include} ${SERVO_FILE} ${SERVO_FILE}
 aprepro -qW --include ${aprepro_include} RPM=$rpm PITCH=$pitch  ${ELASTO_FILE} ${ELASTO_FILE}
-aprepro -qW --include ${aprepro_include} OPENFAST_DT=$openfast_dt ${FAST_FILE} ${FAST_FILE}
+aprepro -qW --include ${aprepro_include} TURBINE_BASE_DIR=$TURBINE_BASE_DIR OPENFAST_DT=$openfast_dt ${FAST_FILE} ${FAST_FILE}
 
 # openfastcpp input replacements 
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt PREC_LEN=$preclen AZB=$azblend ${FASTCPP_FILE} ${FASTCPP_FILE}

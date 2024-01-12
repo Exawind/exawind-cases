@@ -3,22 +3,29 @@ dry_run:  False
 debug: False
 sim_start: init
 coupling_mode: strong
+n_iter: 1
 t_start:  0.0
-t_end:    60.0
-t_max:    60.0
-dt_driver:  0.00625
-restart_freq: 1000
+t_end:    {PREC_LEN + (10*CFD_DT)} # do 10 extra steps to make sure we get chkp file
+t_max:    {PREC_LEN*100}
+dt_driver: {CFD_DT}
+restart_freq: 1440
+output_freq: 1
+set_exp_law_wind: False
+set_uniform_x_blade_forces: False
+x_blade_force: 0.0
+super_controller: False
 Turbine0:
   turb_id: 0
   FAST_input_filename: "5MW_Land_DLL_WTurb_cpp.fst"
+  sim_type: ext-loads
   restart_filename: "Turbine0"
-  turbine_base_pos:
-  - 0
-  - 0
-  - 0
-  turbine_hub_pos:
-  - 0
-  - 0
-  - 90
-  num_force_pts_blade: 0
-  num_force_pts_tower: 0
+  turbine_base_pos: [1800, 1800, 0]
+  turbine_hub_pos: [1795, 1800, 90]
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: {AZB}
+  az_blend_delta: {PI} #TODO we may want to tweak this?
+  vel_mean: {WIND_SPEED}
+  wind_dir: 270.0
+  z_ref: 90.0
+  shear_exp: 0.0
