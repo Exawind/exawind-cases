@@ -136,7 +136,7 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN
 
 # submit case if submit flag given
 if [ -n "${SUBMIT}" ]; then
-    sbatch run_case.sh
-else
     return
+else
+    sbatch run_case.sh
 fi
