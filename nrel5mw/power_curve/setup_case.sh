@@ -111,6 +111,10 @@ else
     NUMNODES=1
 fi
 
+FAST_NAME="${FAST_FILE%????}"
+
+echo "Fast name: $FAST_NAME"
+
 echo "$w: dt ratio: $dtratio"
 
 # text replace the wind speed and mesh location in these files
@@ -132,10 +136,7 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN
 
 # submit case if submit flag given
 if [ -n "${SUBMIT}" ]; then
-  if [ "${MACHINE}"=="snl-hpc" ]; then
-    #sbatch -M chama,skybridge run_case.sh
     sbatch run_case.sh
-  else
-    sbatch run_case.sh
-  fi
+else
+    return
 fi
