@@ -1,10 +1,11 @@
 #----------------------------------
 # OPENFAST FILES
 #----------------------------------
-TURBINE_BASE_DIR="$(pwd)/../5MW_Baseline"
+TURBINE_BASE_DIR="/projects/hfm/ndevelder/hfm-nrel5mw-push1/nrel5mw/5MW_Baseline"
 SERVO_FILE="NRELOffshrBsline5MW_Onshore_ServoDyn.dat"
+AERODYN_FILE="NRELOffshrBsline5MW_Onshore_AeroDyn15.dat"
 ELASTO_FILE="NRELOffshrBsline5MW_Onshore_ElastoDyn.dat"
-FAST_FILE="5MW_Land_DLLL_WTurb_cpp.fst"
+FAST_FILE="5MW_Land_DLL_WTurb_cpp.fst"
 FASTCPP_FILE="cDriver.yaml"
 #----------------------------------
 # EXAWIND FILES
@@ -110,6 +111,10 @@ else
     NUMNODES=1
 fi
 
+FAST_NAME="${FAST_FILE%????}"
+
+echo "Fast name: $FAST_NAME"
+
 echo "$w: dt ratio: $dtratio"
 
 # text replace the wind speed and mesh location in these files
@@ -118,9 +123,10 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt O
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt ${AMR_FILE} ${AMR_FILE} 
 
 # openfast model replacements
-aprepro -qW --include ${aprepro_include} ${SERVO_FILE} ${SERVO_FILE}
+aprepro -qW --include ${aprepro_include} TURBINE_BASE_DIR=$TURBINE_BASE_DIR ${SERVO_FILE} ${SERVO_FILE}
 aprepro -qW --include ${aprepro_include} RPM=$rpm PITCH=$pitch  ${ELASTO_FILE} ${ELASTO_FILE}
 aprepro -qW --include ${aprepro_include} TURBINE_BASE_DIR=$TURBINE_BASE_DIR OPENFAST_DT=$openfast_dt ${FAST_FILE} ${FAST_FILE}
+aprepro -qW --include ${aprepro_include} TURBINE_BASE_DIR=$TURBINE_BASE_DIR ${AERODYN_FILE} ${AERODYN_FILE}
 
 # openfastcpp input replacements 
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt PREC_LEN=$preclen AZB=$azblend ${FASTCPP_FILE} ${FASTCPP_FILE}
@@ -130,10 +136,7 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN
 
 # submit case if submit flag given
 if [ -n "${SUBMIT}" ]; then
-  if [ "${MACHINE}"=="snl-hpc" ]; then
-    #sbatch -M chama,skybridge run_case.sh
+    return
+else
     sbatch run_case.sh
-  else
-    sbatch run_case.sh
-  fi
 fi

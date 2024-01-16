@@ -1,15 +1,14 @@
-
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               =   -1     # Max (simulated) time to evolve
 time.max_step                =   10     # Max number of time steps
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #         TIME STEP COMPUTATION         #
 #.......................................#
 time.fixed_dt         =   {CFD_DT}
 time.cfl              =   1.0       # CFL factor
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #            INPUT AND OUTPUT           #
 #.......................................#
 io.KE_int = -1
@@ -21,7 +20,7 @@ time.checkpoint_interval      =  -1 #1440      # Steps between checkpoint files
 
 incflo.initial_iterations = 3
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #               PHYSICS                 #
 #.......................................#
 incflo.gravity        =  0.0  0.0 -9.81  # Gravitational force (3D)
@@ -52,7 +51,7 @@ FreeStream.fields = wall_dist
 FreeStream.wall_dist_type = ConstValue
 ConstValue.wall_dist.value = 8.0
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
 amr.n_cell              = 256 256 96 # Grid cells at coarsest AMRlevel
@@ -64,7 +63,7 @@ tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
 tagging.static.type = CartBoxRefinement
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#"""""""""""""""""""""""""""""""""""""""#
 #              GEOMETRY                 #
 #.......................................#
 #center turbine at 1800 1800 with 2560m^2 area domain

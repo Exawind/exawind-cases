@@ -53,7 +53,7 @@ if __name__ == "__main__":
     else:
        wind_speed = float(sys.argv[1])
        precursor_length = float(sys.argv[2])
-       file_name = "iea15mw_params.csv"
+       file_name = "nrel5mw_params.csv"
        data = []
        with open(file_name, 'r') as f:
          reader = csv.reader(f)

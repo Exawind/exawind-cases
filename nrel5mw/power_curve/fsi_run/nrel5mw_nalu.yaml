@@ -71,7 +71,7 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: {NALU_MESH_BLADES}
+  mesh: {MESH}
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
@@ -165,15 +165,15 @@ realms:
       - overset_name: b1ovr
         mesh_parts: [blade1-HEX]
         wall_parts: [blade1]
-        ovset_parts: [outerbcblade1]
+        ovset_parts: [outerBCblade1Block]
       - overset_name: b2ovr
         mesh_parts: [blade2-HEX]
         wall_parts: [blade2]
-        ovset_parts: [outerbcblade2]
+        ovset_parts: [outerBCblade2Block]
       - overset_name: b3ovr
         mesh_parts: [blade3-HEX]
         wall_parts: [blade3]
-        ovset_parts: [outerbcblade3]
+        ovset_parts: [outerBCblade3Block]
 
   mesh_transformation:
   - name: turbine_rotor_placment
@@ -203,7 +203,7 @@ realms:
     Turbine0:
       turbine_base_pos: [1800, 1800, 0]
       turbine_hub_pos: [1795, 1800, 90]
-      restart_filename: "nrel5mw.{CHKP_NUM}"
+      restart_filename: "5MW_Land_DLL_WTurb_cpp.{CHKP_NUM}"
       sim_type: "ext-loads"
       blade_parts:
         - ["blade1-HEX"]
