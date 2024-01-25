@@ -24,5 +24,3 @@ NREL 5.0 MW offshore baseline aerodynamic blade input properties; note that we n
 6.0133300E+01 -3.2815226E-04 -1.7737470E-01 0.0000000E+00  1.0600000E-01  1.4190000E+00        8      0.0      0.0       0.0
 6.1499900E+01 -3.2815226E-04 -1.7737470E-01 0.0000000E+00  1.0600000E-01  1.4190000E+00        8      0.0      0.0       0.0
 
-!bjj: because of precision in the BD-AD coupling, 61.5m didn't work, so I changed it to 61.4999m
-6.1500000E+01 -3.2815226E-04 -1.7737470E-01 0.0000000E+00  1.0600000E-01  1.4190000E+00        8      0.0      0.0       0.0

@@ -158,9 +158,6 @@ realms:
     overset_connectivity_type: tioga
     overset_user_data:
       mesh_tag_offset: 0
-      tioga_options:
-        symmetry_direction: 3
-      mesh_group:
       mesh_group:
       - overset_name: b1ovr
         mesh_parts: [blade1-HEX]
@@ -182,15 +179,16 @@ realms:
       - blade2-HEX
       - blade3-HEX
     motion:
-      #tilt done in original mesh location of [0, 0, 0]
-      - type: rotation
-        angle: 5.0
-        axis: [0.0, 1.0, 0.0]
-        centroid: [0.0, 0.0, 0.0]
-      # then translated to the hub_ref_position as computed by openfast
       - type: translation
         displacement: [1795, 1800, 90]
-        
+      # tilt done in original mesh location of [0, 0, 0]
+      # No tilt needed for the current mesh
+      #- type: rotation
+      #  angle: 5.0
+      #  axis: [0.0, 1.0, 0.0]
+      #  centroid: [0.0, 0.0, 0.0]
+      # then translated to the hub_ref_position as computed by openfast
+
   openfast_fsi:
     n_turbines_glob: 1
     dry_run:  False
@@ -314,7 +312,7 @@ realms:
   - name: boundary_output
     output_data_base_name: blades01/blades.exo
     output_frequency: 16
-    target_name: [blade1-HEX, blade2-HEX, blade3-HEX]
+    target_name: [blade1, blade2, blade3]
     output_variables:
     - pressure
     - pressure_force

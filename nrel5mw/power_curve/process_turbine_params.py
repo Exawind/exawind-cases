@@ -32,7 +32,7 @@ def calc_timesteps(rpm,prec_len):
     cfd_dt = 0.25/degps
     # ratio of 100 matches tests by neil for the 10.59 m/s case
     # using 120 just to be safe for higher wind speeds
-    ratio = int(3*math.ceil(degps) - 30)
+    ratio = int(3*math.ceil(degps/2.0) - 30)
     openfast_dt = cfd_dt / ratio
 
     prec_revs = int(math.floor(prec_len * revps))

@@ -1,7 +1,7 @@
 #----------------------------------
 # OPENFAST FILES
 #----------------------------------
-TURBINE_BASE_DIR="/projects/hfm/ndevelder/hfm-nrel5mw-push1/nrel5mw/5MW_Baseline"
+TURBINE_BASE_DIR="/projects/hfm/ndevelder/hfm-nrel5mw-push1/nrel5mw/5MW_ModBD"
 SERVO_FILE="NRELOffshrBsline5MW_Onshore_ServoDyn.dat"
 AERODYN_FILE="NRELOffshrBsline5MW_Onshore_AeroDyn15.dat"
 ELASTO_FILE="NRELOffshrBsline5MW_Onshore_ElastoDyn.dat"
@@ -135,8 +135,6 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt P
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN_PRE=$RUNPRECURSOR RUN_CFD=$RUNCFD NNODES=$NUMNODES SCRIPT_DIR=$scriptdir $scriptdir/run_case.sh.i run_case.sh
 
 # submit case if submit flag given
-if [ -n "${SUBMIT}" ]; then
-    return
-else
+if [ ${SUBMIT} ]; then
     sbatch run_case.sh
 fi
