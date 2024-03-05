@@ -9,3 +9,4 @@ rst*/
 *.chkp
 *.nc
 .DS_Store
+libdiscon.so

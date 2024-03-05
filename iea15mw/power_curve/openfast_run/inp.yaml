@@ -1,0 +1,41 @@
+n_turbines_glob: 1
+dry_run: False
+debug: False
+sim_start: init
+coupling_mode: strong
+n_iter: 1
+t_start:  0.0
+t_end:    {PREC_LEN + (10*CFD_DT)} # do 10 extra steps to make sure we get chkp file
+t_max:    {PREC_LEN*100}
+dt_driver: {CFD_DT}
+restart_freq: 1440
+output_freq: 1
+set_exp_law_wind: False
+set_uniform_x_blade_forces: False
+x_blade_force: 0.0
+super_controller: False
+Turbine0:
+  turb_id: 0
+  FAST_input_filename: "IEA-15-240-RWT-Monopile.fst"
+  sim_type: ext-loads
+  #restart_filename: "Turbine0"
+  turbine_base_pos:
+  - 12.097572172848082
+  - 0
+  - -148.73545941424806
+  turbine_hub_pos:
+  - 0.066271766152727
+  - 0.0
+  - 1.264540628497338
+  num_force_pts_blade: 50
+  num_force_pts_tower: 12
+  az_blend_mean: {AZB}
+  az_blend_delta: {PI}
+  vel_mean: {WIND_SPEED}
+  wind_dir: 270.0
+  z_ref: 150.0
+  shear_exp: 0.0
+  air_density: 1.225  
+  nacelle_cd: 0.8
+  nacelle_area: 8.0
+  
