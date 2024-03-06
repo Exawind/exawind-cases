@@ -1,0 +1,13 @@
+{SLURM_ARGS = '
+#SBATCH -A hfm
+#SBATCH -t 48:00:0'}
+
+{MACHINE_NAME="eagle"}
+{NALU_RANK_PERCENTAGE=75}
+{MESH="/projects/hfm/kmoore/meshes/iea15mw_3blade_volume_v0.2.exo"}
+{DLL="/lustre/eaglefs/projects/hfm/psakiev/spack-manager/environments/2024-01-16/opt/linux-rhel7-skylake_avx512/intel-20.0.2/rosco-2.8.0-poo5twrrbzusvzmgb4xy7sc3bewn75to/lib/libdiscon.so"}
+{RUN_CFD_COMMAND="srun -N $nodes -n $ranks exawind --nwind $nalu_ranks --awind $amr_ranks iea15mw-01.yaml &> log"}
+{RUN_PRE_COMMAND="srun -N 1 -n 1 openfastcpp inp.yaml"}
+
+{CLEANUP_ARGS = ''}
+{_FORMAT="%.15g"}
