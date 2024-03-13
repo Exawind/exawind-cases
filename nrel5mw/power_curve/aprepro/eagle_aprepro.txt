@@ -1,0 +1,15 @@
+{SLURM_ARGS = '
+#SBATCH -A hfm
+#SBATCH -t 48:00:0
+#SBATCH --qos=high'}
+
+{MACHINE_NAME="eagle"}
+{NALU_RANK_PERCENTAGE=75}
+{MESH="/projects/hfm/ndevelder/meshes/split/nrel5mw/nrel5mw_nohub_bladesonly.exo"}
+# DLL variable unused but being left in for any necessary customization
+{DLL="../5MW_Baseline/ServoData/libdiscon.so"}
+{RUN_CFD_COMMAND="srun -N $nodes -n $ranks exawind --nwind $nalu_ranks --awind $amr_ranks nrel5mw.yaml &> log"}
+{RUN_PRE_COMMAND="srun -N 1 -n 1 openfastcpp cDriver.yaml"}
+
+{CLEANUP_ARGS = ''}
+{_FORMAT="%.15g"}
