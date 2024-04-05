@@ -1,10 +1,10 @@
-# step 1 checks
-source ${SPACK_MANAGER}/start.sh
-spack-start # ensure spack-manager is going
+export EXAWIND_MANAGER=/lustre/orion/proj-shared/cfd162/jrood/exawind-manager
+source ${EXAWIND_MANAGER}/start.sh
+spack-start
 spack load exawind
 
 # machine specific params i.e. mesh/restart/etc
-aprepro_include=template_files/${SPACK_MANAGER_MACHINE}_aprepro.txt
+aprepro_include=template_files/${EXAWIND_MANAGER_MACHINE}_aprepro.txt
 
 # Defaults for load blending (units are revolutions)
 MEAN_CUT_IN=3.0 # middle of hyperbolic tangent
@@ -58,7 +58,7 @@ mkdir -p ${rundir}
 # step 4 setup run dir
 echo "Setting up run dir"
 cp template_files/static_files/* ${rundir}
-cp template_files/${SPACK_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
+cp template_files/${EXAWIND_MANAGER_MACHINE}_static_box.txt ${rundir}/static_box.txt
 spack build-env trilinos aprepro -qW --include ${aprepro_include} CUT_IN_MEAN=${MEAN_CUT_IN} CUT_IN_WIDTH=${DELTA_CUT_IN} TOWER=${TOWER} template_files/nrel5mw_nalu.yaml ${rundir}/nrel5mw_nalu.yaml
 spack build-env trilinos aprepro -qW --include ${aprepro_include} USE_CONTROLLER=${USE_CONTROLLER} TOWER=${TOWER} template_files/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat ${rundir}/NRELOffshrBsline5MW_Onshore_ElastoDyn_BDoutputs.dat
 spack build-env trilinos aprepro -qW  CUT_IN_MEAN=${MEAN_CUT_IN} CUT_IN_WIDTH=${DELTA_CUT_IN} template_files/inp.yaml ${rundir}/inp.yaml
