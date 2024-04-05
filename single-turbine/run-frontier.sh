@@ -36,7 +36,7 @@ AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
 NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*56))
 TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
 cmd "export MPICH_RANK_REORDER_METHOD=3"
-cmd "export MPICH_RANK_REORDER_FILE=exawind.rank_map"
+cmd "export MPICH_RANK_REORDER_FILE=exawind.reorder_file"
 
 #+amr_wind_gpu+nalu_wind_gpu
 #AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))

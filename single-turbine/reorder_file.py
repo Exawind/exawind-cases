@@ -39,4 +39,4 @@ mapping = np.concatenate(
     ]
 )
 
-np.savetxt("exawind.rank_map", mapping[None, :], fmt="%.d", delimiter=",")
+np.savetxt("exawind.reorder_file", mapping[None, :], fmt="%.d", delimiter=",")
