@@ -25,7 +25,8 @@ cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
 cmd "spack env activate ${SPACK_ENV_NAME}"
 cmd "spack load exawind+amr_wind_gpu~nalu_wind_gpu"
 cmd "which exawind"
-cmd "export HIP_LAUNCH_BLOCKING=1"
+
+#Current possibly necessary exports
 cmd "export FI_MR_CACHE_MONITOR=memhooks"
 cmd "export FI_CXI_RX_MATCH_MODE=software"
 cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
@@ -39,6 +40,7 @@ cmd "export MPICH_RANK_REORDER_METHOD=3"
 cmd "export MPICH_RANK_REORDER_FILE=exawind.reorder_file"
 
 #+amr_wind_gpu+nalu_wind_gpu
+#cmd "export HIP_LAUNCH_BLOCKING=1"
 #AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
 #NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
 #TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
