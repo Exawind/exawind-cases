@@ -14,16 +14,32 @@ cmd() {
   eval "$@"
 }
 
+SPACK_ENV_NAME=2024-04-04
+
 cmd "module load PrgEnv-amd"
 cmd "module load amd/5.7.1"
 cmd "module load cray-mpich/8.1.27"
 cmd "export EXAWIND_MANAGER=${PROJWORK}/cfd162/${USER}/exawind-manager"
 cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
-cmd "spack env activate exawind-frontier"
-cmd "spack load exawind+amr_wind_gpu+nalu_wind_gpu"
+cmd "spack env activate ${SPACK_ENV_NAME}"
+cmd "spack load exawind+amr_wind_gpu~nalu_wind_gpu"
 cmd "which exawind"
 cmd "export HIP_LAUNCH_BLOCKING=1"
 cmd "export FI_MR_CACHE_MONITOR=memhooks"
 cmd "export FI_CXI_RX_MATCH_MODE=software"
 cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
-cmd "srun -N2 -n16 --gpus-per-node=8 --gpu-bind=closest exawind --awind 8 --nwind 8 nrel5mw.yaml"
+
+#+amr_wind_gpu~nalu_wind_gpu
+cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
+AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
+NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*52))
+TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
+export MPICH_RANK_REORDER_METHOD=3
+export MPICH_RANK_REORDER_FILE=exawind.rank_map
+
+#+amr_wind_gpu+nalu_wind_gpu
+#AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
+#NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
+#TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
+
+cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"

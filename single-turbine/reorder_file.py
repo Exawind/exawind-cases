@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 import numpy as np
+import sys
 
-nodes = 64
+nodes = int(sys.argv[1])
 amr_wind_ranks_per_node = 8
 total_amr_wind_ranks = nodes * amr_wind_ranks_per_node
 nalu_wind_ranks_per_node = 56
