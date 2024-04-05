@@ -5,6 +5,7 @@
 #SBATCH -A CFD162
 #SBATCH -t 30
 #SBATCH -q debug
+#SBATCH -S 0
 #SBATCH -N 2
 
 set -e
@@ -32,10 +33,10 @@ cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
 #+amr_wind_gpu~nalu_wind_gpu
 cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
 AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
-NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*52))
+NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*56))
 TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
-export MPICH_RANK_REORDER_METHOD=3
-export MPICH_RANK_REORDER_FILE=exawind.rank_map
+cmd "export MPICH_RANK_REORDER_METHOD=3"
+cmd "export MPICH_RANK_REORDER_FILE=exawind.rank_map"
 
 #+amr_wind_gpu+nalu_wind_gpu
 #AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
