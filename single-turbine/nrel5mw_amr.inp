@@ -87,7 +87,7 @@ incflo.verbose =   0
 #     EXCEPTION HANDLING                #
 #########################################
 amrex.abort_on_out_of_gpu_memory = 1
-amrex.the_arena_is_managed = 1
+amrex.the_arena_is_managed = 0
 #amrex.fpe_trap_invalid  =   1           # Trap NaNs
 #amrex.throw_exception = 1
 #amrex.signal_handling = 0
@@ -106,12 +106,12 @@ mac_proj.verbose=0
 mac_proj.max_coarsening_level = 0
 #mac_proj.do_nsolve = true
 mac_proj.bottom_verbose  = 0
-mac_proj.bottom_solver = hypre
+#mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-7
 mac_proj.mg_atol = 1.0e-10
 mac_proj.bottom_rtol = 1.0e-06
 mac_proj.bottom_atol = 1.0e-08
-mac_proj.hypre_namespace = "hypre"
+#mac_proj.hypre_namespace = "hypre"
 #mac_proj.num_pre_smooth = 10
 #mac_proj.num_post_smooth = 10
 
@@ -130,7 +130,7 @@ temperature_diffusion.do_nsolve=true
 #########################################
 #                 HYPRE                 #
 #########################################
-amrex.init_hypre = 1
+amrex.init_hypre = 0
 amrex.hypre_spgemm_use_vendor = 1
 amrex.hypre_spmv_use_vendor = 0
 amrex.hypre_sptrans_use_vendor = 0
