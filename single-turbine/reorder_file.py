@@ -1,30 +1,42 @@
-nodes = 2
+#!/usr/bin/env python
+
+import numpy as np
+import sys
+
+nodes = int(sys.argv[1])
 amr_wind_ranks_per_node = 8
 total_amr_wind_ranks = nodes * amr_wind_ranks_per_node
 nalu_wind_ranks_per_node = 56
+total_ranks_per_node = amr_wind_ranks_per_node + nalu_wind_ranks_per_node
 total_nalu_wind_ranks = nodes * nalu_wind_ranks_per_node
 total_ranks = total_nalu_wind_ranks + total_amr_wind_ranks
-             
+
 print(f"AMR-Wind rank total: {total_amr_wind_ranks}")
 print(f"Nalu-Wind rank total: {total_nalu_wind_ranks}")
-    
-cpu_map = ''
-#for node in range(nodes):
-#    for amr_wind_rank in range(amr_wind_ranks_per_node):
-#        offset_amr_wind_rank = amr_wind_rank + (node * amr_wind_ranks_per_node)
-#        cpu_map = cpu_map + str(offset_amr_wind_rank) + ','
-#    for nalu_wind_rank in range(nalu_wind_ranks_per_node):
-#        offset_nalu_wind_rank = nalu_wind_rank + total_amr_wind_ranks + (node * nalu_wind_ranks_per_node)
-#        cpu_map = cpu_map + str(offset_nalu_wind_rank) + ','
-#    cpu_map = cpu_map + ',,'
-for node in range(nodes):
-    for nalu_wind_rank in range(nalu_wind_ranks_per_node):
-        offset_nalu_wind_rank = nalu_wind_rank + total_amr_wind_ranks + (node * nalu_wind_ranks_per_node)
-        cpu_map = cpu_map + str(offset_nalu_wind_rank) + ','
-    for amr_wind_rank in range(amr_wind_ranks_per_node):
-        offset_amr_wind_rank = amr_wind_rank + (node * amr_wind_ranks_per_node)
-        cpu_map = cpu_map + str(offset_amr_wind_rank) + ','
-cpu_map = cpu_map[:-1] 
 
-with open('exawind.rank_map', "w") as f:
-    f.write(cpu_map + '\n')
+amr_wind_ranks_on_node = np.arange(amr_wind_ranks_per_node)
+nalu_wind_ranks_on_node = (
+    (
+        np.reshape(
+            np.arange(
+                total_amr_wind_ranks, total_ranks_per_node + total_amr_wind_ranks
+            ),
+            [amr_wind_ranks_per_node, -1],
+        )
+        - np.arange(amr_wind_ranks_per_node)[:, np.newaxis]
+    )[:, :-1]
+).flatten(order="F")
+
+mapping = np.concatenate(
+    [
+        np.hstack(
+            (
+                nalu_wind_ranks_on_node + n * nalu_wind_ranks_per_node,
+                amr_wind_ranks_on_node + n * amr_wind_ranks_per_node,
+            )
+        )
+        for n in range(nodes)
+    ]
+)
+
+np.savetxt("exawind.reorder_file", mapping[None, :], fmt="%.d", delimiter=",")
