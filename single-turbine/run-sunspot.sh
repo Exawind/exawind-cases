@@ -2,7 +2,7 @@
 
 #PBS -A CSC249ADSE13_CNDA
 #PBS -q workq
-#PBS -l select=2
+#PBS -l select=1
 #PBS -l walltime=30:00
 #PBS -j oe
 
@@ -14,7 +14,7 @@ cmd() {
 }
 
 #PBS does not appear to have an easily accesible env variable for this
-NUM_NODES=2
+NUM_NODES=1
 SPACK_ENV_NAME=exawind-sunspot
 MESH_PATH=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files
 MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
