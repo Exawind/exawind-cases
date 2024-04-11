@@ -13,6 +13,8 @@ cmd() {
   eval "$@"
 }
 
+#PBS does not appear to have an easily accesible env variable for this
+NUM_NODES=2
 SPACK_ENV_NAME=exawind-sunspot
 MESH_PATH=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files
 MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
@@ -35,10 +37,10 @@ cmd "which exawind"
 sed -i "s|CHANGE_PATH|${MESH_PATH}|g" nrel5mw_nalu.yaml || true
 
 #+amr_wind_gpu~nalu_wind_gpu
-cmd "python3.10 rank_file.py ${PBS_NNODES}"
+cmd "python3.10 rank_file.py ${NUM_NODES}"
 cmd "cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file"
-AWIND_RANKS=$((${PBS_NNODES}*12))
-NWIND_RANKS=$((${PBS_NNODES}*44))
-TOTAL_RANKS=$((${PBS_NNODES}*56))
+AWIND_RANKS=$((${NUM_NODES}*12))
+NWIND_RANKS=$((${NUM_NODES}*44))
+TOTAL_RANKS=$((${NUM_NODES}*56))
 
 cmd "mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"
