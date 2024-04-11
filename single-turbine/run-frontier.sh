@@ -16,6 +16,7 @@ cmd() {
 }
 
 SPACK_ENV_NAME=2024-04-04
+MESH_PATH=${PROJWORK}/cfd162/shared
 
 cmd "module load PrgEnv-amd"
 cmd "module load amd/5.7.1"
@@ -30,6 +31,9 @@ cmd "which exawind"
 cmd "export FI_MR_CACHE_MONITOR=memhooks"
 cmd "export FI_CXI_RX_MATCH_MODE=software"
 cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
+
+#Update mesh path
+sed -i "s|CHANGE_PATH|${MESH_PATH}|g" nrel5mw_nalu.yaml || true
 
 #+amr_wind_gpu~nalu_wind_gpu
 cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
