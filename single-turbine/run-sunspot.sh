@@ -15,10 +15,11 @@ cmd() {
 
 SPACK_ENV_NAME=exawind-sunspot
 MESH_PATH=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files
+MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
 
 cmd "cd ${PBS_O_WORKDIR}"
 cmd "export SPACK_PYTHON=python3.10"
-cmd "export EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/${USER}/exawind/exawind-manager"
+cmd "export EXAWIND_MANAGER=${MY_EXAWIND_MANAGER}"
 cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
 cmd "spack env activate ${SPACK_ENV_NAME}"
 cmd "spack load exawind+amr_wind_gpu~nalu_wind_gpu"
@@ -34,10 +35,10 @@ cmd "which exawind"
 sed -i "s|CHANGE_PATH|${MESH_PATH}|g" nrel5mw_nalu.yaml || true
 
 #+amr_wind_gpu~nalu_wind_gpu
-cmd "python3.10 rank_file.py ${PBS_NUM_NODES}"
+cmd "python3.10 rank_file.py ${PBS_NNODES}"
 cmd "cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file"
-AWIND_RANKS=$((${PBS_NUM_NODES}*12))
-NWIND_RANKS=$((${PBS_NUM_NODES}*44))
-TOTAL_RANKS=$((${PBS_NUM_NODES}*56))
+AWIND_RANKS=$((${PBS_NNODES}*12))
+NWIND_RANKS=$((${PBS_NNODES}*44))
+TOTAL_RANKS=$((${PBS_NNODES}*56))
 
 cmd "mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"
