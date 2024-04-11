@@ -140,7 +140,7 @@ linear_solvers:
 
 realms:
 - name: realm_1
-  mesh: /lustre/orion/proj-shared/cfd162/shared/nrel5mw_nearbody.exo
+  mesh: CHANGE_PATH/nrel5mw_nearbody.exo
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis
