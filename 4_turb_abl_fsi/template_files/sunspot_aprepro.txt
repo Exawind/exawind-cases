@@ -12,16 +12,27 @@
 #PBS -j oe'}
 
 # {SUBMIT_EXPORTS = '
-unset MPIR_CVAR_CH4_COLL_SELECTION_TUNING_JSON_FILE
-unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE
-unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE
-export SPACK_PYTHON=python3.10
+#PBS does not appear to have an easily accesible env variable for this
+#Make sure it matches number of nodes in the job
 NUM_NODES=64
-python3.10 rank_file.py ${NUM_NODES}
-cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file
+SPACK_ENV_NAME=exawind-sunspot
+MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
+EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
+#Possibly necessary exports
+#cmd "export FI_MR_CACHE_MONITOR=memhooks"
+#cmd "export FI_CXI_RX_MATCH_MODE=software"
+#cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
+#cmd "export MPIR_CVAR_ENABLE_GPU=0"
+cmd "unset MPIR_CVAR_CH4_COLL_SELECTION_TUNING_JSON_FILE"
+cmd "unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE"
+cmd "unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE"
+cmd "python3.10 rank_file.py ${NUM_NODES}"
+cmd "cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file"
 AWIND_RANKS=$((${NUM_NODES}*12))
 NWIND_RANKS=$((${NUM_NODES}*44))
-TOTAL_RANKS=$((${NUM_NODES}*56))'}
+TOTAL_RANKS=$((${NUM_NODES}*56))
+cmd "cd ${PBS_O_WORKDIR}"
+cmd "export SPACK_PYTHON=python3.10"'}
 
 # {RUN_COMMAND_OPENFAST = 'mpiexec -np 4 -ppn 4 openfastcpp inp.yaml'}
 # {RUN_COMMAND_EXAWIND = 'mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml'}
