@@ -1,0 +1,27 @@
+# {NALU_MESH_TOWER = "/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files/chk30000"}
+# {AMR_TPROFILE_FILE = "/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files/bndry_file"}
+
+# {SCHEDULER_ARGS = '
+#PBS -A CSC249ADSE13_CNDA
+#PBS -q workq
+#PBS -l select=64
+#PBS -l walltime=30:00
+#PBS -j oe'}
+
+# {SUBMIT_EXPORTS = '
+unset MPIR_CVAR_CH4_COLL_SELECTION_TUNING_JSON_FILE
+unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE
+unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE
+export SPACK_PYTHON=python3.10
+NUM_NODES=64
+python3.10 rank_file.py ${NUM_NODES}
+cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file
+AWIND_RANKS=$((${NUM_NODES}*12))
+NWIND_RANKS=$((${NUM_NODES}*44))
+TOTAL_RANKS=$((${NUM_NODES}*56))'}
+
+# {RUN_COMMAND_OPENFAST = 'mpiexec -np 4 -ppn 4 openfastcpp inp.yaml'}
+# {RUN_COMMAND_EXAWIND = 'mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml'}
