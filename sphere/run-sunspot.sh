@@ -19,11 +19,6 @@ SPACK_ENV_NAME=exawind-sunspot
 MESH_PATH=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files
 MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
 
-cmd "module unload oneapi"
-cmd "module load oneapi/release/2023.10.15.001"
-cmd "module unload intel_compute_runtime"
-cmd "module load intel_compute_runtime/release/agama-devel-647"
-
 cmd "cd ${PBS_O_WORKDIR}"
 cmd "export SPACK_PYTHON=python3.10"
 cmd "export EXAWIND_MANAGER=${MY_EXAWIND_MANAGER}"
