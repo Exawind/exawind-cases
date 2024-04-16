@@ -1,9 +1,11 @@
 #For Sunspot
 export EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
 EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
+SPACK_ENV=exawind-sunspot
 
 cd ${EXAWIND_MANAGER}
 source shortcut.sh
+spack env activate ${SPACK_ENV}
 spack load ${EXAWIND_EXE}
 
 SPACK_MANAGER_MACHINE=$(spack manager find-machine | awk '{print $2}')
