@@ -93,14 +93,14 @@ geometry.is_periodic    =   0   0   0   # Periodicity x y z (0/1)
 # Boundary conditions
 xlo.type = "mass_inflow"
 xlo.density = 1.0
-xlo.temperature=0
-xlo.tke=0
+xlo.temperature = 0
+xlo.tke = 0
 xhi.type = "pressure_outflow"
 
 ylo.type = "mass_inflow"
 ylo.density = 1.0
-ylo.temperature=0
-ylo.tke=0
+ylo.temperature = 0
+ylo.tke = 0
 yhi.type = "pressure_outflow"
 
 zlo.type =   "wall_model"
@@ -135,10 +135,10 @@ nodal_proj.num_post_smooth = 10
 nodal_proj.bottom_rtol = 1.0e-9
 nodal_proj.bottom_atol = 1.0e-12
 
-mac_proj.verbose=0
+mac_proj.verbose = 0
 mac_proj.max_coarsening_level = 0
 mac_proj.do_nsolve = false
-mac_proj.bottom_verbose  = 0
+mac_proj.bottom_verbose = 0
 # mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-6
 mac_proj.mg_atol = 1.0e-10
@@ -147,20 +147,20 @@ mac_proj.bottom_atol = 1.0e-12
 mac_proj.num_pre_smooth = 10
 mac_proj.num_post_smooth = 10
 
-diffusion.verbose=0
+diffusion.verbose = 0
 diffusion.do_agglomeration = false
 diffusion.do_nsolve = true
 
-velocity_diffusion.verbose=0
+velocity_diffusion.verbose = 0
 velocity_diffusion.use_tensor_operator = false
 velocity_diffusion.use_segregated_operator = true
 velocity_diffusion.do_nsolve = true
 
-temperature_diffusion.verbose=0
+temperature_diffusion.verbose = 0
 temperature_diffusion.do_nsolve=true
 
-amrex.abort_on_out_of_gpu_memory=1
-amrex.the_arena_is_managed=0
+amrex.abort_on_out_of_gpu_memory = 1
+amrex.the_arena_is_managed = 0
 # amrex.fpe_trap_invalid = 0
 # amrex.throw_exception = 1
 # amrex.signal_handling = 0
