@@ -1,3 +1,5 @@
+#/bin/bash -l
+
 #For Sunspot
 export SPACK_PYTHON=python3.10
 export EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
