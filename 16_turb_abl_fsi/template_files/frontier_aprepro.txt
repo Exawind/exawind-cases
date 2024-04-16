@@ -14,7 +14,7 @@
 
 # {SUBMIT_EXPORTS = '
 SPACK_ENV_NAME=exawind-frontier
-MY_EXAWIND_MANAGER=/lustre/orion/proj-shared/cfd162/${USER}/exawind/exawind-manager
+MY_EXAWIND_MANAGER=${PROJWORK}/cfd162/${USER}/exawind-manager
 EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
 cmd "module load PrgEnv-amd/8.5.0"
 cmd "module load amd/5.7.1"
