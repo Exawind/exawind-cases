@@ -12,6 +12,7 @@
 #PBS -j oe'}
 
 # {SUBMIT_EXPORTS = '
+cmd "cd ${PBS_O_WORKDIR}"
 #PBS does not appear to have an easily accesible env variable for this
 #Make sure it matches number of nodes in the job
 NUM_NODES=64
@@ -33,7 +34,6 @@ cmd "cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file"
 AWIND_RANKS=$((${NUM_NODES}*12))
 NWIND_RANKS=$((${NUM_NODES}*44))
 TOTAL_RANKS=$((${NUM_NODES}*56))
-cmd "cd ${PBS_O_WORKDIR}"
 cmd "export SPACK_PYTHON=python3.10"'}
 
 # {RUN_COMMAND_OPENFAST = 'cmd "mpiexec -np 4 -ppn 4 openfastcpp inp.yaml"'}
