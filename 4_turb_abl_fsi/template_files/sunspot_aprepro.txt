@@ -34,5 +34,5 @@ TOTAL_RANKS=$((${NUM_NODES}*56))
 cmd "cd ${PBS_O_WORKDIR}"
 cmd "export SPACK_PYTHON=python3.10"'}
 
-# {RUN_COMMAND_OPENFAST = 'mpiexec -np 4 -ppn 4 openfastcpp inp.yaml'}
-# {RUN_COMMAND_EXAWIND = 'mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml'}
+# {RUN_COMMAND_OPENFAST = 'cmd "mpiexec -np 4 -ppn 4 openfastcpp inp.yaml"'}
+# {RUN_COMMAND_EXAWIND = 'cmd "mpiexec -np ${TOTAL_RANKS} -ppn 56 --rankfile exawind.rank_file -envall gpu_tile_compact.sh exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"'}
