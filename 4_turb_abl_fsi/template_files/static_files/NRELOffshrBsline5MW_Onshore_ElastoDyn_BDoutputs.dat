@@ -4,8 +4,6 @@ NREL 5.0 MW Baseline Wind Turbine for Use in Offshore Analysis. Properties from 
 False         Echo        - Echo input data to "<RootName>.ech" (flag)
           3   Method      - Integration method: "1: RK4, 2: AB4, or 3: ABM4" (-)
 "DEFAULT"     DT          - Integration time step (s)
----------------------- ENVIRONMENTAL CONDITION ---------------------------------
-    9.80665   Gravity     - Gravitational acceleration (m/s^2)
 ---------------------- DEGREES OF FREEDOM --------------------------------------
 True          FlapDOF1    - First flapwise blade mode DOF (flag)
 True          FlapDOF2    - Second flapwise blade mode DOF (flag)
@@ -97,6 +95,11 @@ False         PtfmYDOF    - Platform yaw rotation DOF (flag)
           0   TeetHStP    - Rotor-teeter hard-stop position (degrees) [used only for 2 blades and when TeetMod=1]
           0   TeetSSSp    - Rotor-teeter soft-stop linear-spring constant (N-m/rad) [used only for 2 blades and when TeetMod=1]
           0   TeetHSSp    - Rotor-teeter hard-stop linear-spring constant (N-m/rad) [used only for 2 blades and when TeetMod=1]
+---------------------- YAW-FRICTION --------------------------------------------
+          0   YawFrctMod  - {0: none, 1: friction without Fz term at the yaw bearing, 2: friction includes Fz term at yaw bearing, 3: user defined model} (switch)
+        300   M_CSmax     - Maximum Coulomb friction torque (N-m)[mu_s*D_eff when YawFrctMod=1 and Fz*mu_s*D_eff when YawFrctMod=2]
+         40   M_CD        - Dynamic friction moment at null yaw rate (N-m) [mu_d*D_eff when YawFrctMod=1 and Fz*mu_d*D_eff when YawFrctMod=2]
+          0   sig_v       - Viscous friction coefficient (N-m/(rad/s))
 ---------------------- DRIVETRAIN ----------------------------------------------
         100   GBoxEff     - Gearbox efficiency (%)
          97   GBRatio     - Gearbox ratio (-)
@@ -159,6 +162,5 @@ True          TabDelim    - Use tab delimiters in text tabular output file? (fla
 "TwstDefl1"               - Blade 1 out-of-plane and in-plane deflections and tip twist
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ---------------------------------------------------------------------------------------
-
 
 
