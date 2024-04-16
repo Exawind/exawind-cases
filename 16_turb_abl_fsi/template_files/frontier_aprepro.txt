@@ -1,25 +1,40 @@
-# {NALU_MESH_TOWER = "/lustre/orion/cfd116/proj-shared/nrel5mw_meshes/tower_and_blades/tower_and_blades.exo"}
-# {NALU_MESH_BLADES = "/lustre/orion/cfd116/proj-shared/nrel5mw_meshes/rotor/nrel5mw_volume.exo"}
-# {AMR_RESTART_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/initial_flow/chk30000"}
-# {AMR_TPROFILE_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/runtime_stats/avg_theta.dat"}
-# {AMR_BOUNDARY_FILE = "/lustre/orion/proj-shared/cfd116/files/abl/5km_neutral_rated/boundary_plane/bndry_file"}
+# {NALU_MESH_TOWER = "/lustre/orion/proj-shared/cfd162/shared/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/lustre/orion/proj-shared/cfd162/shared/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/lustre/orion/proj-shared/cfd162/shared/chk30000"}
+# {AMR_TPROFILE_FILE = "/lustre/orion/proj-shared/cfd162/shared/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/lustre/orion/proj-shared/cfd162/shared/bndry_file"}
+
+# {SCHEDULER_ARGS = '
+#SBATCH -o %x.o%j
+#SBATCH -A CFD162
+#SBATCH -t 30
+#SBATCH -q debug
+#SBATCH -S 0
+#SBATCH -N 64'}
 
 # {SUBMIT_EXPORTS = '
-module load PrgEnv-amd/8.3.3
-module load amd/5.4.3
-export HIP_LAUNCH_BLOCKING=1
-export FI_MR_CACHE_MONITOR=memhooks
-export FI_CXI_RX_MATCH_MODE=software
-export MPICH_SMP_SINGLE_COPY_MODE=NONE'}
+SPACK_ENV_NAME=exawind-frontier
+MY_EXAWIND_MANAGER=/lustre/orion/proj-shared/cfd162/${USER}/exawind/exawind-manager
+EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
+cmd "module load PrgEnv-amd/8.5.0"
+cmd "module load amd/5.7.1"
+cmd "module load cray-mpich/8.1.27"
+#Possibly necessary exports
+cmd "export FI_MR_CACHE_MONITOR=memhooks"
+cmd "export FI_CXI_RX_MATCH_MODE=software"
+cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
+#+amr_wind_gpu~nalu_wind_gpu
+cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
+AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
+NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*56))
+TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
+cmd "export MPICH_RANK_REORDER_METHOD=3"
+cmd "export MPICH_RANK_REORDER_FILE=exawind.reorder_file"
+#+amr_wind_gpu+nalu_wind_gpu
+#cmd "export HIP_LAUNCH_BLOCKING=1"
+#AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
+#NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
+#TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))'}
 
-# {SLURM_ARGS = '
-#SBATCH -A CFD116
-#SBATCH -t 02:00:00
-#SBATCH -p batch
-#SBATCH -N 3072
-#SBATCH --ntasks-per-node=8
-#SBATCH --exclusive'}
-
-# {SRUN_COMMAND_OPENFAST = 'spack build-env openfast srun -N 1 -n 16 openfastcpp inp.yaml'}
-# {SRUN_COMMAND_EXAWIND = 'spack build-env exawind srun -N 3072 -n 24576 --gpus-per-node=8 --gpu-bind=closest  exawind --awind 20480 --nwind 4096 nrel5mw.yaml'}
-
+# {RUN_COMMAND_OPENFAST = 'cmd "srun -N 1 -n 4 openfastcpp inp.yaml"'}
+# {RUN_COMMAND_EXAWIND = 'cmd "srun -N ${SLURM_JOB_NUM_NODES} -n ${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"'}
