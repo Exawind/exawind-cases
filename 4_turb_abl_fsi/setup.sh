@@ -1,4 +1,5 @@
 #For Sunspot
+export SPACK_PYTHON=python3.10
 export EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
 EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
 SPACK_ENV=exawind-sunspot
