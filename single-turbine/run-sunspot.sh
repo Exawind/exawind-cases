@@ -2,7 +2,7 @@
 
 #PBS -A CSC249ADSE13_CNDA
 #PBS -q workq
-#PBS -l select=1
+#PBS -l select=2
 #PBS -l walltime=30:00
 #PBS -j oe
 
@@ -14,7 +14,7 @@ cmd() {
 }
 
 #PBS does not appear to have an easily accesible env variable for this
-NUM_NODES=1
+NUM_NODES=2
 SPACK_ENV_NAME=exawind-sunspot
 MESH_PATH=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/files
 MY_EXAWIND_MANAGER=/lus/gila/projects/CSC249ADSE13_CNDA/jrood/exawind/exawind-manager
@@ -37,6 +37,9 @@ cmd "which exawind"
 #cmd "export FI_CXI_RX_MATCH_MODE=software"
 #cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
 #cmd "export MPIR_CVAR_ENABLE_GPU=0"
+cmd "unset MPIR_CVAR_CH4_COLL_SELECTION_TUNING_JSON_FILE"
+cmd "unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE"
+cmd "unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE"
 
 #Update mesh path
 sed -i "s|CHANGE_PATH|${MESH_PATH}|g" nrel5mw_nalu.yaml || true
