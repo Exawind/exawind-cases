@@ -19,6 +19,7 @@ EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu
 cmd "module load PrgEnv-amd/8.5.0"
 cmd "module load amd/5.7.1"
 cmd "module load cray-mpich/8.1.27"
+cmd "module unload lfs-wrapper"
 cmd "module load cray-python"
 #Possibly necessary exports
 cmd "export FI_MR_CACHE_MONITOR=memhooks"

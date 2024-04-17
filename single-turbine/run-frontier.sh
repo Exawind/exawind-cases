@@ -21,6 +21,7 @@ MESH_PATH=${PROJWORK}/cfd162/shared
 cmd "module load PrgEnv-amd/8.5.0"
 cmd "module load amd/5.7.1"
 cmd "module load cray-mpich/8.1.27"
+cmd "module unload lfs-wrapper"
 cmd "module load cray-python"
 cmd "export EXAWIND_MANAGER=${PROJWORK}/cfd162/${USER}/exawind-manager"
 cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
