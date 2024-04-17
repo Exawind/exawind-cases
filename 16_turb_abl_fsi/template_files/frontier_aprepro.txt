@@ -30,8 +30,6 @@ cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
 AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
 NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*56))
 TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
-cmd "export MPICH_RANK_REORDER_METHOD=3"
-cmd "export MPICH_RANK_REORDER_FILE=exawind.reorder_file"
 #+amr_wind_gpu+nalu_wind_gpu
 #cmd "export HIP_LAUNCH_BLOCKING=1"
 #AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
@@ -39,4 +37,4 @@ cmd "export MPICH_RANK_REORDER_FILE=exawind.reorder_file"
 #TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))'}
 
 # {RUN_COMMAND_OPENFAST = 'cmd "srun -N 1 -n 4 openfastcpp inp.yaml"'}
-# {RUN_COMMAND_EXAWIND = 'cmd "srun -N ${SLURM_JOB_NUM_NODES} -n ${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"'}
+# {RUN_COMMAND_EXAWIND = 'cmd "export MPICH_RANK_REORDER_METHOD=3; export MPICH_RANK_REORDER_FILE=exawind.reorder_file; srun -N ${SLURM_JOB_NUM_NODES} -n ${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"'}
