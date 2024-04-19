@@ -136,7 +136,7 @@ nodal_proj.bottom_atol = 1.0e-12
 
 mac_proj.verbose = 0
 mac_proj.max_coarsening_level = 0
-mac_proj.do_nsolve = false
+mac_proj.do_nsolve = true
 mac_proj.bottom_verbose = 0
 # mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-6
