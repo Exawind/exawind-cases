@@ -78,8 +78,6 @@ if [ "$RUNDIRECTORY" != "$scriptdir" ] ; then
     cp -R IEA-15-240-RWT ${RUNDIRECTORY}/.
 fi
 
-cd $target_dir
-
 # If just a precursor run, use only single node per job
 if [ "$RUNCFD" -eq 1 ] ; then
     echo "Not changing NUMNODES"
@@ -94,24 +92,26 @@ echo "$w: dt ratio: $dtratio"
 # cfd input file replacements
 if [ "$SIMTYPE" = "amrnalu" ] ; then
     aprepro_include=$(pwd)/aprepro/${MACHINE}_aprepro_amrnalu.txt
-    aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-amr-bg.inp iea15mw-amr-bg.inp 
+    cd $target_dir
+    aprepro -q --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-amr-bg.inp iea15mw-amr-bg.inp 
 else 
     aprepro_include=$(pwd)/aprepro/${MACHINE}_aprepro_nalunalu.txt
-    aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-nalu-bg.yaml iea15mw-nalu-bg.yaml 
+    cd $target_dir
+    aprepro -q --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-nalu-bg.yaml iea15mw-nalu-bg.yaml 
 fi
 
-aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt OPENFAST_DT=$openfast_dt PREC_LEN=$preclen CHKP_NUM=$chkpnum AZB=$azblend iea15mw-nalu-01.yaml iea15mw-nalu-01.yaml 
+aprepro -q --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt OPENFAST_DT=$openfast_dt PREC_LEN=$preclen CHKP_NUM=$chkpnum AZB=$azblend iea15mw-nalu-01.yaml iea15mw-nalu-01.yaml 
 
 # openfast model replacements
-aprepro -qW --include ${aprepro_include} IEA-15-240-RWT-Monopile_ServoDyn.dat IEA-15-240-RWT-Monopile_ServoDyn.dat
-aprepro -qW --include ${aprepro_include} RPM=$rpm PITCH=$pitch  IEA-15-240-RWT-Monopile_ElastoDyn.dat IEA-15-240-RWT-Monopile_ElastoDyn.dat
-aprepro -qW --include ${aprepro_include} OPENFAST_DT=$openfast_dt IEA-15-240-RWT-Monopile.fst IEA-15-240-RWT-Monopile.fst
+aprepro -q --include ${aprepro_include} IEA-15-240-RWT-Monopile_ServoDyn.dat IEA-15-240-RWT-Monopile_ServoDyn.dat
+aprepro -q --include ${aprepro_include} RPM=$rpm PITCH=$pitch  IEA-15-240-RWT-Monopile_ElastoDyn.dat IEA-15-240-RWT-Monopile_ElastoDyn.dat
+aprepro -q --include ${aprepro_include} OPENFAST_DT=$openfast_dt IEA-15-240-RWT-Monopile.fst IEA-15-240-RWT-Monopile.fst
 
 # openfastcpp input replacements 
-aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt PREC_LEN=$preclen AZB=$azblend inp.yaml inp.yaml
+aprepro -q --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt PREC_LEN=$preclen AZB=$azblend inp.yaml inp.yaml
 
 # submit script replacements
-aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN_PRE=$RUNPRECURSOR RUN_CFD=$RUNCFD NNODES=$NUMNODES SCRIPT_DIR=$scriptdir $scriptdir/run_case.sh.i run_case.sh
+aprepro -q --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN_PRE=$RUNPRECURSOR RUN_CFD=$RUNCFD NNODES=$NUMNODES SCRIPT_DIR=$scriptdir $scriptdir/run_case.sh.i run_case.sh
 
 # submit case if submit flag given
 #if [ -n "${SUBMIT}" ]; then
