@@ -10,26 +10,26 @@ False                  Echo        - Echo input data to <RootName>.ech (flag)
 99999.0                DT_UJac     - Time between calls to get Jacobians (s)
 1000000.0              UJacSclFact - Scaling factor used in Jacobians (-)
 ---------------------- FEATURE SWITCHES AND FLAGS ------------------------------
-2                      CompElast   - Compute structural dynamics (switch) {1=ElastoDyn; 2=ElastoDyn + BeamDyn for blades}
-0                      CompInflow  - Compute inflow wind velocities (switch) {0=still air; 1=InflowWind; 2=external from OpenFOAM}
-3                      CompAero    - Compute aerodynamic loads (switch) {0=None; 1=AeroDyn v14; 2=AeroDyn v15}
-1                      CompServo   - Compute control and electrical-drive dynamics (switch) {0=None; 1=ServoDyn}
-0                      CompSeaSt   - Compute sea state information (switch) {0=None; 1=SeaState}
-0                      CompHydro   - Compute hydrodynamic loads (switch) {0=None; 1=HydroDyn}
-0                      CompSub     - Compute sub-structural dynamics (switch) {0=None; 1=SubDyn; 2=External Platform MCKF}
-0                      CompMooring - Compute mooring system (switch) {0=None; 1=MAP++; 2=FEAMooring; 3=MoorDyn; 4=OrcaFlex}
-0                      CompIce     - Compute ice loads (switch) {0=None; 1=IceFloe; 2=IceDyn}
-0                      MHK         - MHK turbine type (switch) {0=Not an MHK turbine; 1=Fixed MHK turbine; 2=Floating MHK turbine}
+2                      CompElast   - Compute structural dynamics (switch) [1=ElastoDyn; 2=ElastoDyn + BeamDyn for blades]
+0                      CompInflow  - Compute inflow wind velocities (switch) [0=still air; 1=InflowWind; 2=external from OpenFOAM]
+3                      CompAero    - Compute aerodynamic loads (switch) [0=None; 1=AeroDyn v14; 2=AeroDyn v15]
+1                      CompServo   - Compute control and electrical-drive dynamics (switch) [0=None; 1=ServoDyn]
+0                      CompSeaSt       - Compute sea state information (switch) [0=None; 1=SeaState]
+0                      CompHydro   - Compute hydrodynamic loads (switch) [0=None; 1=HydroDyn]
+0                      CompSub     - Compute sub-structural dynamics (switch) [0=None; 1=SubDyn; 2=External Platform MCKF]
+0                      CompMooring - Compute mooring system (switch) [0=None; 1=MAP++; 2=FEAMooring; 3=MoorDyn; 4=OrcaFlex]
+0                      CompIce     - Compute ice loads (switch) [0=None; 1=IceFloe; 2=IceDyn]
+0                      MHK         - MHK turbine type (switch) 
 ---------------------- ENVIRONMENTAL CONDITIONS --------------------------------
-9.80665                Gravity     - Gravitational acceleration (m/s^2)
-1.225                  AirDens     - Air density (kg/m^3)
-1025                   WtrDens     - Water density (kg/m^3)
-1.4694e-05             KinVisc     - Kinematic viscosity of working fluid (m^2/s)
-335                    SpdSound    - Speed of sound in working fluid (m/s)
-103500                 Patm        - Atmospheric pressure (Pa) [used only for an MHK turbine cavitation check]
-1700                   Pvap        - Vapour pressure of working fluid (Pa) [used only for an MHK turbine cavitation check]
-30                     WtrDpth     - Water depth (m)
-0                      MSL2SWL     - Offset between still-water level and mean sea level (m) [positive upward]
+       9.81   Gravity         - Gravitational acceleration (m/s^2)
+       1.225  AirDens         - Air density (kg/m^3)
+          0   WtrDens         - Water density (kg/m^3)
+    0.000015   KinVisc         - Kinematic viscosity of working fluid (m^2/s)
+        335   SpdSound        - Speed of sound in working fluid (m/s)
+     103500   Patm            - Atmospheric pressure (Pa) [used only for an MHK turbine cavitation check]
+       1700   Pvap            - Vapour pressure of working fluid (Pa) [used only for an MHK turbine cavitation check]
+          0   WtrDpth         - Water depth (m)
+          0   MSL2SWL         - Offset between still-water level and mean sea level (m) [positive upward]
 ---------------------- INPUT FILES ---------------------------------------------
 "IEA-15-240-RWT-Monopile_ElastoDyn.dat"  EDFile      - Name of file containing ElastoDyn input parameters (quoted string)
 "../IEA-15-240-RWT/IEA-15-240-RWT_BeamDyn.dat"    BDBldFile(1) - Name of file containing BeamDyn input parameters for blade 1 (quoted string)
@@ -38,11 +38,11 @@ False                  Echo        - Echo input data to <RootName>.ech (flag)
 "../IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat" InflowFile  - Name of file containing inflow wind input parameters (quoted string)
 "IEA-15-240-RWT-Monopile_AeroDyn15.dat"  AeroFile    - Name of file containing aerodynamic input parameters (quoted string)
 "IEA-15-240-RWT-Monopile_ServoDyn.dat"   ServoFile   - Name of file containing control and electrical-drive input parameters (quoted string)
-"unused"               SeaStFile   - Name of file containing sea state input parameters (quoted string)
+"unused"      SeaStFile       - Name of file containing sea state input parameters (quoted string)
 "IEA-15-240-RWT-Monopile_HydroDyn.dat"   HydroFile   - Name of file containing hydrodynamic input parameters (quoted string)
 "IEA-15-240-RWT-Monopile_SubDyn.dat"     SubFile     - Name of file containing sub-structural input parameters (quoted string)
-"none"                 MooringFile - Name of file containing mooring system input parameters (quoted string)
-"none"                 IceFile     - Name of file containing ice input parameters (quoted string)
+"unused"                 MooringFile - Name of file containing mooring system input parameters (quoted string)
+"unused"                 IceFile     - Name of file containing ice input parameters (quoted string)
 ---------------------- OUTPUT --------------------------------------------------
 False                  SumPrint    - Print summary data to "<RootName>.sum" (flag)
 10.0                   SttsTime    - Amount of time between screen status messages (s)
@@ -67,7 +67,7 @@ False                  CalcSteady  - Calculate a steady-state periodic operating
 False                  LinOutJac   - Include full Jacobians in linearization output (for debug) (flag) [unused if Linearize=False; used only if LinInputs=LinOutputs=2]
 False                  LinOutMod   - Write module-level linearization output files in addition to output for full system? (flag) [unused if Linearize=False]
 ---------------------- VISUALIZATION ------------------------------------------
-2                      WrVTK       - VTK visualization data output: (switch) [0=none; 1=initialization data only; 2=animation]
-2                      VTK_type    - Type of VTK visualization data: (switch) [1=surfaces; 2=basic meshes (lines/points); 3=all meshes (debug)] [unused if WrVTK=0]
-True                   VTK_fields  - Write mesh fields to VTK data files? (flag) [true/false] [unused if WrVTK=0]
-1.0                    VTK_fps     - Frame rate for VTK output (frames per second)[will use closest integer multiple of DT] [used only if WrVTK=2]
+0                      WrVTK       - VTK visualization data output: (switch) [0=none; 1=initialization data only; 2=animation]
+1                      VTK_type    - Type of VTK visualization data: (switch) [1=surfaces; 2=basic meshes (lines/points); 3=all meshes (debug)] [unused if WrVTK=0]
+False                  VTK_fields  - Write mesh fields to VTK data files? (flag) [true/false] [unused if WrVTK=0]
+15                     VTK_fps     - Frame rate for VTK output (frames per second)[will use closest integer multiple of DT] [used only if WrVTK=2]

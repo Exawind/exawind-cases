@@ -37,6 +37,10 @@ for i in "$@"; do
             RUNDIRECTORY="${i#*=}"
             shift # past argument=value
             ;;
+        -t=*|--simtype=*)
+            SIMTYPE="${i#*=}"
+            shift # past argument=value
+            ;;
         --)
             shift
             break
@@ -47,7 +51,6 @@ done
 # must load things so that aprepro is active in the shell
 # machine specific params i.e. mesh/restart/etc
 scriptdir=$(pwd)
-aprepro_include=$(pwd)/aprepro/${MACHINE}_aprepro.txt
 source $(pwd)/envs/${MACHINE}_setup_env.sh
 
 # define rpm and pitch inputs for this wind speed
@@ -89,8 +92,15 @@ echo "$w: dt ratio: $dtratio"
 
 # text replace the wind speed and mesh location in these files
 # cfd input file replacements
+if [ "$SIMTYPE" = "amrnalu" ] ; then
+    aprepro_include=$(pwd)/aprepro/${MACHINE}_aprepro_amrnalu.txt
+    aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-amr-bg.inp iea15mw-amr-bg.inp 
+else 
+    aprepro_include=$(pwd)/aprepro/${MACHINE}_aprepro_nalunalu.txt
+    aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-nalu-bg.yaml iea15mw-nalu-bg.yaml 
+fi
+
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt OPENFAST_DT=$openfast_dt PREC_LEN=$preclen CHKP_NUM=$chkpnum AZB=$azblend iea15mw-nalu-01.yaml iea15mw-nalu-01.yaml 
-aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt iea15mw-amr-01.inp iea15mw-amr-01.inp 
 
 # openfast model replacements
 aprepro -qW --include ${aprepro_include} IEA-15-240-RWT-Monopile_ServoDyn.dat IEA-15-240-RWT-Monopile_ServoDyn.dat
@@ -104,11 +114,11 @@ aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED CFD_DT=$cfd_dt P
 aprepro -qW --include ${aprepro_include} WIND_SPEED=$WIND_SPEED EMAIL=$EMAIL RUN_PRE=$RUNPRECURSOR RUN_CFD=$RUNCFD NNODES=$NUMNODES SCRIPT_DIR=$scriptdir $scriptdir/run_case.sh.i run_case.sh
 
 # submit case if submit flag given
-if [ -n "${SUBMIT}" ]; then
-  if [ "${MACHINE}"=="snl-hpc" ]; then
-    #sbatch -M chama,skybridge run_case.sh
-    sbatch run_case.sh
-  else
-    sbatch run_case.sh
-  fi
-fi
+#if [ -n "${SUBMIT}" ]; then
+#  if [ "${MACHINE}"=="snl-hpc" ]; then
+#    #sbatch -M chama,skybridge run_case.sh
+#    sbatch run_case.sh
+#  else
+#    sbatch run_case.sh
+#  fi
+#fi
