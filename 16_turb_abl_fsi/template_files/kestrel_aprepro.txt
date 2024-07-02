@@ -1,0 +1,19 @@
+# {NALU_MESH_TOWER = "/scratch/jrood/shared/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/scratch/jrood/shared/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/scratch/jrood/shared/chk30000"}
+# {AMR_TPROFILE_FILE = "/scratch/jrood/shared/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/scratch/jrood/shared/bndry_file"}
+
+# {SCHEDULER_ARGS = '
+#SBATCH -o %x.o%j
+#SBATCH -A hpcapps
+#SBATCH -t 30
+#SBATCH -N 256'}
+
+# {SUBMIT_EXPORTS = '
+SPACK_ENV_NAME=exawind-kestrel
+MY_EXAWIND_MANAGER=/scratch/${USER}/exawind-manager
+EXAWIND_EXE=exawind~amr_wind_gpu~nalu_wind_gpu'}
+
+# {RUN_COMMAND_OPENFAST = 'cmd "srun -N 1 -n 16 openfastcpp inp.yaml"'}
+# {RUN_COMMAND_EXAWIND = 'cmd "srun -N ${SLURM_JOB_NUM_NODES} -n ${TOTAL_RANKS} --cpu_bind=cores exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"'}

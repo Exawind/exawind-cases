@@ -6,6 +6,9 @@
 #For Frontier run something like this command
 #export EXAWIND_MANAGER=${PROJWORK}/cfd162/${USER}/exawind-manager && export EXAWIND_EXE=exawind+amr_wind_gpu~nalu_wind_gpu && export MY_SPACK_ENV=exawind-frontier && cd ${EXAWIND_MANAGER} && source shortcut.sh && cd - && spack env activate ${MY_SPACK_ENV} && spack load ${EXAWIND_EXE} && ./setup.sh
 
+#For Kestrel run something like this command
+#module load cray-python && export EXAWIND_MANAGER=/scratch/${USER}/exawind-manager && export EXAWIND_EXE=exawind~amr_wind_gpu~nalu_wind_gpu && export MY_SPACK_ENV=exawind-kestrel && cd ${EXAWIND_MANAGER} && source shortcut.sh && cd - && spack env activate ${MY_SPACK_ENV} && spack load ${EXAWIND_EXE} && ./setup.sh
+
 SPACK_MANAGER_MACHINE=$(spack manager find-machine | awk '{print $2}')
 aprepro_include=template_files/${SPACK_MANAGER_MACHINE}_aprepro.txt
 
