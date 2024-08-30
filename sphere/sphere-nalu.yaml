@@ -7,13 +7,25 @@ Simulations:
 
 linear_solvers:
 
+linear_solvers:
   - name: solve_scalar
     type: hypre
     method: hypre_gmres
     preconditioner: boomerAMG
     tolerance: 1e-5
     max_iterations: 200
-    kspace: 50
+    kspace: 20
+    segregated_solver: yes
+    write_matrix_files: no
+    recompute_preconditioner_frequency: 1
+    reuse_linear_system: yes
+    simple_hypre_matrix_assemble: yes
+    dump_hypre_matrix_stats: no
+    bamg_max_levels: 1
+    bamg_relax_type: 12
+    bamg_num_sweeps: 2
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
     output_level: 0
 
   - name: solve_cont
@@ -22,7 +34,18 @@ linear_solvers:
     preconditioner: boomerAMG
     tolerance: 1e-5
     max_iterations: 200
-    kspace: 5
+    kspace: 20
+    segregated_solver: yes
+    write_matrix_files: no
+    recompute_preconditioner_frequency: 1
+    reuse_linear_system: yes
+    simple_hypre_matrix_assemble: yes
+    dump_hypre_matrix_stats: no
+    bamg_max_levels: 1
+    bamg_relax_type: 12
+    bamg_num_sweeps: 2
+    bamg_cycle_type: 1
+    bamg_relax_order: 0
     output_level: 0
 
 realms:
