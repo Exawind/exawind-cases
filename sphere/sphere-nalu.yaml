@@ -6,8 +6,6 @@ Simulations:
     optimizer: opt1
 
 linear_solvers:
-
-linear_solvers:
   - name: solve_scalar
     type: hypre
     method: hypre_gmres
