@@ -3,7 +3,7 @@
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               =   -1     # Max (simulated) time to evolve
-time.max_step                =   10     # Max number of time steps
+time.max_step                =   -1     # Max number of time steps
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #         TIME STEP COMPUTATION         #
 #.......................................#
@@ -104,7 +104,7 @@ nodal_proj.bottom_atol = 1.0e-12
 
 mac_proj.verbose=0
 mac_proj.max_coarsening_level = 0
-#mac_proj.do_nsolve = true
+mac_proj.do_nsolve = true
 mac_proj.bottom_verbose  = 0
 #mac_proj.bottom_solver = hypre
 mac_proj.mg_rtol = 1.0e-7
@@ -130,37 +130,37 @@ temperature_diffusion.do_nsolve=true
 #########################################
 #                 HYPRE                 #
 #########################################
-amrex.init_hypre = 0
-amrex.hypre_spgemm_use_vendor = 1
-amrex.hypre_spmv_use_vendor = 0
-amrex.hypre_sptrans_use_vendor = 0
-amrex.hypre_umpire_device_pool_mbs = 4096
-amrex.hypre_umpire_pinned_pool_mbs = 512
-
-hypre.bamg_verbose = 0
-hypre.verbose = 0
-hypre.recompute_preconditioner = 0
-hypre.hypre_solver = PCG
-hypre.hypre_preconditioner = BoomerAMG
-#hypre.num_krylov = 20
-hypre.max_iterations = 40
-hypre.rtol = 1.e-5
-hypre.atol = 1.e-8
-hypre.bamg_coarsen_type = 8
-hypre.bamg_interp_type = 6
-hypre.bamg_relax_type = 11
-hypre.bamg_num_sweeps = 2
-hypre.bamg_cycle_type = 1
-hypre.bamg_relax_order = 0
-hypre.bamg_trunc_factor = 0.45
-hypre.bamg_strong_threshold = 0.3
-#hypre.bamg_max_levels = 10
-hypre.bamg_min_coarse_size  = 1   # default 1
-hypre.bamg_max_coarse_size  = 100 # default 9
-hypre.bamg_agg_num_levels = 4
-hypre.bamg_agg_interp_type = 7
-hypre.bamg_agg_pmax_elmts = 3
-hypre.bamg_pmax_elmts = 3
-hypre.bamg_keep_transpose = 1
-hypre.write_matrix_files = 0
-
+#amrex.init_hypre = 0
+#amrex.hypre_spgemm_use_vendor = 1
+#amrex.hypre_spmv_use_vendor = 0
+#amrex.hypre_sptrans_use_vendor = 0
+#amrex.hypre_umpire_device_pool_mbs = 4096
+#amrex.hypre_umpire_pinned_pool_mbs = 512
+#
+#hypre.bamg_verbose = 0
+#hypre.verbose = 0
+#hypre.recompute_preconditioner = 0
+#hypre.hypre_solver = PCG
+#hypre.hypre_preconditioner = BoomerAMG
+##hypre.num_krylov = 20
+#hypre.max_iterations = 40
+#hypre.rtol = 1.e-5
+#hypre.atol = 1.e-8
+#hypre.bamg_coarsen_type = 8
+#hypre.bamg_interp_type = 6
+#hypre.bamg_relax_type = 11
+#hypre.bamg_num_sweeps = 2
+#hypre.bamg_cycle_type = 1
+#hypre.bamg_relax_order = 0
+#hypre.bamg_trunc_factor = 0.45
+#hypre.bamg_strong_threshold = 0.3
+##hypre.bamg_max_levels = 10
+#hypre.bamg_min_coarse_size  = 1   # default 1
+#hypre.bamg_max_coarse_size  = 100 # default 9
+#hypre.bamg_agg_num_levels = 4
+#hypre.bamg_agg_interp_type = 7
+#hypre.bamg_agg_pmax_elmts = 3
+#hypre.bamg_pmax_elmts = 3
+#hypre.bamg_keep_transpose = 1
+#hypre.write_matrix_files = 0
+#
