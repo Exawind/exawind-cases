@@ -71,7 +71,7 @@ linear_solvers:
 realms:
 
 - name: realm_1
-  mesh: /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/tower_and_blades.exo
+  mesh: CHANGE_PATH/tower_and_blades.exo
   automatic_decomposition_type: rcb
   rebalance_mesh: yes
   stk_rebalance_method: parmetis

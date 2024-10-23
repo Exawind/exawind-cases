@@ -11,7 +11,7 @@ time.cfl              =   0.95       # CFL factor
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 #            INPUT AND OUTPUT           #
 #.......................................#
-io.restart_file = /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/chk30000
+io.restart_file = CHANGE_PATH/chk30000
 time.plot_interval            =  -1      # Steps between plot files
 time.checkpoint_interval      =  -1      # Steps between checkpoint files
 time.plot_start               =  30000
@@ -36,7 +36,7 @@ ICNS.source_terms = BoussinesqBuoyancy CoriolisForcing BodyForce ABLMeanBoussine
 
 BoussinesqBuoyancy.reference_temperature = 300.0
 BoussinesqBuoyancy.read_temperature_profile = true
-BoussinesqBuoyancy.tprofile_filename = /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/avg_theta.dat
+BoussinesqBuoyancy.tprofile_filename = CHANGE_PATH/avg_theta.dat
 
 CoriolisForcing.east_vector = 1.0 0.0 0.0
 CoriolisForcing.north_vector = 0.0 1.0 0.0
@@ -112,7 +112,7 @@ zlo.tke_type = "zero_gradient"
 #¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
 # Boundary data sampling for IO         #
 #.......................................#
-ABL.bndry_file = /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/bndry_file
+ABL.bndry_file = CHANGE_PATH/bndry_file
 ABL.bndry_io_mode = 1
 ABL.bndry_planes = xlo ylo
 ABL.bndry_output_start_time = 15000.0
