@@ -16,6 +16,7 @@ cmd() {
 #PBS does not appear to have an easily accesible env variable for querying this
 NUM_NODES=256
 SPACK_ENV_NAME=exawind
+MESH_PATH=/lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files
 MY_EXAWIND_MANAGER=/lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/exawind-manager
 
 cmd "cd ${PBS_O_WORKDIR}"
