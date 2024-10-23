@@ -1,21 +1,21 @@
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            SIMULATION STOP            #
 #.......................................#
 time.stop_time               = -1          # Max (simulated) time to evolve
 time.max_step                = -1          # Max number of time steps
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #         TIME STEP COMPUTATION         #
 #.......................................#
 time.fixed_dt         =   0.003443526170799   # Use this constant dt if > 0
 time.cfl              =   0.95       # CFL factor
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #            INPUT AND OUTPUT           #
 #.......................................#
 io.restart_file = /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/chk30000
 time.plot_interval            =  -1      # Steps between plot files
 time.checkpoint_interval      =  -1      # Steps between checkpoint files
 time.plot_start               =  30000
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #               PHYSICS                 #
 #.......................................#
 incflo.gravity        =  0.0  0.0 -9.81  # Gravitational force (3D)
@@ -68,11 +68,11 @@ ABL.surface_roughness_z0 = 0.01
 ABL.surface_temp_flux = 0.005
 ABL.normal_direction = 2
 ABL.log_law_height = 5.0
-ABL.stats_output_frequency = 10000000
-#ABL.stats_output_format = netcdf
+ABL.stats_output_frequency = 1
+ABL.stats_output_format = netcdf
 
 ABL.enable_hybrid_rl_mode = true
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #        ADAPTIVE MESH REFINEMENT       #
 #.......................................#
 amr.n_cell              = 512 512 192    # Grid cells at coarsest AMRlevel
@@ -82,7 +82,7 @@ amr.blocking_factor     = 32
 tagging.labels = static
 tagging.static.static_refinement_def = static_box.txt
 tagging.static.type = CartBoxRefinement
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #              GEOMETRY                 #
 #.......................................#
 geometry.prob_lo        =   0.       0.     0.  # Lo corner coordinates
@@ -109,7 +109,7 @@ zhi.temperature_type = "fixed_gradient"
 zhi.temperature = 0.003
 zlo.tke_type = "zero_gradient"
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 # Boundary data sampling for IO         #
 #.......................................#
 ABL.bndry_file = /lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/bndry_file
@@ -119,7 +119,7 @@ ABL.bndry_output_start_time = 15000.0
 ABL.bndry_var_names = velocity temperature tke
 ABL.bndry_output_format = native
 
-#¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨#
+#.......................................#
 #                SOLVER                 #
 #.......................................#
 incflo.verbose = 0
@@ -160,8 +160,8 @@ temperature_diffusion.do_nsolve=true
 #
 amrex.abort_on_out_of_gpu_memory=1
 amrex.the_arena_is_managed= 0
-#amrex.fpe_trap_invalid  =   1           # Trap NaNs
-#amrex.throw_exception = 1
+#amrex.fpe_trap_invalid  =   0           # Trap NaNs
+#amrex.throw_exception = 0
 #amrex.signal_handling = 0
 
 #########################################
@@ -172,7 +172,7 @@ amrex.the_arena_is_managed= 0
 #amrex.hypre_spmv_use_vendor = 0
 #amrex.hypre_sptrans_use_vendor = 0
 #amrex.hypre_umpire_device_pool_mbs = 4096
-#	
+#
 #hypre.bamg_verbose = 0
 #hypre.verbose = 0
 #hypre.recompute_preconditioner = 0
@@ -184,7 +184,7 @@ amrex.the_arena_is_managed= 0
 #hypre.atol = 1.e-8
 #hypre.bamg_coarsen_type = 8
 #hypre.bamg_interp_type = 6
-#hypre.bamg_relax_type = 11
+#hypre.bamg_relax_type = 18
 #hypre.bamg_num_sweeps = 2
 #hypre.bamg_cycle_type = 1
 #hypre.bamg_relax_order = 0
@@ -198,3 +198,14 @@ amrex.the_arena_is_managed= 0
 #hypre.bamg_pmax_elmts = 3
 #hypre.bamg_keep_transpose = 1
 #hypre.write_matrix_files = 0
+#
+#hypre.bamg_smooth_type = 5
+#hypre.bamg_smooth_num_sweeps = 1
+#hypre.bamg_smooth_num_levels = 0
+#hypre.bamg_ilu_type = 0
+#hypre.bamg_ilu_level = 0
+#hypre.bamg_ilu_max_iter = 1
+#hypre.bamg_ilu_reordering_type = 0
+#hypre.bamg_ilu_tri_solve = 0
+#hypre.bamg_ilu_lower_jacobi_iters = 3
+#hypre.bamg_ilu_upper_jacobi_iters = 3

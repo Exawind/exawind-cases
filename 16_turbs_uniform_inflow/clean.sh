@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -r out01 rst01 *.dat *.log plt* chk* mesh core
+rm -r out01 rst01 *.dat *.log plt* chk* core*

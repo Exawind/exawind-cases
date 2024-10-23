@@ -17,7 +17,7 @@ exawind:
     - nrel5mw_nalu15.yaml
     - nrel5mw_nalu16.yaml
   amr_wind_inp: nrel5mw_amr.inp
-  num_timesteps: 10
+  num_timesteps: 50
   additional_picard_iterations: 0
 
   # Variables for overset exchange

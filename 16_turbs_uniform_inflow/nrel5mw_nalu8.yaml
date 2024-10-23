@@ -76,9 +76,9 @@ realms:
 - name: realm_1
   mesh: ./mesh/nrel5mw_nearbody.exo
   use_edges: yes
-  #automatic_decomposition_type: rcb
-  #rebalance_mesh: yes
-  #stk_rebalance_method: parmetis
+  automatic_decomposition_type: rcb
+  rebalance_mesh: yes
+  stk_rebalance_method: parmetis
 
   equation_systems:
     name: theEqSys

@@ -31,6 +31,9 @@ cmd "which exawind"
 #cmd "export FI_CXI_RX_MATCH_MODE=software"
 #cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
 #cmd "export MPIR_CVAR_ENABLE_GPU=0"
+#cmd "unset MPIR_CVAR_CH4_COLL_SELECTION_TUNING_JSON_FILE"
+#cmd "unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE"
+#cmd "unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE"
 
 #Update mesh path
 sed -i "s|CHANGE_PATH|${MESH_PATH}|g" sphere-nalu.yaml || true

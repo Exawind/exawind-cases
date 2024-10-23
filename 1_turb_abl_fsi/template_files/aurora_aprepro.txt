@@ -1,0 +1,26 @@
+# {NALU_MESH_BLADES = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/nrel5mw_volume.exo"}
+# {NALU_MESH_TOWER = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/tower_and_blades.exo"}
+# {AMR_RESTART_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/chk30000"}
+# {AMR_TPROFILE_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/bndry_file"}
+
+# {SUBMIT_EXPORTS = '
+module load oneapi/eng-compiler/2023.05.15.006
+module load intel_compute_runtime/release/agama-devel-647
+module load gcc/11.2.0
+module load cray-libpals/1.2.12
+module load mpich/51.2/icc-all-pmix-gpu
+module load libfabric/1.15.2.0
+module load cray-pals/1.2.12
+export FI_MR_CACHE_MONITOR=memhooks
+export FI_CXI_RX_MATCH_MODE=software
+export MPICH_SMP_SINGLE_COPY_MODE=NONE'}
+
+# {SLURM_ARGS = '
+#PBS -A CSC249ADSE13_CNDA
+#PBS -q workq
+#PBS -l select=4
+#PBS -l walltime=30:00
+#PBS -j oe'}
+
+# {SRUN_COMMAND = 'mpiexec -np 48 -ppn 12 -envall gpu_tile_compact.sh exawind --awind 36 --nwind 12 nrel5mw.yaml'}

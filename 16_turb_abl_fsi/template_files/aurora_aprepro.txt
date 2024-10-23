@@ -1,0 +1,19 @@
+# {NALU_MESH_TOWER = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/tower_and_blades.exo"}
+# {NALU_MESH_BLADES = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/nrel5mw_volume.exo"}
+# {AMR_RESTART_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/chk30000"}
+# {AMR_TPROFILE_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/avg_theta.dat"}
+# {AMR_BOUNDARY_FILE = "/lus/gecko/projects/CSC249ADSE13_CNDA/rood/exawind/files/bndry_file"}
+
+# {SUBMIT_EXPORTS = '
+cd $PBS_O_WORKDIR'}
+
+# {SLURM_ARGS = '
+#PBS -A CSC249ADSE13_CNDA
+#PBS -q workq
+#PBS -l select=32
+#PBS -l walltime=30:00
+#PBS -j oe'}
+
+# {SRUN_COMMAND_OPENFAST = 'spack build-env openfast mpiexec -np 16 -ppn 16 openfastcpp inp.yaml'}
+# {SRUN_COMMAND_EXAWIND = 'spack build-env exawind mpiexec -np 7168 -ppn 56 exawind --awind 1536 --nwind 5632 nrel5mw.yaml'}
+
