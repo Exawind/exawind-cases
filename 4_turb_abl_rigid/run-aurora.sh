@@ -39,7 +39,7 @@ cmd "unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE"
 cmd "unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE"
 
 #+amr_wind_gpu~nalu_wind_gpu
-cmd "python3 rank_file.py ${NUM_NODES}"
+cmd "python3 ../tools/rank_file.py ${NUM_NODES}"
 cmd "cat exawind.rank_file | sort -g > tmp.txt && mv tmp.txt exawind.rank_file"
 AWIND_RANKS=$((${NUM_NODES}*12))
 NWIND_RANKS=$((${NUM_NODES}*44))

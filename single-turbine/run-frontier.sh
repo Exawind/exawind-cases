@@ -37,7 +37,7 @@ cmd "export MPICH_SMP_SINGLE_COPY_MODE=NONE"
 sed -i "s|CHANGE_PATH|${MESH_PATH}|g" nrel5mw_nalu.yaml || true
 
 #+amr_wind_gpu~nalu_wind_gpu
-#cmd "python3 reorder_file.py ${SLURM_JOB_NUM_NODES}"
+#cmd "python3 ../tools/reorder_file.py ${SLURM_JOB_NUM_NODES}"
 #AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
 #NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*56))
 #TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*64))
