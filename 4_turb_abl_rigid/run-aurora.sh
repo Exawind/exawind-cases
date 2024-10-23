@@ -40,8 +40,10 @@ cmd "unset MPIR_CVAR_COLL_SELECTION_TUNING_JSON_FILE"
 cmd "unset MPIR_CVAR_CH4_POSIX_COLL_SELECTION_TUNING_JSON_FILE"
 
 #Update mesh path
+set +e
 find . -name 'nrel5mw_nalu_w_tower*.yaml' -type f -exec sed -i "s|CHANGE_PATH|${MESH_PATH}|g" {} \;
 find . -name 'nrel5mw_amr.inp' -type f -exec sed -i "s|CHANGE_PATH|${MESH_PATH}|g" {} \;
+set -e
 
 #+amr_wind_gpu~nalu_wind_gpu
 cmd "python3 ../tools/rank_file.py ${NUM_NODES}"
