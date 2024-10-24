@@ -14,8 +14,8 @@ cmd() {
 }
 
 SPACK_ENV_NAME=exawind
-MESH_PATH=/lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/files/meshes
-MY_EXAWIND_MANAGER=/lus/flare/projects/CSC249ADSE13_CNDA/rood/exawind/exawind-manager
+MESH_PATH=/lus/flare/projects/CSC249ADSE13_CNDA/${USER}/exawind/files/meshes
+MY_EXAWIND_MANAGER=/lus/flare/projects/CSC249ADSE13_CNDA/${USER}/exawind/exawind-manager
 
 cmd "cd ${PBS_O_WORKDIR}"
 cmd "module load python"
