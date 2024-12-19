@@ -1,0 +1,17 @@
+# Example input file
+
+exawind:
+  num_timesteps: 432000
+  nonlinear_iterations: 1
+
+  # Variables for overset exchange
+  nalu_vars:
+    - velocity
+    - turbulent_ke
+    - specific_dissipation_rate
+    - pressure
+    - temperature
+  nalu_wind_inp:
+    - iea15mw-nalu-bg.yaml
+    - iea15mw-nalu-01.yaml
+
