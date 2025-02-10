@@ -2,7 +2,7 @@
 
 #SBATCH -o %x.o%j
 #SBATCH -A CFD162
-#SBATCH -t 00:30:00
+#SBATCH -t 01:00:00
 #SBATCH -q debug
 #SBATCH -S 0
 #SBATCH -J sphere

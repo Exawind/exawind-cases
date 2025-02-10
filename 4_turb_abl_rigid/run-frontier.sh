@@ -15,7 +15,7 @@ cmd() {
 }
 
 SPACK_ENV_NAME=exawind_frontier_gpu_02_05_2025
-EXAWIND_MANAGER=${MEMBERWORK}/cfd162/exawind-manager
+export EXAWIND_MANAGER=${MEMBERWORK}/cfd162/exawind-manager
 MESH_PATH=${PROJWORK}/cfd162/shared
 spec="exawind"
 
