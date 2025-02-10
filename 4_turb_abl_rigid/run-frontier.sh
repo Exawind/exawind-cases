@@ -7,6 +7,8 @@
 #SBATCH -S 0
 #SBATCH -N 64
 
+set -e
+
 cmd() {
   echo "+ $@"
   eval "$@"
@@ -15,20 +17,11 @@ cmd() {
 SPACK_ENV_NAME=exawind_frontier_gpu_02_05_2025
 EXAWIND_MANAGER=${MEMBERWORK}/cfd162/exawind-manager
 MESH_PATH=${PROJWORK}/cfd162/shared
-
 spec="exawind"
 
 cmd "module load cray-python"
 cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
 cmd "spack env activate ${SPACK_ENV_NAME}"
-mods=$(spack build-env "$spec" | grep 'LOADEDMODULES' | cut -d'=' -f2)
-IFS=':' read -r -a modules <<< "$mods"
-for module in "${modules[@]}"; do
-    # Check if the module is already loaded
-    if ! module list 2>&1 | grep -q "$module"; then
-        cmd "module load "$module""
-    fi
-done
 cmd "spack load ${spec}"
 cmd "which exawind"
 
@@ -57,4 +50,4 @@ AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
 NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
 TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
 
-cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"
+cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest spack build-env exawind exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} nrel5mw.yaml"

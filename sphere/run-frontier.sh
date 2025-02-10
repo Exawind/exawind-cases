@@ -2,35 +2,27 @@
 
 #SBATCH -o %x.o%j
 #SBATCH -A CFD162
-#SBATCH -t 01:30:00
+#SBATCH -t 00:30:00
 #SBATCH -q debug
 #SBATCH -S 0
 #SBATCH -J sphere
 #SBATCH -N 4
 
-#set -e
+set -e
+
 cmd() {
   echo "+ $@"
   eval "$@"
 }
 
 SPACK_ENV_NAME=exawind_frontier_gpu_02_05_2025
-EXAWIND_MANAGER=${MEMBERWORK}/cfd162/exawind-manager
-MESH_PATH=${PROJWORK}/cfd162/gyalla/exawind-cases/sphere/
-
+export EXAWIND_MANAGER=${MEMBERWORK}/cfd162/exawind-manager
+MESH_PATH=${PROJWORK}/cfd162/shared
 spec="exawind"
 
 cmd "module load cray-python"
 cmd "source ${EXAWIND_MANAGER}/start.sh && spack-start"
 cmd "spack env activate ${SPACK_ENV_NAME}"
-mods=$(spack build-env "$spec" | grep 'LOADEDMODULES' | cut -d'=' -f2)
-IFS=':' read -r -a modules <<< "$mods"
-for module in "${modules[@]}"; do
-    # Check if the module is already loaded
-    if ! module list 2>&1 | grep -q "$module"; then
-        cmd "module load "$module""
-    fi
-done
 cmd "spack load ${spec}"
 cmd "which exawind"
 
@@ -52,9 +44,9 @@ sed -i "s|CHANGE_PATH|${MESH_PATH}|g" sphere-nalu.yaml || true
 
 #+amr_wind_gpu+nalu_wind_gpu
 cmd "export HIP_LAUNCH_BLOCKING=1"
-AWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
-NWIND_RANKS=$((${SLURM_JOB_NUM_NODES}*4))
 TOTAL_RANKS=$((${SLURM_JOB_NUM_NODES}*8))
+NWIND_RANKS=$((TOTAL_RANKS - 1))
+AWIND_RANKS=$((TOTAL_RANKS - NWIND_RANKS))
 
-cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} sphere.yaml"
+cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest spack build-env exawind exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} sphere.yaml"
 
