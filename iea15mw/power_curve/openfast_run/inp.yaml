@@ -8,7 +8,7 @@ t_start:  0.0
 t_end:    {PREC_LEN + (10*CFD_DT)} # do 10 extra steps to make sure we get chkp file
 t_max:    {PREC_LEN*100}
 dt_driver: {CFD_DT}
-restart_freq: 1440
+restart_freq: 1440 # in dt_driver timesteps
 output_freq: 1
 set_exp_law_wind: False
 set_uniform_x_blade_forces: False
@@ -24,13 +24,13 @@ Turbine0:
   - 0
   - -148.73545941424806
   turbine_hub_pos:
-  - 0.066271766152727
   - 0.0
-  - 1.264540628497338
+  - 0.0
+  - 0.0
   num_force_pts_blade: 50
   num_force_pts_tower: 12
   az_blend_mean: {AZB}
-  az_blend_delta: {PI}
+  az_blend_delta: 1.5707963267948966
   vel_mean: {WIND_SPEED}
   wind_dir: 270.0
   z_ref: 150.0
