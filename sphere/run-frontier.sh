@@ -49,4 +49,3 @@ NWIND_RANKS=$((TOTAL_RANKS - 1))
 AWIND_RANKS=$((TOTAL_RANKS - NWIND_RANKS))
 
 cmd "srun -N${SLURM_JOB_NUM_NODES} -n${TOTAL_RANKS} --gpus-per-node=8 --gpu-bind=closest spack build-env exawind exawind --awind ${AWIND_RANKS} --nwind ${NWIND_RANKS} sphere.yaml"
-
