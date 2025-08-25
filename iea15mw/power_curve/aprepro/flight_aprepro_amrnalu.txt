@@ -1,0 +1,19 @@
+{SLURM_ARGS = '
+#SBATCH -A FY190020
+#SBATCH -t 96:00:00
+#SBATCH --qos=long
+#SBATCH --reservation=flight-cldera
+'}
+
+{MACHINE_NAME="flight"}
+{NALU_RANK_PERCENTAGE=50}
+{MESH="/pscratch/ndeveld/hfm-2024-q3/mesh/iea15mw_rotor_1344/iea15mw_3blade_volume_v0.2.exo"}
+{DLL="/projects/wind/hpc/wind/ndeveld/em-exawind-flight/spack/opt/spack/linux-rhel8-sapphirerapids/intel-2023.2.0/rosco-2.8.0-3ai26xzmv3wnm7chxnaum6sdvrjp4j2l/lib/libdiscon.so"}
+{RUN_CFD_COMMAND="srun -N $nodes -n $ranks exawind --nwind $nalu_ranks --awind $amr_ranks iea15mw-01-amrnalu.yaml &> log"}
+{RUN_PRE_COMMAND="srun -N 1 -n 1 openfastcpp inp.yaml"}
+
+{CLEANUP_ARGS = '
+chown $USER:wg-sierra-users .
+chmod g+s .
+'}
+{_FORMAT="%.15g"}

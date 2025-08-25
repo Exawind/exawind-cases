@@ -61,9 +61,9 @@ realms:
 
 - name: realm_1
   mesh: {MESH}
-  automatic_decomposition_type: rcb
-  rebalance_mesh: yes
-  stk_rebalance_method: parmetis
+  #automatic_decomposition_type: rcb
+  #rebalance_mesh: yes
+  #stk_rebalance_method: parmetis
   use_edges: yes
   check_jacobians: true
   output_on_failed_jacobian_check: true
